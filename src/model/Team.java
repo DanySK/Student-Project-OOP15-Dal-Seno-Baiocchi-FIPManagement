@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface Team extends Serializable{
 
+    
     /**
      * 
      * @return the Team's name

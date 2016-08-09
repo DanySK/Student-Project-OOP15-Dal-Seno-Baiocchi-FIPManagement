@@ -8,5 +8,5 @@ package model;
  */
 public enum Division {
 
-    A,A2,B1,B2,C1,C2,PRIMA_DIVISONE,PROMOZIONE
+    A,A2,B1,B2,C1,C2,PRIMA_DIVISONE,PROMOZIONE;
 }
