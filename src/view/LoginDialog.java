@@ -5,16 +5,21 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javafx.scene.control.PasswordField;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
+import observer.LoginObserver;
+
 import com.sun.xml.internal.ws.Closeable;
 
-public class LoginDialog extends JDialog implements LoginDialogInterface {
+public class LoginDialog extends JDialog implements ObserverInterface<LoginObserver> {
 
     /**
      * 
@@ -22,7 +27,7 @@ public class LoginDialog extends JDialog implements LoginDialogInterface {
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     public JTextField userTextField;
-    public JTextField pswTextfield;
+    public JPasswordField pswTextfield;
     private LoginObserver obs;
 
     /**
@@ -37,6 +42,7 @@ public class LoginDialog extends JDialog implements LoginDialogInterface {
             e.printStackTrace();
         }
     }
+ 
 
     /**
      * Create the dialog.
@@ -64,7 +70,7 @@ public class LoginDialog extends JDialog implements LoginDialogInterface {
             contentPanel.add(passLbl);
         }
         
-        pswTextfield = new JTextField();
+        pswTextfield = new JPasswordField();
         pswTextfield.setBounds(133, 50, 134, 28);
         contentPanel.add(pswTextfield);
         pswTextfield.setColumns(10);
@@ -92,14 +98,7 @@ public class LoginDialog extends JDialog implements LoginDialogInterface {
         }
     }
     
-    public static interface LoginObserver{
-        
-        /**
-         * check if the login is correct
-         */
-        void doLogin(String user,String pwd);
-        
-    }
+  
     
     public void attachObserver(LoginObserver observer){
         this.obs = observer;
@@ -110,18 +109,7 @@ public class LoginDialog extends JDialog implements LoginDialogInterface {
         
     }
 
-   /* @Override
-    public void actionPerformed(ActionEvent e) {
-        Object buttonPressed = e.getSource();
-        if(buttonPressed =="Cancel"){
-            this.setVisible(false);
-        } else if(buttonPressed == "OK"){
-            this.obs.doLogin(userTextField.getText(), pswTextfield.getText());
-        }
-        
-    }*/
-
-   
 }
+
 
 

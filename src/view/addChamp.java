@@ -7,19 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 
+import observer.ChampionshipObserver;
 import model.Division;
 import model.Zone;
-public class addChamp extends JDialog {
+public class addChamp extends JDialog implements ObserverInterface<ChampionshipObserver> {
 
     /**
      * 
      */
     private static final long serialVersionUID = 73893420932703563L;
     private final JPanel contentPanel = new JPanel();
+    private ChampionshipObserver obs;
 
     /**
      * Launch the application.
@@ -68,12 +69,27 @@ public class addChamp extends JDialog {
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
+                okButton.addActionListener(e->{
+                   obs.addChampionship((Division)divisionBox.getSelectedItem(), (Zone) zoneBox.getSelectedItem()); 
+                });
             }
             {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
+                cancelButton.addActionListener(e->{
+                    this.setVisible(false);
+                });
             }
         }
+    }
+    @Override
+    public void attachObserver(ChampionshipObserver observer) {
+        this.obs = observer;    
+    }
+    @Override
+    public void clearInterface() {
+        // TODO Auto-generated method stub
+        
     }
 }

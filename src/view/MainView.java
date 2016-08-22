@@ -1,26 +1,14 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
-import java.awt.CardLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
 
@@ -28,6 +16,10 @@ import controller.LoginController;
 
 public class MainView extends JFrame {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1434216695759527061L;
     private JPanel contentPane;
 
     /**

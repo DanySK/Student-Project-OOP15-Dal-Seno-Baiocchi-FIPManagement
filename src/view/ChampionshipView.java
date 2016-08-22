@@ -1,21 +1,27 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JDialog;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+
+import observer.ChampionshipObserver;
+
 import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.JButton;
 
-public class ChampionshipView extends JFrame {
+public class ChampionshipView extends JFrame  {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4097624461142333134L;
     private JPanel contentPane;
+    private JTable champTable;
+    
 
     /**
      * Launch the application.
@@ -50,13 +56,16 @@ public class ChampionshipView extends JFrame {
         addChampBtn.addActionListener(e->{
             addChamp c = new addChamp();
             c.setVisible(true);
+            
         });
         
-        JButton btnNewButton_1 = new JButton("Delete Championship");
-        btnNewButton_1.setBounds(388, 415, 179, 29);
-        contentPane.add(btnNewButton_1);
+        JButton deleteChamp = new JButton("Delete Championship");
+        deleteChamp.setBounds(388, 415, 179, 29);
+        contentPane.add(deleteChamp);
         
-    
-        
+        champTable = new JTable(new Object[10][10], new String[]{"ciao","ciao"});
+        champTable.setBounds(101, 273, 466, -222);
+      
+        contentPane.add(champTable);
     }
 }
