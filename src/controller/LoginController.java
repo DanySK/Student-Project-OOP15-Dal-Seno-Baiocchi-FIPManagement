@@ -29,7 +29,7 @@ public class LoginController implements LoginObserver {
     public boolean doLogin(String user, String pwd) {
         if(type == LoginType.adm){
 	    	if(user.equals("adm") && pwd.equals("adm")){
-	    		new ChampionshipView().setVisible(true);
+
 	            return true;
 	        } else {
 	        	
@@ -37,7 +37,6 @@ public class LoginController implements LoginObserver {
 	        }
     	}else if(type == LoginType.user){
     		if(user.equals("user") && pwd.equals("user")){
-	            new MatchView().setVisible(true);;
 	            return true;
 	        } else {
 	        

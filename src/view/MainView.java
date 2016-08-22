@@ -10,11 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.LoginController;
+import model.Model;
 
 public class MainView extends JFrame {
 
     private JPanel contentPane;
     public static enum LoginType{adm,user};
+    Model model = new Model();
     
     /**
      * Launch the application.
@@ -44,7 +46,7 @@ public class MainView extends JFrame {
         championshipBtn.setBounds(101, 439, 172, 29);
         contentPane.add(championshipBtn);
         championshipBtn.addActionListener(e->{
-            LoginDialog lD = new LoginDialog();
+            LoginDialog lD = new LoginDialog(model);
             LoginController contr = new LoginController(LoginType.adm);
             contr.setView(lD);
             lD.setLocation(250, 250);
@@ -55,7 +57,7 @@ public class MainView extends JFrame {
         matchBtn.setBounds(424, 439, 172, 29);
         contentPane.add(matchBtn);
         matchBtn.addActionListener(e->{
-            LoginDialog lD = new LoginDialog();
+            LoginDialog lD = new LoginDialog(model);
             LoginController contr = new LoginController(LoginType.user);
             contr.setView(lD);
             lD.setLocation(250, 250);

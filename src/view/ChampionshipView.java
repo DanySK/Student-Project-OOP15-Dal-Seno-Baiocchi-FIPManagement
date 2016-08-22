@@ -5,13 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
-
-import observer.ChampionshipObserver;
-
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+
+import com.sun.java.swing.plaf.motif.resources.motif;
+import com.sun.javafx.scene.control.SelectedCellsMap;
+import com.sun.rowset.internal.Row;
+
+import controller.ChampionshipController;
+import javafx.scene.control.SingleSelectionModel;
+import model.Model;
+import model.MyTableModel;
 
 public class ChampionshipView extends JFrame  {
 
@@ -21,6 +25,8 @@ public class ChampionshipView extends JFrame  {
     private static final long serialVersionUID = 4097624461142333134L;
     private JPanel contentPane;
     private JTable champTable;
+	private JButton addChampBtn;
+	private JButton deleteChamp;
     
 
     /**
@@ -30,7 +36,7 @@ public class ChampionshipView extends JFrame  {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ChampionshipView frame = new ChampionshipView();
+                    ChampionshipView frame = new ChampionshipView(new Model());
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -41,31 +47,41 @@ public class ChampionshipView extends JFrame  {
 
     /**
      * Create the frame.
+     * @param model 
      */
-    public ChampionshipView() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private ChampionshipView() {
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JButton addChampBtn = new JButton("Add Championship");
+        addChampBtn = new JButton("Add Championship");
         addChampBtn.setBounds(133, 415, 179, 29);
         contentPane.add(addChampBtn);
-        addChampBtn.addActionListener(e->{
-            addChamp c = new addChamp();
-            c.setVisible(true);
-            
-        });
         
-        JButton deleteChamp = new JButton("Delete Championship");
+        deleteChamp = new JButton("Delete Championship");
         deleteChamp.setBounds(388, 415, 179, 29);
         contentPane.add(deleteChamp);
         
-        champTable = new JTable(new Object[10][10], new String[]{"ciao","ciao"});
-        champTable.setBounds(101, 273, 466, -222);
-      
+        champTable = new JTable();
+        champTable.setBounds(101, 149, 466, 222);
         contentPane.add(champTable);
+        
+    }
+    
+    public ChampionshipView(final Model model){
+    	this();
+    	champTable.setModel(new MyTableModel(model));
+        addChampBtn.addActionListener(e->{
+            AddChamp c = new AddChamp();
+            c.attachObserver(new ChampionshipController(model));
+            c.repaint();
+            c.setVisible(true);
+        });
+        deleteChamp.addActionListener(e->{
+        	model.getChampionship().remove(model.getChampionship().toArray()[champTable.getSelectedRow()]);
+        	champTable.repaint();
+        });
     }
 }

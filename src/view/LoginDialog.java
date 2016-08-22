@@ -11,6 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import model.Model;
 import observer.LoginObserver;
 
 public class LoginDialog extends JDialog implements ObserverInterface<LoginObserver> {
@@ -29,7 +30,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
      */
     public static void main(String[] args) {
         try {
-            LoginDialog dialog = new LoginDialog();
+            LoginDialog dialog = new LoginDialog(new Model());
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
         } catch (Exception e) {
@@ -40,8 +41,9 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
 
     /**
      * Create the dialog.
+     * @param model 
      */
-    public LoginDialog() {
+    public LoginDialog(final Model model) {
         setBounds(100, 100, 401, 162);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,6 +81,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                 getRootPane().setDefaultButton(okButton);
                 okButton.addActionListener(e->{
                 	if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
+        	    		new ChampionshipView(model).setVisible(true);
                 		this.setVisible(false);
                 	}
                     
@@ -89,7 +92,10 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
                 cancelButton.addActionListener(e->{
-                    this.setVisible(false);
+                	if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
+                    	new MatchView().setVisible(true);
+                		this.setVisible(false);
+                	}
                 });
             }
         }

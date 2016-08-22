@@ -9,18 +9,18 @@ import exceptions.CompanyAlreadyExistException;
 
 public class Model implements IModel {
 
-    private Set<ChampionshipImpl> champSet;
+    private Set<Championship> champSet;
     private Set<CompanyImpl> companySet;
     
     public Model(){
-        this.champSet = new HashSet<ChampionshipImpl>();
+        this.champSet = new HashSet<Championship>();
         this.companySet = new HashSet<CompanyImpl>();
     }
     
     @Override
     public void addChampionship(ChampionshipImpl champ) throws ChampionshipAlreadyExistException {
-        Iterator<ChampionshipImpl> it = this.champSet.iterator();
-        ChampionshipImpl currentChamp;
+        Iterator<Championship> it = this.champSet.iterator();
+        Championship currentChamp;
         while (it.hasNext()) {
             currentChamp = it.next();
           if(currentChamp.getDivision().equals(champ.getDivision())){
@@ -54,5 +54,9 @@ public class Model implements IModel {
     public void deleteCompany(CompanyImpl company) {
         // TODO Auto-generated method stub
 
+    }
+    
+    public Set<Championship> getChampionship(){
+    	return champSet;
     }
 }

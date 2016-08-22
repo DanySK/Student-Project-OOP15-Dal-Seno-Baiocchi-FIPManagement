@@ -12,8 +12,10 @@ import javax.swing.JComboBox;
 
 import observer.ChampionshipObserver;
 import model.Division;
+import model.Model;
+import model.MyTableModel;
 import model.Zone;
-public class addChamp extends JDialog implements ObserverInterface<ChampionshipObserver> {
+public class AddChamp extends JDialog implements ObserverInterface<ChampionshipObserver> {
 
     /**
      * 
@@ -27,7 +29,7 @@ public class addChamp extends JDialog implements ObserverInterface<ChampionshipO
      */
     public static void main(String[] args) {
         try {
-            addChamp dialog = new addChamp();
+            AddChamp dialog = new AddChamp();
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
         } catch (Exception e) {
@@ -38,7 +40,7 @@ public class addChamp extends JDialog implements ObserverInterface<ChampionshipO
     /**
      * Create the dialog.
      */
-    public addChamp() {
+    public AddChamp() {
         setBounds(100, 100, 410, 231);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,6 +85,8 @@ public class addChamp extends JDialog implements ObserverInterface<ChampionshipO
             }
         }
     }
+    
+    
     @Override
     public void attachObserver(ChampionshipObserver observer) {
         this.obs = observer;    
