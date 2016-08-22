@@ -2,22 +2,16 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javafx.scene.control.PasswordField;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 
 import observer.LoginObserver;
-
-import com.sun.xml.internal.ws.Closeable;
 
 public class LoginDialog extends JDialog implements ObserverInterface<LoginObserver> {
 
@@ -84,7 +78,10 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
                 okButton.addActionListener(e->{
-                    obs.doLogin(userTextField.getText(), pswTextfield.getText());
+                	if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
+                		this.setVisible(false);
+                	}
+                    
                 });
             }
             {

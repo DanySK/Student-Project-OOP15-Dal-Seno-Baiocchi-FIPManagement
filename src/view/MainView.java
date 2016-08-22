@@ -3,25 +3,19 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import javax.swing.JButton;
-
-
-import javax.swing.JLabel;
 
 import controller.LoginController;
 
 public class MainView extends JFrame {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1434216695759527061L;
     private JPanel contentPane;
-
+    public static enum LoginType{adm,user};
+    
     /**
      * Launch the application.
      */
@@ -38,11 +32,7 @@ public class MainView extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
-    @SuppressWarnings("deprecation")
-    public MainView() {
+    	public MainView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
@@ -55,7 +45,7 @@ public class MainView extends JFrame {
         contentPane.add(championshipBtn);
         championshipBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog();
-            LoginController contr = new LoginController();
+            LoginController contr = new LoginController(LoginType.adm);
             contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 
@@ -66,6 +56,8 @@ public class MainView extends JFrame {
         contentPane.add(matchBtn);
         matchBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog();
+            LoginController contr = new LoginController(LoginType.user);
+            contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 
         });
