@@ -16,7 +16,6 @@ import javax.swing.JButton;
 public class ChampionshipView extends JFrame {
 
     private JPanel contentPane;
-    private JTable table;
 
     /**
      * Launch the application.
@@ -45,11 +44,6 @@ public class ChampionshipView extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JList list = new JList();
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setBounds(79, 66, 531, 273);
-        contentPane.add(list);
-        
         JButton addChampBtn = new JButton("Add Championship");
         addChampBtn.setBounds(133, 415, 179, 29);
         contentPane.add(addChampBtn);
@@ -62,6 +56,7 @@ public class ChampionshipView extends JFrame {
         btnNewButton_1.setBounds(388, 415, 179, 29);
         contentPane.add(btnNewButton_1);
         
+    
         
     }
 }

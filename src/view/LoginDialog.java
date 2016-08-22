@@ -14,8 +14,12 @@ import javax.swing.JLabel;
 
 import com.sun.xml.internal.ws.Closeable;
 
-public class LoginDialog extends JDialog implements ActionListener {
+public class LoginDialog extends JDialog implements LoginDialogInterface {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     public JTextField userTextField;
     public JTextField pswTextfield;
@@ -73,16 +77,21 @@ public class LoginDialog extends JDialog implements ActionListener {
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
-                okButton.addActionListener(this);  
+                okButton.addActionListener(e->{
+                    obs.doLogin(userTextField.getText(), pswTextfield.getText());
+                });
             }
             {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
-                cancelButton.addActionListener(this);
+                cancelButton.addActionListener(e->{
+                    this.setVisible(false);
+                });
             }
         }
     }
+    
     public static interface LoginObserver{
         
         /**
@@ -95,8 +104,13 @@ public class LoginDialog extends JDialog implements ActionListener {
     public void attachObserver(LoginObserver observer){
         this.obs = observer;
     }
-
     @Override
+    public void clearInterface() {
+        // TODO Auto-generated method stub
+        
+    }
+
+   /* @Override
     public void actionPerformed(ActionEvent e) {
         Object buttonPressed = e.getSource();
         if(buttonPressed =="Cancel"){
@@ -105,7 +119,9 @@ public class LoginDialog extends JDialog implements ActionListener {
             this.obs.doLogin(userTextField.getText(), pswTextfield.getText());
         }
         
-    }
+    }*/
+
+   
 }
 
 

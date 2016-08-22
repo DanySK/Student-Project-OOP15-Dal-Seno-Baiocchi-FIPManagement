@@ -24,6 +24,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
 
+import controller.LoginController;
+
 public class MainView extends JFrame {
 
     private JPanel contentPane;
@@ -61,6 +63,8 @@ public class MainView extends JFrame {
         contentPane.add(championshipBtn);
         championshipBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog();
+            LoginController contr = new LoginController();
+            contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 
         });
