@@ -1,5 +1,6 @@
 package controller;
 
+import exceptions.ChampionshipAlreadyExistException;
 import model.Championship;
 import model.ChampionshipImpl;
 import model.Division;
@@ -17,13 +18,13 @@ public class ChampionshipController implements ChampionshipObserver {
 	}
 
 	@Override
-	public void addChampionship(Division d, Zone zone) {
-		model.getChampionship().add(new ChampionshipImpl(d, zone));
+	public void addChampionship(Division d, Zone zone) throws ChampionshipAlreadyExistException {
+	    model.addChampionship(new ChampionshipImpl(d, zone));
 	}
 
 	@Override
-	public void deleteChampionship() {
-		
+	public void deleteChampionship(ChampionshipImpl champ) {
+		model.deletChampionship(champ);
 	}
 
 }

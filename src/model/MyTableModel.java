@@ -8,13 +8,15 @@ public class MyTableModel implements TableModel {
 	
 	private Model model;
 	private String[] columnNames = new String[]{"Championship", "Zone"};
-	
+	public int parametro;
 	
 	public MyTableModel(Model model) {
-		this.model = model;
-	}
+	    this.model = model;
+        }
 
-	@Override
+
+
+    @Override
 	public void addTableModelListener(TableModelListener l) {
 		// TODO Auto-generated method stub
 		

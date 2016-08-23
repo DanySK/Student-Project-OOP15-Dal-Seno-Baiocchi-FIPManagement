@@ -14,9 +14,14 @@ import com.sun.rowset.internal.Row;
 
 import controller.ChampionshipController;
 import javafx.scene.control.SingleSelectionModel;
+import model.ChampionshipImpl;
 import model.Model;
 import model.MyTableModel;
+
 import javax.swing.JLabel;
+
+import observer.ChampionshipObserver;
+
 
 public class ChampionshipView extends JFrame  {
 
@@ -28,6 +33,7 @@ public class ChampionshipView extends JFrame  {
     private JTable champTable;
     private JButton addChampBtn;
     private JButton deleteChamp;
+    private ChampionshipObserver obs;
     
 
     /**
@@ -89,7 +95,12 @@ public class ChampionshipView extends JFrame  {
             c.setVisible(true);
         });
         deleteChamp.addActionListener(e->{
-        	model.getChampionship().remove(model.getChampionship().toArray()[champTable.getSelectedRow()]);
+            /*PUNTA A NULL NON CAPISCO PERCHE'*/
+            
+            obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
+        	
+            /* questo metodo non passava dal controller quindi secondo me non va bene*/
+            //model.getChampionship().remove(model.getChampionship().toArray()[champTable.getSelectedRow()]);
         	champTable.repaint();
         });
     }

@@ -2,6 +2,7 @@ package model;
 
 import exceptions.ChampionshipAlreadyExistException;
 import exceptions.CompanyAlreadyExistException;
+import exceptions.TeamAlreadyInThisChampionshipException;
 
 public interface IModel {
     
@@ -13,6 +14,9 @@ public interface IModel {
     void addCompany(CompanyImpl company) throws CompanyAlreadyExistException;
     
     void deleteCompany(CompanyImpl company);
-
+    
+    void addTeam(ChampionshipImpl champ, TeamImpl team) throws TeamAlreadyInThisChampionshipException;
+    
+    void removeTeam(ChampionshipImpl champ,TeamImpl team);
   
 }

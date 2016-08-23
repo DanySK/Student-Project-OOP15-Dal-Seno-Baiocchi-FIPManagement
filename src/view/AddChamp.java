@@ -40,6 +40,7 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
     /**
      * Create the dialog.
      */
+    @SuppressWarnings("deprecation")
     public AddChamp() {
         setBounds(100, 100, 410, 231);
         getContentPane().setLayout(new BorderLayout());
@@ -72,7 +73,15 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
                 okButton.addActionListener(e->{
-                   obs.addChampionship((Division)divisionBox.getSelectedItem(), (Zone) zoneBox.getSelectedItem()); 
+                   try {
+                    obs.addChampionship((Division)divisionBox.getSelectedItem(), (Zone) zoneBox.getSelectedItem());
+                } catch (Exception e1) {
+                   JDialog error = new JDialog();
+                   error.setTitle("Champioship already exist");
+                   error.setSize(300, 100);
+                   error.show();
+                   error.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                } 
                 });
             }
             {

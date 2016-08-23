@@ -22,6 +22,7 @@ public class TeamView extends JFrame {
     private JTable teamTable;
     private JButton btnAddTeam;
     private JButton btnDeleteTeam;
+    private static int TEAM_TABLE = 2;
 
     /**
      * Launch the application.
