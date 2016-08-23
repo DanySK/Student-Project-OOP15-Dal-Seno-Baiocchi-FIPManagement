@@ -76,7 +76,7 @@ public class TeamView extends JFrame {
         teamTable.setModel(new MyTableModel(model));
         btnAddTeam.addActionListener(e->{
            AddTeam t = new AddTeam();
-           t.attachObserver(new TeamController(model));
+          // t.attachObserver(new TeamController(model));
            t.repaint();
            t.setVisible(true);
         });
