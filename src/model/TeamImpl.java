@@ -110,7 +110,6 @@ public class TeamImpl implements Team {
 
     @Override
     public List<Manager> getManagers() {
-
         return managerList;
     }
 

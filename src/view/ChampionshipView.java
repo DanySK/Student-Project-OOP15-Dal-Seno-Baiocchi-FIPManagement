@@ -16,6 +16,7 @@ import controller.ChampionshipController;
 import javafx.scene.control.SingleSelectionModel;
 import model.Model;
 import model.MyTableModel;
+import javax.swing.JLabel;
 
 public class ChampionshipView extends JFrame  {
 
@@ -25,8 +26,8 @@ public class ChampionshipView extends JFrame  {
     private static final long serialVersionUID = 4097624461142333134L;
     private JPanel contentPane;
     private JTable champTable;
-	private JButton addChampBtn;
-	private JButton deleteChamp;
+    private JButton addChampBtn;
+    private JButton deleteChamp;
     
 
     /**
@@ -65,8 +66,16 @@ public class ChampionshipView extends JFrame  {
         contentPane.add(deleteChamp);
         
         champTable = new JTable();
-        champTable.setBounds(101, 149, 466, 222);
+        champTable.setBounds(108, 131, 492, 245);
         contentPane.add(champTable);
+        
+        JLabel lblChampionship = new JLabel("DIVISION");
+        lblChampionship.setBounds(173, 103, 82, 16);
+        contentPane.add(lblChampionship);
+        
+        JLabel lblZone = new JLabel("ZONE");
+        lblZone.setBounds(436, 103, 82, 16);
+        contentPane.add(lblZone);
         
     }
     

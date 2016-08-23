@@ -14,6 +14,10 @@ import model.Model;
 
 public class MainView extends JFrame {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 9199009276340778940L;
     private JPanel contentPane;
     public static enum LoginType{adm,user};
     Model model = new Model();
@@ -69,9 +73,5 @@ public class MainView extends JFrame {
         JLabel logoLbl = new JLabel(image);
         logoLbl.setBounds(86, 51, 522, 334);
         contentPane.add(logoLbl);
-    }
-    
-    public interface MainViewObserver{
-        
     }
 }
