@@ -1,17 +1,12 @@
 package controller;
 
-import com.sun.java.swing.plaf.motif.MotifDesktopIconUI;
-import com.sun.org.apache.xpath.internal.operations.Lte;
-
-import exceptions.TeamAlreadyInThisChampionshipException;
 import model.Championship;
-import model.CompanyImpl;
 import model.Model;
 import model.Team;
 import model.TeamImpl;
-import observer.LoginObserver;
 import observer.TeamObserver;
 import view.ObserverInterface;
+import exceptions.TeamAlreadyInThisChampionshipException;
 
 public class TeamController implements TeamObserver {
 

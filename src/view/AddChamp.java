@@ -5,11 +5,13 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 
+import exceptions.ChampionshipAlreadyExistException;
 import observer.ChampionshipObserver;
 import model.Division;
 import model.Zone;
@@ -78,12 +80,8 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
                    try {
                     obs.addChampionship((Division)divisionBox.getSelectedItem(), (Zone) zoneBox.getSelectedItem());
                     this.setVisible(false);
-                } catch (Exception e1) {
-                  /* JDialog error = new JDialog();
-                   error.setTitle("Champioship already exist");
-                   error.setSize(300, 100);
-                   error.show();
-                   error.setDefaultCloseOperation(EXIT_ON_CLOSE);*/
+                } catch (ChampionshipAlreadyExistException ex) {
+                        JOptionPane.showMessageDialog(this, "Championship already exists", "Error",JOptionPane.ERROR_MESSAGE);                    
                 } 
                 });
             }

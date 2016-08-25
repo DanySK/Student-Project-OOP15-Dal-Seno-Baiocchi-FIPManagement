@@ -46,6 +46,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
      * @param model 
      */
     public LoginDialog(final Model model) {
+        this.setTitle("Login");
         setBounds(100, 100, 401, 162);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

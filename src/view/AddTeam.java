@@ -10,9 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-
-
-import model.CompanyImpl;
 import observer.TeamObserver;
 
 public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> {

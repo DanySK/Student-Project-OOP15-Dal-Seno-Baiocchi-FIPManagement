@@ -1,6 +1,4 @@
 package observer;
-
-import model.CompanyImpl;
 import model.Team;
 
 public interface TeamObserver {
