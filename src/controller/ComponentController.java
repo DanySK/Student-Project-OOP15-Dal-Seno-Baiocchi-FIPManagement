@@ -1,7 +1,13 @@
 package controller;
 
+import java.sql.Date;
+
 import model.Model;
 import model.PersonImpl;
+import model.Player;
+import model.Player.PLAYEROLE;
+import model.Staff;
+import model.Staff.ROLE;
 import model.Team;
 import observer.TeamComponentObserver;
 import sun.security.acl.PermissionImpl;
@@ -15,23 +21,32 @@ public class ComponentController implements TeamComponentObserver {
 		this.model = model;
 		this.team = team;
 	}
+
+    @Override
+    public void addPlayer(String name, String surname, PLAYEROLE role, float height, double cf, Date birth) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addStaff(String name, String surname, ROLE role, double cf, Date birth) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void removePlayer(Player p) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void removeStaff(Staff s) {
+        // TODO Auto-generated method stub
+        
+    }
 	
 
-	@Override
-	public void showComponent(String name, String surname, float height, String role, double cf) {
-
-		
-	}
-
-	@Override
-	public void deleteComponent() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addComponent(String name, String surname, String role, float height, double cf) {
-		//model.addComponent(champ, team, person));
-	}
+	
 
 }

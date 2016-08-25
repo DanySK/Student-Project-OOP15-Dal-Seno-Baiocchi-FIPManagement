@@ -1,10 +1,19 @@
 package observer;
 
+import java.sql.Date;
+
+import model.Player;
+import model.Player.PLAYEROLE;
+import model.Staff.ROLE;
+import model.Staff;
+
 public interface TeamComponentObserver {
 
-	void addComponent(String name, String surname,String role, float height, double cf);
+	void addPlayer(String name, String surname,PLAYEROLE role, float height, double cf, Date birth);
 	
-	void showComponent(String name, String surname, float height, String role, double cf);
+	void addStaff(String name, String surname, ROLE role, double cf,Date birth);
 	
-	void deleteComponent();
+	void removePlayer(Player p);
+	
+	void removeStaff(Staff s);
 }
