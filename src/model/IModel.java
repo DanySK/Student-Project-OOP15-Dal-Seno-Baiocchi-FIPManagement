@@ -30,10 +30,16 @@ public interface IModel {
      * @param team: the team to delete
      */
     void removeTeam(Championship champ,Team team);
-
-  
+    /**
+     * 
+     * @param champ the reference championship
+     * @return a list of teams
+     */
     List<Team> getTeam(Championship champ);
-    
+    /**
+     * 
+     * @return a list of championship
+     */
     List<Championship> getChampionship(); 
     
 }
