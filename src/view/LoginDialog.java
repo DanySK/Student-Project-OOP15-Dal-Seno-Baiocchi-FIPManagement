@@ -92,10 +92,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
                 cancelButton.addActionListener(e->{
-                	if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
-                    	new MatchView().setVisible(true);
-                		this.setVisible(false);
-                	}
+                	    this.setVisible(false);
                 });
             }
         }

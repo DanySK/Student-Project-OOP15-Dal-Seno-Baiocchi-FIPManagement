@@ -12,9 +12,12 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
+
+import observer.TeamComponentObserver;
+
 import java.awt.Font;
 
-public class AddComponent extends JDialog {
+public class AddComponent extends JDialog implements ObserverInterface<TeamComponentObserver> {
 
     private final JPanel contentPanel = new JPanel();
     private JTextField nameField;
@@ -25,6 +28,7 @@ public class AddComponent extends JDialog {
     private JTextField cfField;
     private JTextField heightField;
     private JTextField roleField;
+    private TeamComponentObserver obs;
 
     /**
      * Launch the application.
@@ -152,5 +156,16 @@ public class AddComponent extends JDialog {
                 buttonPane.add(cancelButton);
             }
         }
+    }
+
+    @Override
+    public void attachObserver(TeamComponentObserver observer) {
+        this.obs = observer;        
+    }
+
+    @Override
+    public void clearInterface() {
+        // TODO Auto-generated method stub
+        
     }
 }

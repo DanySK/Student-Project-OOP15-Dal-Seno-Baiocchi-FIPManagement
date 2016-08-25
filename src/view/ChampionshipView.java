@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import observer.ChampionshipObserver;
 
 
-public class ChampionshipView extends JFrame  {
+public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>{
 
     /**
      * 
@@ -34,6 +34,7 @@ public class ChampionshipView extends JFrame  {
     private JButton addChampBtn;
     private JButton deleteChamp;
     private ChampionshipObserver obs;
+    private JButton btnBack;
     
 
     /**
@@ -83,6 +84,9 @@ public class ChampionshipView extends JFrame  {
         lblZone.setBounds(436, 103, 82, 16);
         contentPane.add(lblZone);
         
+        btnBack = new JButton("Back");
+        btnBack.setBounds(6, 492, 117, 29);
+        contentPane.add(btnBack);   
     }
     
     public ChampionshipView(final Model model){
@@ -95,13 +99,21 @@ public class ChampionshipView extends JFrame  {
             c.setVisible(true);
         });
         deleteChamp.addActionListener(e->{
-            /*PUNTA A NULL NON CAPISCO PERCHE'*/
-            
+            this.attachObserver(new ChampionshipController(model));
             obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
-        	
-            /* questo metodo non passava dal controller quindi secondo me non va bene*/
-            //model.getChampionship().remove(model.getChampionship().toArray()[champTable.getSelectedRow()]);
-        	champTable.repaint();
+            champTable.repaint();
         });
+    }
+
+    @Override
+    public void attachObserver(ChampionshipObserver observer) {
+        this.obs = observer;
+        
+    }
+
+    @Override
+    public void clearInterface() {
+        // TODO Auto-generated method stub
+        
     }
 }

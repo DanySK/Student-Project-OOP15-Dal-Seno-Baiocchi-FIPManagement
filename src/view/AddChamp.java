@@ -12,8 +12,6 @@ import javax.swing.JComboBox;
 
 import observer.ChampionshipObserver;
 import model.Division;
-import model.Model;
-import model.MyTableModel;
 import model.Zone;
 public class AddChamp extends JDialog implements ObserverInterface<ChampionshipObserver> {
 
@@ -23,6 +21,10 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
     private static final long serialVersionUID = 73893420932703563L;
     private final JPanel contentPanel = new JPanel();
     private ChampionshipObserver obs;
+    @SuppressWarnings("rawtypes")
+    private JComboBox zoneBox;
+    @SuppressWarnings("rawtypes")
+    private JComboBox divisionBox;
 
     /**
      * Launch the application.
@@ -40,7 +42,7 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
     /**
      * Create the dialog.
      */
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public AddChamp() {
         setBounds(100, 100, 410, 231);
         getContentPane().setLayout(new BorderLayout());
@@ -56,11 +58,11 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
         lblZone.setBounds(42, 106, 75, 16);
         contentPanel.add(lblZone);
         
-        JComboBox divisionBox = new JComboBox(Division.values());
+        divisionBox = new JComboBox(Division.values());
         divisionBox.setBounds(188, 39, 145, 27);
         contentPanel.add(divisionBox);
         
-        JComboBox zoneBox = new JComboBox(Zone.values());
+        zoneBox = new JComboBox(Zone.values());
         zoneBox.setBounds(188, 102, 145, 27);
         contentPanel.add(zoneBox);
         {
@@ -75,12 +77,13 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
                 okButton.addActionListener(e->{
                    try {
                     obs.addChampionship((Division)divisionBox.getSelectedItem(), (Zone) zoneBox.getSelectedItem());
+                    this.setVisible(false);
                 } catch (Exception e1) {
-                   JDialog error = new JDialog();
+                  /* JDialog error = new JDialog();
                    error.setTitle("Champioship already exist");
                    error.setSize(300, 100);
                    error.show();
-                   error.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                   error.setDefaultCloseOperation(EXIT_ON_CLOSE);*/
                 } 
                 });
             }

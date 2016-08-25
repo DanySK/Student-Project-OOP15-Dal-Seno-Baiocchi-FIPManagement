@@ -16,6 +16,7 @@ public class TeamComponentView extends JFrame {
     private JTable componentsTable;
     private JButton deleteComponent;
     private JButton addComponent;
+    private JButton btnBack;
 
     /**
      * Launch the application.
@@ -55,6 +56,10 @@ public class TeamComponentView extends JFrame {
         deleteComponent = new JButton("Delete");
         deleteComponent.setBounds(388, 415, 179, 29);
         contentPane.add(deleteComponent);
+        
+        btnBack = new JButton("Back");
+        btnBack.setBounds(6, 492, 117, 29);
+        contentPane.add(btnBack);
         
         JLabel lblTeamName = new JLabel("NAME");
         lblTeamName.setBounds(173, 103, 82, 16);

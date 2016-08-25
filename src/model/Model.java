@@ -10,29 +10,30 @@ import java.util.Set;
 
 import exceptions.ChampionshipAlreadyExistException;
 import exceptions.CompanyAlreadyExistException;
+import exceptions.PersonAlreadyAddedException;
 import exceptions.TeamAlreadyInThisChampionshipException;
 
 public class Model implements IModel {
     
-    private Map<ChampionshipImpl, Map<TeamImpl, List<PersonImpl>>> dataMap;
+    private Map<Championship, Map<Team, List<Person>>> dataMap;
     private Set<CompanyImpl> companySet;
     
     public Model(){
-        this.dataMap = new HashMap<ChampionshipImpl, Map<TeamImpl,List<PersonImpl>>>();
+        this.dataMap = new HashMap<Championship, Map<Team,List<Person>>>();
         this.companySet = new HashSet<CompanyImpl>();
     }
     
     @Override
-    public void addChampionship(ChampionshipImpl champ) throws ChampionshipAlreadyExistException {
+    public void addChampionship(Championship champ) throws ChampionshipAlreadyExistException {
         if(!dataMap.containsKey(champ)){
-            dataMap.put(champ, new HashMap<TeamImpl, List<PersonImpl>>());
+            dataMap.put(champ, new HashMap<Team, List<Person>>());
         } else throw new ChampionshipAlreadyExistException();
       
 
     }
 
     @Override
-    public void deletChampionship(ChampionshipImpl champ) {
+    public void deletChampionship(Championship champ) {
         if(dataMap.containsKey(champ)){
             dataMap.remove(champ);
         } else throw new IllegalArgumentException();
@@ -58,23 +59,39 @@ public class Model implements IModel {
 
     }
     
-    public Set<ChampionshipImpl> getChampionship(){
+    public Set<Championship> getChampionship(){
     	return dataMap.keySet();
     }
 
     @Override
-    public void addTeam(ChampionshipImpl champ, TeamImpl team) throws TeamAlreadyInThisChampionshipException {
+    public void addTeam(Championship champ, Team team) throws TeamAlreadyInThisChampionshipException {
         if(dataMap.containsKey(champ)){
             if(!dataMap.get(champ).containsValue(team)){
-                dataMap.get(champ).put(team, new ArrayList<PersonImpl>());
+                dataMap.get(champ).put(team, new ArrayList<Person>());
             } else throw new TeamAlreadyInThisChampionshipException();
         }  
     }
 
     @Override
-    public void removeTeam(ChampionshipImpl champ,TeamImpl team) {
+    public void removeTeam(Championship champ,Team team) {
         dataMap.get(champ).remove(team); 
     }
+
+    @Override
+    public void addComponent(Championship champ,Team team,Person person) throws PersonAlreadyAddedException {
+        if(!dataMap.get(champ).get(team).contains(person.getCF())){
+            dataMap.get(champ).get(team).add(person);
+        } else throw new PersonAlreadyAddedException();
+        
+    }
+
+    @Override
+    public void removeComponent(Championship champ, Team team, Person person) {
+        dataMap.get(champ).get(team).remove(person);
+        
+    }
+    
+    
     
     
 }

@@ -22,6 +22,7 @@ public class TeamView extends JFrame {
     private JTable teamTable;
     private JButton btnAddTeam;
     private JButton btnDeleteTeam;
+    private JButton btnBack;
     private static int TEAM_TABLE = 2;
 
     /**
@@ -62,6 +63,10 @@ public class TeamView extends JFrame {
         btnDeleteTeam = new JButton("Delete Team");
         btnDeleteTeam.setBounds(388, 415, 179, 29);
         contentPane.add(btnDeleteTeam);
+        
+        btnBack = new JButton("Back");
+        btnBack.setBounds(6, 492, 117, 29);
+        contentPane.add(btnBack);
         
         JLabel lblTeamName = new JLabel("TEAM NAME");
         lblTeamName.setBounds(173, 103, 82, 16);
