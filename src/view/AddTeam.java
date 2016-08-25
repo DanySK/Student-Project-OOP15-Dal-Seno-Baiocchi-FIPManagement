@@ -103,6 +103,7 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
                 buttonPane.add(addButton);
                 addButton.addActionListener(e->{
                     obs.addTeam(nameTextfield.getText(), homeColourTextfield.getText(), transferColourTextField.getText());
+                    this.setVisible(false);
                 });
                 getRootPane().setDefaultButton(addButton);
             }

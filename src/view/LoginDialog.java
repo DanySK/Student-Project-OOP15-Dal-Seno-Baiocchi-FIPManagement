@@ -6,15 +6,14 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import controller.LoginController;
 import model.Model;
 import observer.LoginObserver;
-import view.MainView.LoginType;
 
 public class LoginDialog extends JDialog implements ObserverInterface<LoginObserver> {
 
@@ -83,9 +82,12 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
                 okButton.addActionListener(e->{
-                	if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
-                		
-                		this.setVisible(false);}
+                    if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
+                		this.setVisible(false);
+                	} else {
+                            JOptionPane.showMessageDialog(this, "Login Error", "Error",JOptionPane.ERROR_MESSAGE);                    
+                	}
+                	    
                 });
             }
             {

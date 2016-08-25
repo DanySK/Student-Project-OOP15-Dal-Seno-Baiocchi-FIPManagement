@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -11,17 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import controller.ComponentController;
-import controller.TeamController;
-import model.Championship;
-import model.Model;
 import model.Player;
 import model.Team;
 import observer.TeamComponentObserver;
 import tableModel.MyComponentModel;
+import controller.ComponentController;
 
 public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6121024019716588087L;
     private JPanel contentPane;
     private JTable componentsTable;
     private JButton deleteComponent;
@@ -49,6 +51,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
      * Create the frame.
      */
     private TeamComponentView() {
+        this.setTitle("Team Component View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
@@ -79,6 +82,11 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         JLabel lblCompany = new JLabel("ROLE");
         lblCompany.setBounds(436, 103, 69, 16);
         contentPane.add(lblCompany);
+        
+        JLabel lblRoster = new JLabel("ROSTER");
+        lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+        lblRoster.setBounds(293, 23, 117, 53);
+        contentPane.add(lblRoster);
     }
     
     

@@ -1,31 +1,23 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.java.swing.plaf.motif.resources.motif;
-import com.sun.javafx.scene.control.SelectedCellsMap;
-import com.sun.rowset.internal.Row;
-
-import controller.ChampionshipController;
-import javafx.scene.control.SingleSelectionModel;
 import model.Championship;
 import model.ChampionshipImpl;
 import model.Model;
-import model.MyTableModel;
-
-import javax.swing.JLabel;
-
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
+import controller.ChampionshipController;
 
 
 public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>{
@@ -63,6 +55,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
      * @param model 
      */
     private ChampionshipView() {
+        this.setTitle("Championship View");
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -92,6 +85,11 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         btnBack = new JButton("Back");
         btnBack.setBounds(6, 492, 117, 29);
         contentPane.add(btnBack);   
+        
+        JLabel lblChampionship_1 = new JLabel("CHAMPIONSHIP");
+        lblChampionship_1.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+        lblChampionship_1.setBounds(251, 23, 200, 53);
+        contentPane.add(lblChampionship_1);
     }
     
     public ChampionshipView(final Model model){

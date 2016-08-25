@@ -3,8 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
-
 import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
@@ -15,11 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-
-
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 
 import model.Player.PLAYEROLE;
 import model.Staff.ROLE;
@@ -178,6 +171,7 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
                     } else {
                         obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), cfField.getText(),birth.getTime());
                     }
+                    this.setVisible(false);
                 });
                 getRootPane().setDefaultButton(addButton);
             }

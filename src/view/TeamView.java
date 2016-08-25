@@ -1,26 +1,22 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controller.TeamController;
-
-import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 
 import model.Championship;
 import model.Model;
-import model.MyTableModel;
 import model.Team;
-import tableModel.MyChampionshipModel;
 import tableModel.MyTeamModel;
+import controller.TeamController;
 
 public class TeamView extends JFrame {
 
@@ -34,7 +30,6 @@ public class TeamView extends JFrame {
     private JButton btnDeleteTeam;
     private JButton btnBack;
     private TeamController controller;
-    private static int TEAM_TABLE = 2;
 
     /**
      * Launch the application.
@@ -56,6 +51,7 @@ public class TeamView extends JFrame {
      * Create the frame.
      */
     private TeamView() {
+        this.setTitle("Team View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
@@ -87,6 +83,10 @@ public class TeamView extends JFrame {
         lblCompany.setBounds(436, 103, 69, 16);
         contentPane.add(lblCompany);
       
+        JLabel lblTeams = new JLabel("TEAMS");
+        lblTeams.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+        lblTeams.setBounds(293, 23, 91, 53);
+        contentPane.add(lblTeams);
     }
     
     public TeamView(final Model model, Championship ch){
