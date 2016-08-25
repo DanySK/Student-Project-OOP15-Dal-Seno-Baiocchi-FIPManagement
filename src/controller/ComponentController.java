@@ -2,22 +2,14 @@ package controller;
 
 import java.sql.Date;
 
-<<<<<<< local
 import exceptions.PersonAlreadyAddedException;
-=======
->>>>>>> other
 import model.Model;
-import model.PersonImpl;
 import model.Player;
 import model.Player.PLAYEROLE;
-<<<<<<< local
-=======
 import model.Staff;
 import model.Staff.ROLE;
->>>>>>> other
 import model.Team;
 import observer.TeamComponentObserver;
-import sun.security.acl.PermissionImpl;
 
 public class ComponentController implements TeamComponentObserver {
 
@@ -28,8 +20,12 @@ public class ComponentController implements TeamComponentObserver {
 	}
 
     @Override
-    public void addPlayer(String name, String surname, PLAYEROLE role, float height, double cf, Date birth) {
-        // TODO Auto-generated method stub
+    public void addPlayer(String name, String surname, PLAYEROLE role, float height, String cf, Date birth) {
+		try {
+			team.addPlayer(new Player(name, surname, birth, cf, role, height));
+		} catch (PersonAlreadyAddedException e) {
+			e.printStackTrace();
+		}
         
     }
 
@@ -41,7 +37,7 @@ public class ComponentController implements TeamComponentObserver {
 
     @Override
     public void removePlayer(Player p) {
-        // TODO Auto-generated method stub
+		team.removePlayer(p);
         
     }
 
@@ -51,28 +47,5 @@ public class ComponentController implements TeamComponentObserver {
         
     }
 	
-
-<<<<<<< local
-	@Override
-	public void showComponent(String name, String surname, double height, PLAYEROLE role, String cf, Date birth) {
-		
-	}
-
-	@Override
-	public void deleteComponent(Player p) {
-		team.removePlayer(p);
-	}
-
-	@Override
-	public void addComponent(String name, String surname, PLAYEROLE role, float height, String cf, Date birth) {
-		try {
-			team.addPlayer(new Player(name, surname, birth, cf, role, height));
-		} catch (PersonAlreadyAddedException e) {
-			e.printStackTrace();
-		}
-	}
-=======
-	
->>>>>>> other
 
 }
