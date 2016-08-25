@@ -1,9 +1,8 @@
 package controller;
 
-import java.sql.Date;
+import java.util.Date;
 
 import exceptions.PersonAlreadyAddedException;
-import model.Model;
 import model.Player;
 import model.Player.PLAYEROLE;
 import model.Staff;
@@ -20,7 +19,7 @@ public class ComponentController implements TeamComponentObserver {
 	}
 
     @Override
-    public void addPlayer(String name, String surname, PLAYEROLE role, float height, String cf, Date birth) {
+    public void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth) {
 		try {
 			team.addPlayer(new Player(name, surname, birth, cf, role, height));
 		} catch (PersonAlreadyAddedException e) {

@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+
+import java.util.Calendar;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,6 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+
+
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 
 import model.Player.PLAYEROLE;
 import model.Staff.ROLE;
@@ -119,7 +127,7 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
         yyField.setColumns(10);
         
         JLabel lblDd = new JLabel("dd");
-        lblDd.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+ lblDd.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
         lblDd.setBounds(97, 220, 12, 16);
         contentPanel.add(lblDd);
         
@@ -162,6 +170,15 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
                 JButton addButton = new JButton("Add");
                 addButton.setActionCommand("OK");
                 buttonPane.add(addButton);
+                addButton.addActionListener(e->{
+                    Calendar birth = Calendar.getInstance();
+                    birth.set(Integer.valueOf(yyField.getText()), Integer.valueOf(mmField.getText()), Integer.valueOf(ddField.getText()));
+                    if(typeBox.getSelectedItem().equals(type[0])){
+                        obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), Double.valueOf(heightField.getText()), cfField.getText(), birth.getTime());
+                    } else {
+                        obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), cfField.getText(),birth.getTime());
+                    }
+                });
                 getRootPane().setDefaultButton(addButton);
             }
             {
