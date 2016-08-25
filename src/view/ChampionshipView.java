@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -96,7 +97,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     public ChampionshipView(final Model model){
     	this();
     	champTable.setModel(new MyChampionshipModel(model));
-    	champTable.addMouseListener(new MouseListener() {
+    	champTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2){
@@ -104,30 +105,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 					Championship ch = (Championship) model.getChampionship().toArray()[index];
 					new TeamView(model, ch).setVisible(true);
 				}
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 		});
         addChampBtn.addActionListener(e->{

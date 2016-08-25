@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -92,31 +93,16 @@ public class TeamView extends JFrame {
         this();
         this.controller = new TeamController(model, ch);
         teamTable.setModel(new MyTeamModel(model, ch));
-        teamTable.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-			}
-			
+        teamTable.addMouseListener(new MouseAdapter() {
+		
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount()==2){
-					new TeamComponentView(model).setVisible(true);;
+					new TeamComponentView(model, null).setVisible(true);;
 				}
 			}
 		});
+        
         btnAddTeam.addActionListener(e->{
            AddTeam t = new AddTeam();
            t.attachObserver(new TeamController(model,ch));
