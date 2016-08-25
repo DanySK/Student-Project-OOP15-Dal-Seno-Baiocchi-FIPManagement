@@ -1,25 +1,30 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import model.Championship;
 import model.Model;
+import model.Team;
+import observer.TeamComponentObserver;
+import tableModel.MyComponentModel;
 
-import javax.swing.JTable;
-import javax.swing.JButton;
-
-public class TeamComponentView extends JFrame {
+public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
 
     private JPanel contentPane;
     private JTable componentsTable;
     private JButton deleteComponent;
     private JButton addComponent;
     private JButton btnBack;
+    private TeamComponentObserver observer;
 
     /**
      * Launch the application.
@@ -73,10 +78,41 @@ public class TeamComponentView extends JFrame {
         contentPane.add(lblCompany);
     }
     
-    public TeamComponentView(final Model model){
+    
+    
+    public TeamComponentView(final Model model,final Team team){
     	this();
+    	componentsTable.setModel(new MyComponentModel(model));
+    	componentsTable.addMouseListener(new MouseAdapter(){
+    		@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					int index = ((JTable)e.getSource()).getSelectedRow();
+					//team.getP
+					//Team team = (Team) model.getTeam(champ)().toArray()[index];
+					
+				}
+			}
+    	});
     	addComponent.addActionListener(e->{
     		new AddComponent();
     	});
+    	
+    	deleteComponent.addActionListener(e->{
+    		
+    	});
     }
+    
+
+	@Override
+	public void clearInterface() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void attachObserver(TeamComponentObserver observer) {
+		this.observer = observer;
+	}
+   
 }
