@@ -3,11 +3,11 @@ package model;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-public class MyTableModel implements TableModel {
+public abstract class MyTableModel implements TableModel {
 	
 	
-	private Model model;
-	private String[] columnNames = new String[]{"Championship", "Zone"};
+	protected Model model;
+	private String[] columnNames;
 	public int parametro;
 	
 	public MyTableModel(Model model) {
@@ -31,7 +31,7 @@ public class MyTableModel implements TableModel {
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 2;
+		return columnNames.length;
 	}
 
 	@Override
@@ -39,12 +39,12 @@ public class MyTableModel implements TableModel {
 		return columnNames[columnIndex];
 	}
 
-	@Override
+	/*@Override
 	public int getRowCount() {
 		return model.getChampionship().size();
-	}
+	}*/
 
-	@Override
+/*	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Championship ch = (Championship) model.getChampionship().toArray()[rowIndex];
 		if(columnIndex == 0){
@@ -53,6 +53,10 @@ public class MyTableModel implements TableModel {
 			return ch.getZone().toString();
 		}
 		
+	}*/
+	
+	protected void setColumnNames(String []names) {
+		this.columnNames = names;
 	}
 
 	@Override

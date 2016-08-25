@@ -51,7 +51,7 @@ public class MainView extends JFrame {
         contentPane.add(championshipBtn);
         championshipBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog(model);
-            LoginController contr = new LoginController(LoginType.adm);
+            LoginController contr = new LoginController(LoginType.adm, model);
             contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 
@@ -62,7 +62,7 @@ public class MainView extends JFrame {
         contentPane.add(matchBtn);
         matchBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog(model);
-            LoginController contr = new LoginController(LoginType.user);
+            LoginController contr = new LoginController(LoginType.user,model);
             contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 

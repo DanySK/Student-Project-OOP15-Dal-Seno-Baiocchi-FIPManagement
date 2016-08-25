@@ -1,9 +1,11 @@
 package view;
 
+import controller.LoginController;
+
 public interface ObserverInterface<T>{
     /**
      * Adds an observer of the view
-     * @param observer
+     * @param loginController
      */
     void attachObserver(T observer);
     /**

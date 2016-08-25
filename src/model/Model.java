@@ -71,11 +71,17 @@ public class Model implements IModel {
             } else throw new TeamAlreadyInThisChampionshipException();
         }  
     }
+    
+    public Set<Team> getTeam(Championship champ){
+    	return dataMap.get(champ).keySet(); 
+    }
 
     @Override
     public void removeTeam(Championship champ,Team team) {
         dataMap.get(champ).remove(team); 
     }
+
+
 
     @Override
     public void addComponent(Championship champ,Team team,Person person) throws PersonAlreadyAddedException {

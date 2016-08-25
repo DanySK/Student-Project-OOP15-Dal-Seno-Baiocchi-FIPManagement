@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +16,7 @@ import com.sun.rowset.internal.Row;
 
 import controller.ChampionshipController;
 import javafx.scene.control.SingleSelectionModel;
+import model.Championship;
 import model.ChampionshipImpl;
 import model.Model;
 import model.MyTableModel;
@@ -21,6 +24,7 @@ import model.MyTableModel;
 import javax.swing.JLabel;
 
 import observer.ChampionshipObserver;
+import tableModel.MyChampionshipModel;
 
 
 public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>{
@@ -91,7 +95,41 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     
     public ChampionshipView(final Model model){
     	this();
-    	champTable.setModel(new MyTableModel(model));
+    	champTable.setModel(new MyChampionshipModel(model));
+    	champTable.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					int index = ((JTable)e.getSource()).getSelectedRow();
+					Championship ch = (Championship) model.getChampionship().toArray()[index];
+					new TeamView(model, ch).setVisible(true);
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
         addChampBtn.addActionListener(e->{
             AddChamp c = new AddChamp();
             c.attachObserver(new ChampionshipController(model));

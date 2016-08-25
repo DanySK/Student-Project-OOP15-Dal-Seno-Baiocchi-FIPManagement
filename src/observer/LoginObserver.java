@@ -1,5 +1,6 @@
 package observer;
 
+import model.Model;
 import sun.security.util.Password;
 
 public interface LoginObserver{
@@ -9,6 +10,5 @@ public interface LoginObserver{
      */
     boolean doLogin(String user, String pwd);
     
-    
-    
+
 }

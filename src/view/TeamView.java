@@ -1,16 +1,25 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.TeamController;
+
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import model.Championship;
 import model.Model;
 import model.MyTableModel;
+import model.Team;
+import tableModel.MyChampionshipModel;
+import tableModel.MyTeamModel;
 
 public class TeamView extends JFrame {
 
@@ -23,6 +32,7 @@ public class TeamView extends JFrame {
     private JButton btnAddTeam;
     private JButton btnDeleteTeam;
     private JButton btnBack;
+    private TeamController controller;
     private static int TEAM_TABLE = 2;
 
     /**
@@ -75,20 +85,49 @@ public class TeamView extends JFrame {
         JLabel lblCompany = new JLabel("COMPANY");
         lblCompany.setBounds(436, 103, 69, 16);
         contentPane.add(lblCompany);
+      
     }
     
-    public TeamView(final Model model){
+    public TeamView(final Model model, Championship ch){
         this();
-        teamTable.setModel(new MyTableModel(model));
+        this.controller = new TeamController(model, ch);
+        teamTable.setModel(new MyTeamModel(model, ch));
+        teamTable.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount()==2){
+					new TeamComponentView(model).setVisible(true);;
+				}
+			}
+		});
         btnAddTeam.addActionListener(e->{
            AddTeam t = new AddTeam();
-          // t.attachObserver(new TeamController(model));
-           t.repaint();
+           t.attachObserver(new TeamController(model,ch));
            t.setVisible(true);
         });
         
         btnDeleteTeam.addActionListener(e->{
-            
+        	int i = teamTable.getSelectedRow();
+        	Team remove = (Team) model.getTeam(ch).toArray()[i];
+        	controller.removeTeam(remove);
+        	teamTable.repaint();
         });
     }
 }

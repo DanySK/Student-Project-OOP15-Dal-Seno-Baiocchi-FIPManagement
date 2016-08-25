@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Model;
+
 import javax.swing.JTable;
 import javax.swing.JButton;
 
@@ -37,7 +40,7 @@ public class TeamComponentView extends JFrame {
     /**
      * Create the frame.
      */
-    public TeamComponentView() {
+    private TeamComponentView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
@@ -68,5 +71,12 @@ public class TeamComponentView extends JFrame {
         JLabel lblCompany = new JLabel("ROLE");
         lblCompany.setBounds(436, 103, 69, 16);
         contentPane.add(lblCompany);
+    }
+    
+    public TeamComponentView(final Model model){
+    	this();
+    	addComponent.addActionListener(e->{
+    		new AddComponent();
+    	});
     }
 }
