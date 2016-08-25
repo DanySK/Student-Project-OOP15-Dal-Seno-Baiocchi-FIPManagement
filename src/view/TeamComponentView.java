@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import controller.ComponentController;
+import controller.TeamController;
 import model.Championship;
 import model.Model;
 import model.Player;
@@ -83,6 +85,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     
     public TeamComponentView(final Team team){
     	this();
+    	observer = new ComponentController(team);
     	componentsTable.setModel(new MyComponentModel( team));
     	componentsTable.addMouseListener(new MouseAdapter(){
     		@Override
@@ -95,7 +98,9 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
 			}
     	});
     	addComponent.addActionListener(e->{
-    		new AddComponent();
+    		AddComponent ac = new AddComponent();
+    		ac.attachObserver(observer);
+    		ac.setVisible(true);
     	});
     	
     	deleteComponent.addActionListener(e->{

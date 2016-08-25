@@ -39,22 +39,6 @@ public abstract class MyTableModel implements TableModel {
 		return columnNames[columnIndex];
 	}
 
-	/*@Override
-	public int getRowCount() {
-		return model.getChampionship().size();
-	}*/
-
-/*	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		Championship ch = (Championship) model.getChampionship().toArray()[rowIndex];
-		if(columnIndex == 0){
-			return ch.getDivision().toString();	
-		}else{
-			return ch.getZone().toString();
-		}
-		
-	}*/
-	
 	protected void setColumnNames(String []names) {
 		this.columnNames = names;
 	}

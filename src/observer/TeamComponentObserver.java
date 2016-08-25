@@ -9,9 +9,9 @@ import model.Staff;
 
 public interface TeamComponentObserver {
 
-	void addStaff(String name, String surname, ROLE role, double cf,Date birth);
 	void removePlayer(Player p);
 	void removeStaff(Staff s);
 	void addPlayer(String name, String surname, PLAYEROLE role, float height, String cf, Date birth);
+	void addStaff(String name, String surname, ROLE role, String cf, Date birth);
 
 }

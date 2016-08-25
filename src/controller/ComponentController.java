@@ -15,7 +15,7 @@ public class ComponentController implements TeamComponentObserver {
 
 	private Team team;
 
-	public ComponentController(Model model, Team team) {
+	public ComponentController(Team team) {
 		this.team = team;
 	}
 
@@ -30,9 +30,13 @@ public class ComponentController implements TeamComponentObserver {
     }
 
     @Override
-    public void addStaff(String name, String surname, ROLE role, double cf, Date birth) {
-        // TODO Auto-generated method stub
-        
+    public void addStaff(String name, String surname, ROLE role, String cf, Date birth) {
+    	try {
+			team.addStaff(new Staff(name, surname, birth, cf, role));
+		} catch (PersonAlreadyAddedException e) {
+			e.printStackTrace();
+		}
+                
     }
 
     @Override
@@ -43,8 +47,8 @@ public class ComponentController implements TeamComponentObserver {
 
     @Override
     public void removeStaff(Staff s) {
-        // TODO Auto-generated method stub
-        
+
+    	team.removeStaff(s);
     }
 	
 
