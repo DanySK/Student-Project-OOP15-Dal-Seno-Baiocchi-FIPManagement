@@ -1,10 +1,16 @@
 package observer;
 
-public interface TeamComponentObserver {
+import java.sql.Date;
 
-	void addComponent(String name, String surname,String role, float height, double cf);
+import model.Player;
+import model.Player.PLAYEROLE;
+
+public interface TeamComponentObserver {
 	
-	void showComponent(String name, String surname, float height, String role, double cf);
 	
-	void deleteComponent();
+	void addComponent(String name, String surname, PLAYEROLE role, float height, String cf, Date birth);
+
+	void deleteComponent(Player p);
+
+	void showComponent(String name, String surname, double height, PLAYEROLE role, String cf, Date birth);
 }

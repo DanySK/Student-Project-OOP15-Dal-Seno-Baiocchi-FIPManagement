@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class Staff extends PersonImpl {
     /**
      * 
@@ -7,7 +9,7 @@ public class Staff extends PersonImpl {
     private static final long serialVersionUID = 4869245935781128086L;
     private ROLE role;
 
-    public Staff(String name, String surname, String birth, String cf,ROLE role) {
+    public Staff(String name, String surname, Date birth, String cf,ROLE role) {
         super(name, surname, birth, cf);
         this.role = role;
     }

@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 
+import exceptions.PersonAlreadyAddedException;
+
 public interface Team extends Serializable{
     /**
      * 
@@ -30,9 +32,9 @@ public interface Team extends Serializable{
      */
     public String getVatNumber();
     
-    public void addPlayer(Player p);
+    public void addPlayer(Player p) throws PersonAlreadyAddedException;
     
-    public void addStaff(Staff s);
+    public void addStaff(Staff s) throws PersonAlreadyAddedException;
     
     public void removePlayer(Player p);
     

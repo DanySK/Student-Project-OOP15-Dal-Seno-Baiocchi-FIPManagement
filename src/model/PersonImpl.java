@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class PersonImpl implements Person {
     
     /**
@@ -8,10 +10,10 @@ public class PersonImpl implements Person {
     private static final long serialVersionUID = 3970309943492437923L;
     private final String name;
     private final String surname;
-    private final String birth;
+    private final Date birth;
     private final String cf;
 
-    public PersonImpl(String name, String surname, String birth, String cf){
+    public PersonImpl(String name, String surname, Date birth, String cf){
         this.name = name;
         this.surname = surname;
         this.birth = birth;
@@ -29,7 +31,7 @@ public class PersonImpl implements Person {
     }
 
     @Override
-    public String getBirth() {
+    public Date getBirth() {
         return this.birth;
     }
 

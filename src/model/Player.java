@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class Player extends PersonImpl {
     
     /**
@@ -7,10 +9,10 @@ public class Player extends PersonImpl {
      */
     private static final long serialVersionUID = 8648663467990512362L;
     private final PLAYEROLE role;
-    private final int height;
+    private final double height;
     
     
-    public Player(String name, String surname, String birth, String cf,PLAYEROLE role,int height) {
+    public Player(String name, String surname, Date birth, String cf,PLAYEROLE role,double height) {
         super(name, surname, birth, cf);
         this.role = role;
         this.height = height;
@@ -20,7 +22,7 @@ public class Player extends PersonImpl {
         return this.role;
     }
     
-    public int getHeight(){
+    public double getHeight(){
         return this.height;
     }
     

@@ -93,12 +93,15 @@ public class TeamView extends JFrame {
         this();
         this.controller = new TeamController(model, ch);
         teamTable.setModel(new MyTeamModel(model, ch));
+        
         teamTable.addMouseListener(new MouseAdapter() {
 		
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount()==2){
-					new TeamComponentView(model, null).setVisible(true);;
+					int index = teamTable.getSelectedRow();
+					Team team = model.getTeam(ch).get(index);
+					new TeamComponentView(team).setVisible(true);;
 				}
 			}
 		});

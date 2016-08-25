@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.Championship;
 import model.Model;
+import model.Player;
 import model.Team;
 import observer.TeamComponentObserver;
 import tableModel.MyComponentModel;
@@ -80,16 +81,15 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     
     
     
-    public TeamComponentView(final Model model,final Team team){
+    public TeamComponentView(final Team team){
     	this();
-    	componentsTable.setModel(new MyComponentModel(model));
+    	componentsTable.setModel(new MyComponentModel( team));
     	componentsTable.addMouseListener(new MouseAdapter(){
     		@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2){
 					int index = ((JTable)e.getSource()).getSelectedRow();
-					//team.getP
-					//Team team = (Team) model.getTeam(champ)().toArray()[index];
+					Player player = team.getPlayers().get(index);
 					
 				}
 			}

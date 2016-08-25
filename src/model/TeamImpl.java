@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import exceptions.PersonAlreadyAddedException;
+
 public class TeamImpl implements Team {
     /**
      * 
@@ -54,27 +56,33 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public void addPlayer(Player p) {
-        // TODO Auto-generated method stub
-        
+    public void addPlayer(Player p) throws PersonAlreadyAddedException {
+    	if(!players.contains(p)){
+    		players.add(p);
+    	}else{
+    		throw new PersonAlreadyAddedException();
+    	}
+    	
     }
 
     @Override
-    public void addStaff(Staff s) {
-        // TODO Auto-generated method stub
-        
+    public void addStaff(Staff s) throws PersonAlreadyAddedException {
+    	if(!staff.contains(s)){
+    		staff.add(s);
+    	}else{
+    		throw new PersonAlreadyAddedException();
+    	}
+   
     }
 
     @Override
     public void removePlayer(Player p) {
-        // TODO Auto-generated method stub
-        
+        players.remove(p);
     }
 
     @Override
     public void removeStaff(Staff s) {
-        // TODO Auto-generated method stub
-        
+        staff.remove(s);
     }
 
     @Override

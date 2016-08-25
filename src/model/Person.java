@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public interface Person extends Serializable {
     /**
@@ -19,7 +20,7 @@ public interface Person extends Serializable {
      * 
      * @return the birth
      */
-    String getBirth();
+    Date getBirth();
     
     /**
      * 
