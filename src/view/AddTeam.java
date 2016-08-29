@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import observer.TeamObserver;
 
 public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> {
@@ -43,7 +45,7 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
      * Create the dialog.
      */
     public AddTeam() {
-        setBounds(100, 100, 455, 341);
+        setBounds(100, 100, 474, 365);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -102,7 +104,13 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
                 addButton.setActionCommand("Add");
                 buttonPane.add(addButton);
                 addButton.addActionListener(e->{
-                    obs.addTeam(nameTextfield.getText(), homeColourTextfield.getText(), transferColourTextField.getText());
+                	try {
+						obs.addTeam(nameTextfield.getText(), homeColourTextfield.getText(), transferColourTextField.getText(), companyTextfield.getText(),vatTextfield.getText());
+						this.setVisible(false);
+					} catch (Exception e2) {
+                        JOptionPane.showMessageDialog(this, "Team already exists", "Error",JOptionPane.ERROR_MESSAGE);                    
+					}
+                    
                 });
                 getRootPane().setDefaultButton(addButton);
             }

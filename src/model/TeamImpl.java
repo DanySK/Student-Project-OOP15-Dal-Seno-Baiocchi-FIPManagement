@@ -20,12 +20,12 @@ public class TeamImpl implements Team {
     private Set<Player> players;
     private Set<Staff> staff;
     
-    public TeamImpl(String name, String transferColour,String homeColour){
+    public TeamImpl(String name, String transferColour,String homeColour, String company, String vat){
         this.name = name;
         this.transferColour = transferColour;
         this.homeColour = homeColour;
-       // this.company = company;
-       // this.vatNumber = vatNumber;
+        this.company = company;
+        this.vatNumber = vat;
         players = new HashSet<Player>();
         staff = new HashSet<Staff>();
     }

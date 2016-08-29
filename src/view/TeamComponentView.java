@@ -3,6 +3,8 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,11 +14,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import controller.ComponentController;
-import controller.TeamController;
-import model.Championship;
-import model.Model;
 import model.Player;
 import model.Team;
+import model.TeamImpl;
 import observer.TeamComponentObserver;
 import tableModel.MyComponentModel;
 
@@ -28,6 +28,10 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JButton addComponent;
     private JButton btnBack;
     private TeamComponentObserver observer;
+    private JLabel lblSurname;
+    private JLabel lblBirth;
+    private JLabel lblHeight;
+    private JLabel lblCf;
 
     /**
      * Launch the application.
@@ -36,7 +40,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    TeamComponentView frame = new TeamComponentView();
+                    TeamComponentView frame = new TeamComponentView(new TeamImpl("","","","",""));
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -49,7 +53,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
      * Create the frame.
      */
     private TeamComponentView() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,16 +72,32 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(deleteComponent);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(6, 492, 117, 29);
+        btnBack.setBounds(549, 470, 117, 29);
         contentPane.add(btnBack);
         
-        JLabel lblTeamName = new JLabel("NAME");
-        lblTeamName.setBounds(173, 103, 82, 16);
+        JLabel lblTeamName = new JLabel("Name");
+        lblTeamName.setBounds(108, 103, 82, 16);
         contentPane.add(lblTeamName);
         
-        JLabel lblCompany = new JLabel("ROLE");
-        lblCompany.setBounds(436, 103, 69, 16);
+        JLabel lblCompany = new JLabel("Role");
+        lblCompany.setBounds(547, 103, 69, 16);
         contentPane.add(lblCompany);
+        
+        lblSurname = new JLabel("Surname");
+        lblSurname.setBounds(203, 104, 82, 16);
+        contentPane.add(lblSurname);
+        
+        lblBirth = new JLabel("Birth");
+        lblBirth.setBounds(295, 103, 82, 16);
+        contentPane.add(lblBirth);
+        
+        lblHeight = new JLabel("Height");
+        lblHeight.setBounds(449, 103, 82, 16);
+        contentPane.add(lblHeight);
+        
+        lblCf = new JLabel("CF");
+        lblCf.setBounds(365, 103, 82, 16);
+        contentPane.add(lblCf);
     }
     
     
@@ -86,25 +105,30 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     public TeamComponentView(final Team team){
     	this();
     	observer = new ComponentController(team);
-    	componentsTable.setModel(new MyComponentModel( team));
+    	componentsTable.setModel(new MyComponentModel(team));
     	componentsTable.addMouseListener(new MouseAdapter(){
     		@Override
 			public void mouseClicked(MouseEvent e) {
+    			componentsTable.repaint();
 				if(e.getClickCount() == 2){
 					int index = ((JTable)e.getSource()).getSelectedRow();
 					Player player = team.getPlayers().get(index);
-					
 				}
 			}
     	});
     	addComponent.addActionListener(e->{
     		AddComponent ac = new AddComponent();
     		ac.attachObserver(observer);
+    		
     		ac.setVisible(true);
     	});
     	
     	deleteComponent.addActionListener(e->{
     		
+    	});
+    	
+    	btnBack.addActionListener(e->{
+    		this.setVisible(false);
     	});
     }
     

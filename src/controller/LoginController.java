@@ -11,6 +11,7 @@ import sun.security.util.Password;
 import view.ChampionshipView;
 import view.LoginDialog;
 import view.MainView.LoginType;
+import view.MatchSelector;
 import view.MatchView;
 import view.ObserverInterface;
 
@@ -43,7 +44,7 @@ public class LoginController implements LoginObserver {
 	        }
     	}else if(type == LoginType.user){
     		if(user.equals("user") && pwd.equals("user")){
-    			new MatchView(model).setVisible(true);
+    			new MatchSelector(model).setVisible(true);
 	            return true;
 	        } else {
 	        	return false;
