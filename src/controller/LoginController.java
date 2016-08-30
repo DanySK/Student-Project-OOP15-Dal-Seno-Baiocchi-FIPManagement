@@ -1,28 +1,20 @@
 package controller;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
-
-import model.Model;
+import model.IModel;
 import observer.LoginObserver;
-import sun.security.util.Password;
 import view.ChampionshipView;
-import view.LoginDialog;
 import view.MainView.LoginType;
 import view.MatchSelector;
-import view.MatchView;
 import view.ObserverInterface;
 
 public class LoginController implements LoginObserver {
 
     private ObserverInterface<LoginObserver> view;
     private LoginType type;
-	private Model model;
+	private IModel model;
     private static String ERROR_MESSAGE = "Errore login";
     
-    public LoginController(LoginType type, Model model) {
+    public LoginController(LoginType type, IModel model) {
     	this.type = type;
     	this.model = model;
     }

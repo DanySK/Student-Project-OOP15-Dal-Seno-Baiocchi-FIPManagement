@@ -16,10 +16,13 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ComponentController;
 import model.Player;
+import model.Staff;
 import model.Team;
 import model.TeamImpl;
 import observer.TeamComponentObserver;
+import sun.security.x509.DeltaCRLIndicatorExtension;
 import tableModel.MyComponentModel;
+import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
 
 public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
@@ -38,6 +41,8 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JLabel lblBirth;
     private JLabel lblHeight;
     private JLabel lblCf;
+    private JTable staffTable;
+    private JButton removeStaff;
 
     /**
      * Launch the application.
@@ -60,7 +65,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
      */
     private TeamComponentView() {
         this.setTitle("Team Component View");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,15 +72,15 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.setLayout(null);
         
         componentsTable = new JTable();
-        componentsTable.setBounds(108, 131, 492, 245);
+        componentsTable.setBounds(108, 131, 492, 160);
         contentPane.add(componentsTable);
         
         addComponent = new JButton("Add Component");
-        addComponent.setBounds(133, 415, 179, 29);
+        addComponent.setBounds(108, 415, 109, 29);
         contentPane.add(addComponent);
         
-        deleteComponent = new JButton("Delete");
-        deleteComponent.setBounds(388, 415, 179, 29);
+        deleteComponent = new JButton("Remove Player");
+        deleteComponent.setBounds(491, 415, 109, 29);
         contentPane.add(deleteComponent);
         
         btnBack = new JButton("Back");
@@ -91,6 +95,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         lblCompany.setBounds(547, 103, 69, 16);
         contentPane.add(lblCompany);
         
+        lblSurname = new JLabel("Surname");
         lblSurname.setBounds(203, 104, 82, 16);
         contentPane.add(lblSurname);
         
@@ -109,6 +114,14 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
         lblRoster.setBounds(293, 23, 117, 53);
         contentPane.add(lblRoster);
+        
+        staffTable = new JTable();
+        staffTable.setBounds(108, 302, 492, 91);
+        contentPane.add(staffTable);
+        
+        removeStaff = new JButton("Remove Staff");
+        removeStaff.setBounds(372, 415, 109, 29);
+        contentPane.add(removeStaff);
     }
     
     
@@ -116,27 +129,42 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     public TeamComponentView(final Team team){
     	this();
     	observer = new ComponentController(team);
-    	componentsTable.setModel(new MyComponentModel(team));
+    	componentsTable.setModel(new MyComponentModel(team, CompononentType.PLAYER));
+    	staffTable.setModel(new MyComponentModel(team, CompononentType.STAFF));
     	componentsTable.addMouseListener(new MouseAdapter(){
     		@Override
 			public void mouseClicked(MouseEvent e) {
     			componentsTable.repaint();
 				if(e.getClickCount() == 2){
-					int index = ((JTable)e.getSource()).getSelectedRow();
+					/*int index = ((JTable)e.getSource()).getSelectedRow();
 					Player player = team.getPlayers().get(index);
+					 */
 				}
 			}
     	});
     	addComponent.addActionListener(e->{
     		AddComponent ac = new AddComponent();
     		ac.attachObserver(observer);
-    		
     		ac.setVisible(true);
     	});
     	
     	deleteComponent.addActionListener(e->{
-    		
+    		int index = componentsTable.getSelectedRow();
+    		if(index>=0){
+				Player player = team.getPlayers().get(index);
+	    		observer.removePlayer(player);
+    		}
     	});
+    	
+    	removeStaff.addActionListener(e->{
+    		int index = staffTable.getSelectedRow();
+    		if(index>=0){
+        		Staff staff = team.getStaff().get(index);
+    			observer.removeStaff(staff);
+    		}
+    	});
+    	  	
+    	
     	
     	btnBack.addActionListener(e->{
     		this.setVisible(false);
@@ -154,5 +182,4 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
 	public void attachObserver(TeamComponentObserver observer) {
 		this.observer = observer;
 	}
-   
 }

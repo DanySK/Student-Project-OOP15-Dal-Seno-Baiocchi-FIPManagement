@@ -12,8 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+
 import model.Championship;
 import model.ChampionshipImpl;
+import model.IModel;
 import model.Model;
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
@@ -92,16 +94,19 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         contentPane.add(lblChampionship_1);
     }
     
-    public ChampionshipView(final Model model){
+    public ChampionshipView(final IModel model){
     	this();
     	champTable.setModel(new MyChampionshipModel(model));
+            this.attachObserver(new ChampionshipController(model));
     	champTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2){
 					int index = ((JTable)e.getSource()).getSelectedRow();
-					Championship ch = (Championship) model.getChampionship().toArray()[index];
-					new TeamView(model, ch).setVisible(true);
+					if(index>=0){
+						Championship ch = (Championship) model.getChampionship().toArray()[index];
+						new TeamView(model, ch).setVisible(true);
+					}
 				}
 			}
 		});
@@ -112,9 +117,11 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             c.setVisible(true);
         });
         deleteChamp.addActionListener(e->{
-            this.attachObserver(new ChampionshipController(model));
-            obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
-            champTable.repaint();
+        	int index = champTable.getSelectedRow();
+        	if(index>=0) {
+	            obs.deleteChampionship(model.getChampionship().get(index));
+	            champTable.repaint();
+        	}
         });
         
         btnBack.addActionListener(e->{

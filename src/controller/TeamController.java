@@ -1,6 +1,7 @@
 package controller;
 
 import model.Championship;
+import model.IModel;
 import model.Model;
 import model.Team;
 import model.TeamImpl;
@@ -13,10 +14,10 @@ public class TeamController implements TeamObserver {
 	
 	
 	private ObserverInterface<TeamObserver> view;
-	private Model model;
+	private IModel model;
 	private Championship champ;
 
-	public TeamController(final Model model, Championship champ) {
+	public TeamController(final IModel model, Championship champ) {
 		this.model = model;
 		this.champ = champ;
 	}

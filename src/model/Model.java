@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,9 +10,15 @@ import java.util.Set;
 import exceptions.ChampionshipAlreadyExistException;
 import exceptions.TeamAlreadyInThisChampionshipException;
 
-public class Model implements IModel {
+
+public class Model implements IModel{
     
-    private Map<Championship,Set<Team>> dataMap;
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Map<Championship,Set<Team>> dataMap;
     
     public Model(){
         this.dataMap = new HashMap<Championship, Set<Team>>();
