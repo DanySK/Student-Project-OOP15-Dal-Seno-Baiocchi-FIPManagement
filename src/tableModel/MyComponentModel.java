@@ -32,8 +32,7 @@ public class MyComponentModel extends MyTableModel{
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-<<<<<<< local
-
+        SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
 		if(type == CompononentType.PLAYER){		
 			Player player = team.getPlayers().get(rowIndex);
 			switch (columnIndex) {
@@ -48,7 +47,7 @@ public class MyComponentModel extends MyTableModel{
 			case 4 : 
 				return player.getRole();
 			case 5 : 
-				return player.getBirth();
+				return ft.format(player.getBirth());
 			default : 
 				return null;
 			}
@@ -64,30 +63,10 @@ public class MyComponentModel extends MyTableModel{
 			case 3 : 
 				return staff.getRole();
 			case 4 : 
-				return staff.getBirth();
+			return ft.format(staff.getBirth());
 			default : 
 				return null;
-		}
-=======
-		Player player = team.getPlayers().get(rowIndex);
-		switch (columnIndex) {
-		case 0:
-			return	player.getName();
-		case 1 : 
-			return player.getSurname();
-		case 2 : 
-			return player.getHeight();
-		case 3 : 
-			return player.getCF();
-		case 4 : 
-			return player.getRole();
-		case 5 : 
-		        SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
-			return ft.format(player.getBirth());
-		default : 
-			return null;
-	
->>>>>>> other
+			}
 		}
 	}
 
