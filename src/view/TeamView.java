@@ -8,13 +8,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import model.Championship;
 import model.IModel;
-import model.Model;
 import model.Team;
 import tableModel.MyTeamModel;
 import controller.TeamController;
@@ -127,12 +127,15 @@ public class TeamView extends JFrame {
         });
         
         btnDeleteTeam.addActionListener(e->{
+            if((JOptionPane.showConfirmDialog(this, "You want to delete this team and roster with it?",
+                    "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
         	int i = teamTable.getSelectedRow();
         	if(i>=0){
 	        	Team remove = (Team) model.getTeam(ch).toArray()[i];
 	        	controller.removeTeam(remove);
 	        	teamTable.repaint();
         	}
+            }
         });
         
         btnBack.addActionListener(e->{

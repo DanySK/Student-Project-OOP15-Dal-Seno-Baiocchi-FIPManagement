@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,12 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-
-
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 import model.Championship;
 import model.ChampionshipImpl;
+import model.IModel;
 import model.Model;
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
@@ -99,7 +94,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         contentPane.add(lblChampionship_1);
     }
     
-    public ChampionshipView(final Model model){
+    public ChampionshipView(final IModel model){
     	this();
     	champTable.setModel(new MyChampionshipModel(model));
     	champTable.addMouseListener(new MouseAdapter() {
@@ -135,7 +130,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 
     @Override
     public void attachObserver(ChampionshipObserver observer) {
-        this.obs = observer;
-        
+        this.obs = observer;  
     }
 }
