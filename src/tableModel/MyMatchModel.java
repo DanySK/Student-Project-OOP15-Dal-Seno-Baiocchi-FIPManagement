@@ -1,20 +1,22 @@
 package tableModel;
 
-import java.text.SimpleDateFormat;
-
 import model.IModel;
 import model.MyTableModel;
 import model.Player;
+import model.StatisticModel;
 import model.Team;
-import tableModel.MyComponentModel.CompononentType;
 
 public class MyMatchModel extends MyTableModel{
 
 	private Team team;
+	private StatisticModel statmodel;
 
-	public MyMatchModel(IModel model, Team team) {
+	public MyMatchModel(IModel model, Team team, StatisticModel statmod) {
 		super(model);
-		setColumnNames(new String[]{"Name","Surname","P","OffR","DefR","Ass","Blo","Faul","BL","Ste"});
+		this.team = team;
+		this.statmodel  = statmod;
+		setColumnNames(new String[]{"Player","P","OffR","DefR","Ass","Blo","Faul","BL","Ste"});
+		
 	}
 
 	@Override
@@ -27,25 +29,23 @@ public class MyMatchModel extends MyTableModel{
 			Player player = team.getPlayers().get(rowIndex);
 			switch (columnIndex) {
 			case 0:
-				return	player.getName();
-			case 1 : 
-				return player.getSurname();
+				return	player.getName() + " " + player.getSurname();
+			case 1 :
+				return statmodel.getStatistic(player).getPoints();
 			case 2 : 
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getOffRebounds();
 			case 3 : 
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getDefRebounds();
 			case 4 : 
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getAssists();
 			case 5 : 
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getBlocks();
 			case 6 : 
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getPersonalFouls();
 			case 7 :
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getLoseBalls();
 			case 8 :
-				return player.getStatistics();
-			case 9 : 
-				return player.getStatistics();
+				return statmodel.getStatistic(player).getSteals();
 			default : 
 				return null;
 

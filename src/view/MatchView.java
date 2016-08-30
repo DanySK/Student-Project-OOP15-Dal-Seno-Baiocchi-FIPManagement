@@ -3,6 +3,8 @@ package view;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,11 +13,19 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.MatchViewController;
 import model.IModel;
+import model.Player;
+import model.StatisticModel;
+import model.StatisticModelImpl;
+import model.Statistics;
 import model.Team;
 import observer.MatchViewObserver;
+import tableModel.MyMatchModel;
+
 import javax.swing.BoxLayout;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
@@ -51,6 +61,8 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
     private JButton cancel;
     private JTable homeTable;
     private JTable guestTable;
+	private JScrollPane homeScrollPane;
+	private JScrollPane guestScrollPane;
 
 	/**
 	 * Launch the application.
@@ -163,12 +175,16 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.add(cancel);
 		
 		homeTable = new JTable();
-		homeTable.setBounds(22, 37, 434, 416);
-		contentPane.add(homeTable);
 		
 		guestTable = new JTable();
-		guestTable.setBounds(748, 37, 434, 416);
-		contentPane.add(guestTable);
+		
+		homeScrollPane = new JScrollPane(homeTable);
+		homeScrollPane.setBounds(10, 49, 434, 416);
+		contentPane.add(homeScrollPane);
+		
+		guestScrollPane = new JScrollPane(guestTable);
+		guestScrollPane.setBounds(751, 49, 434, 416);
+		contentPane.add(guestScrollPane);
 	}
 
 	public MatchView(final IModel model, Team team1, Team team2){
@@ -176,9 +192,84 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		this.model = model;
 		this.homeTeam = team1;
 		this.guestTeam = team2;		
-	
 		
+		StatisticModel stmod = new StatisticModelImpl();
 		
+		for(Player p : team1.getPlayers()){
+			stmod.addStatistic(p, new Statistics());
+		}
+		
+		for(Player p : team2.getPlayers()){
+			stmod.addStatistic(p, new Statistics());
+		}
+		
+		homeTable.setModel(new MyMatchModel(model, team1, stmod));
+		guestTable.setModel(new MyMatchModel(model, team2, stmod));
+		final MatchViewController controller = new MatchViewController(model, stmod);
+		
+		homeTable.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				guestTable.getSelectionModel().removeSelectionInterval(0, 1000);;
+			}
+		});
+		
+		guestTable.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				homeTable.getSelectionModel().removeSelectionInterval(0, 1000);
+			}
+		});
+		
+		addOnePoint.addActionListener(e->{
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increasePoints(p, 1);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increasePoints(p, 1);
+				guestTable.repaint();
+			}
+		});
+		
+		removeOnePoint.addActionListener(e->{
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreasePoints(p, 1);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreasePoints(p, 1);
+				guestTable.repaint();
+			}
+		});
+		
+		saveMatch.addActionListener(e->{
+			
+		});
 	}
 	
 	
