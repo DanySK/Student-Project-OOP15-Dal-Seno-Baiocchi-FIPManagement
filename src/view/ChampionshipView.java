@@ -8,10 +8,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-
 
 import model.Championship;
 import model.ChampionshipImpl;
@@ -97,16 +97,13 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     public ChampionshipView(final IModel model){
     	this();
     	champTable.setModel(new MyChampionshipModel(model));
-            this.attachObserver(new ChampionshipController(model));
     	champTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2){
 					int index = ((JTable)e.getSource()).getSelectedRow();
-					if(index>=0){
-						Championship ch = (Championship) model.getChampionship().toArray()[index];
-						new TeamView(model, ch).setVisible(true);
-					}
+					Championship ch = (Championship) model.getChampionship().toArray()[index];
+					new TeamView(model, ch).setVisible(true);
 				}
 			}
 		});
@@ -117,11 +114,13 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             c.setVisible(true);
         });
         deleteChamp.addActionListener(e->{
-        	int index = champTable.getSelectedRow();
-        	if(index>=0) {
-	            obs.deleteChampionship(model.getChampionship().get(index));
-	            champTable.repaint();
-        	}
+            
+            if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
+                    "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
+                    this.attachObserver(new ChampionshipController(model));
+                    obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
+            }
+            champTable.repaint();
         });
         
         btnBack.addActionListener(e->{
@@ -131,7 +130,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 
     @Override
     public void attachObserver(ChampionshipObserver observer) {
-        this.obs = observer;
-        
+        this.obs = observer;  
     }
 }
