@@ -18,6 +18,10 @@ public class Staff extends PersonImpl {
         return this.role;
     }
     
+    public void setRole(ROLE r){
+        this.role = r;
+    }
+    
     public static enum ROLE{
         HEADCOACH,ASSISTANT_COACH,SCOUT,SPORTS_DIRECTOR,PRESIDENT,VICE_PRESIDENT,DOCTOR,MASSEUR,PHYSIOTERAPIST
     }

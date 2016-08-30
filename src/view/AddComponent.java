@@ -2,8 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -19,6 +17,8 @@ import model.Player.PLAYEROLE;
 import model.Staff.ROLE;
 import observer.TeamComponentObserver;
 
+import com.toedter.calendar.JDateChooser;
+
 public class AddComponent extends JDialog implements ObserverInterface<TeamComponentObserver> {
 
     /**
@@ -28,14 +28,12 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
     private final JPanel contentPanel = new JPanel();
     private JTextField nameField;
     private JTextField surnameField;
-    private JTextField ddField;
-    private JTextField mmField;
-    private JTextField yyField;
     private JTextField cfField;
     private JTextField heightField;
     private TeamComponentObserver obs;
     private JComboBox<Object> roleBox;
     private String[] type = new String[]{"PLAYER","STAFF"};
+    private JDateChooser calendar;
 
     /**
      * Launch the application.
@@ -49,7 +47,6 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
             e.printStackTrace();
         }
     }
-
     /**
      * Create the dialog.
      */
@@ -101,39 +98,13 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
         lblSurname.setBounds(24, 169, 61, 16);
         contentPanel.add(lblSurname);
         
-        ddField = new JTextField();
-        ddField.setBounds(112, 213, 38, 28);
-        contentPanel.add(ddField);
-        ddField.setColumns(10);
-        
         JLabel lblBirth = new JLabel("Birth:");
         lblBirth.setBounds(24, 219, 61, 16);
         contentPanel.add(lblBirth);
         
-        mmField = new JTextField();
-        mmField.setBounds(173, 213, 38, 28);
-        contentPanel.add(mmField);
-        mmField.setColumns(10);
-        
-        yyField = new JTextField();
-        yyField.setBounds(245, 213, 68, 28);
-        contentPanel.add(yyField);
-        yyField.setColumns(10);
-        
-        JLabel lblDd = new JLabel("dd");
-        lblDd.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-        lblDd.setBounds(97, 220, 12, 16);
-        contentPanel.add(lblDd);
-        
-        JLabel lblMm = new JLabel("mm");
-        lblMm.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-        lblMm.setBounds(152, 220, 21, 16);
-        contentPanel.add(lblMm);
-        
-        JLabel lblYyyy = new JLabel("yyyy");
-        lblYyyy.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-        lblYyyy.setBounds(223, 220, 21, 16);
-        contentPanel.add(lblYyyy);
+        calendar = new JDateChooser();
+        calendar.setBounds(141, 213, 200, 28);
+        contentPanel.add(calendar);
         
         cfField = new JTextField();
         cfField.setBounds(122, 260, 134, 28);
@@ -165,25 +136,21 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
                 addButton.setActionCommand("OK");
                 buttonPane.add(addButton);
                 addButton.addActionListener(e->{
-                    Calendar birth = Calendar.getInstance();
-                    birth.set(Integer.valueOf(yyField.getText()), Integer.valueOf(mmField.getText()), 
-                            Integer.valueOf(ddField.getText()));
-                    if(typeBox.getSelectedItem().equals(type[0])){
-                        if(checkField()){
-                        obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), 
-                                Double.valueOf(heightField.getText()), cfField.getText(), birth.getTime());
+                    if(checkField()){
+                        if(checkIntField()){
+                        if(typeBox.getSelectedItem().equals(type[0])){
+                            obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), 
+                                Double.valueOf(heightField.getText()), cfField.getText(), calendar.getDate());
+                        } else {
+                            obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), 
+                                cfField.getText(),calendar.getDate());
+                        } 
                         this.setVisible(false);
                         } else {
-                            JOptionPane.showMessageDialog(this, "Some fields are missing","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Height must be an Int","Error",JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        if(checkField()){
-                        obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), 
-                                cfField.getText(),birth.getTime());
-                        this.setVisible(false);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Some fields are missing","Error",JOptionPane.ERROR_MESSAGE);
-                        }
+                      JOptionPane.showMessageDialog(this, "Some fields are missing","Error",JOptionPane.ERROR_MESSAGE);
                     }
                 });
                 getRootPane().setDefaultButton(addButton);
@@ -199,18 +166,25 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
         }
     }
 
+    private boolean checkIntField() {
+        try{
+            if(heightField.isEnabled()){
+                Integer.valueOf(heightField.getText());
+            }
+            return true;
+        } catch (Exception ex){
+            return false;
+        }
+    }
+
     @Override
     public void attachObserver(TeamComponentObserver observer) {
         this.obs = observer;        
     }
     
     public boolean checkField(){
-        if(heightField.isEnabled()){
-            return !(nameField.getText().isEmpty() || surnameField.getText().isEmpty() || heightField.getText().isEmpty() || 
-                    cfField.getText().isEmpty() || ddField.getText().isEmpty() || mmField.getText().isEmpty() ||
-                    yyField.getText().isEmpty());
-        } else   return !(nameField.getText().isEmpty() || surnameField.getText().isEmpty()  || 
-                cfField.getText().isEmpty() || ddField.getText().isEmpty() || mmField.getText().isEmpty() ||
-                yyField.getText().isEmpty());
+        boolean b = !(nameField.getText().isEmpty() || surnameField.getText().isEmpty()  || 
+                cfField.getText().isEmpty() || calendar.getDate() == null);
+        return b && (!heightField.isEnabled() || !heightField.getText().isEmpty());
     }
 }

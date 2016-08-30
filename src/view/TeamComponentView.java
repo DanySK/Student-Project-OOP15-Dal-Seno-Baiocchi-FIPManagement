@@ -14,7 +14,6 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import model.IModel;
-import model.Model;
 import model.Player;
 import model.Staff;
 import model.Team;
@@ -44,7 +43,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JTable staffTable;
     private JButton removeStaff;
     private JLabel lblRoster;
-	private Model model;
 
     /**
      * Launch the application.
@@ -78,11 +76,11 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(componentsTable);
         
         addComponent = new JButton("Add Component");
-        addComponent.setBounds(108, 415, 109, 29);
+        addComponent.setBounds(108, 415, 146, 29);
         contentPane.add(addComponent);
         
         deleteComponent = new JButton("Remove Player");
-        deleteComponent.setBounds(491, 415, 109, 29);
+        deleteComponent.setBounds(476, 415, 124, 29);
         contentPane.add(deleteComponent);
         
         btnBack = new JButton("Back");
@@ -122,7 +120,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(staffTable);
         
         removeStaff = new JButton("Remove Staff");
-        removeStaff.setBounds(372, 415, 109, 29);
+        removeStaff.setBounds(366, 415, 109, 29);
         contentPane.add(removeStaff);
     }
     
@@ -134,14 +132,24 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	observer = new ComponentController(model, team);
     	componentsTable.setModel(new MyComponentModel(team, CompononentType.PLAYER));
     	staffTable.setModel(new MyComponentModel(team, CompononentType.STAFF));
+    	staffTable.addMouseListener(new MouseAdapter() {
+    	    public void mouseClicked(MouseEvent e){
+    	        staffTable.repaint();
+    	        if(e.getClickCount() == 2){
+    	            int index = ((JTable)e.getSource()).getSelectedRow();
+    	            Staff staff = team.getStaff().get(index);
+    	            new StatisticView(staff,model).setVisible(true);;
+    	        }
+    	    }
+        });
     	componentsTable.addMouseListener(new MouseAdapter(){
     		@Override
 			public void mouseClicked(MouseEvent e) {
     			componentsTable.repaint();
 				if(e.getClickCount() == 2){
-					/*int index = ((JTable)e.getSource()).getSelectedRow();
+					int index = ((JTable)e.getSource()).getSelectedRow();
 					Player player = team.getPlayers().get(index);
-					 */
+					new StatisticView(player,model).setVisible(true);;
 				}
 			}
     	});
@@ -172,9 +180,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     		}
     	  }
     	});
-    	  	
-    	
-    	
+    	  	   	
     	btnBack.addActionListener(e->{
     		this.setVisible(false);
     	});

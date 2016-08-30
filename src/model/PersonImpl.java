@@ -13,10 +13,10 @@ public class PersonImpl implements Person {
      * 
      */
     private static final long serialVersionUID = 3970309943492437923L;
-    private final String name;
-    private final String surname;
-    private final Date birth;
-    private final String cf;
+    private String name;
+    private String surname;
+    private Date birth;
+    private String cf;
 
     public PersonImpl(String name, String surname, Date birth, String cf){
         this.name = name;
@@ -69,5 +69,25 @@ public class PersonImpl implements Person {
 			return false;
 		return true;
 	}
+
+    @Override
+    public void setName(String name) {
+        this.name = name;        
+    }
+
+    @Override
+    public void setSurname(String surname) {
+        this.surname = surname;        
+    }
+
+    @Override
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    @Override
+    public void setCF(String cf) {
+        this.cf = cf;        
+    }
 
 }
