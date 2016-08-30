@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import model.Model;
 import model.Player;
 import model.Staff;
 import model.Team;
@@ -41,6 +42,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JTable staffTable;
     private JButton removeStaff;
     private JLabel lblRoster;
+	private Model model;
 
     /**
      * Launch the application.
@@ -127,7 +129,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     public TeamComponentView(final Team team){
     	this();
     	lblRoster.setText(team.getName()+" ROSTER");
-    	observer = new ComponentController(team);
+    	observer = new ComponentController(model, team);
     	componentsTable.setModel(new MyComponentModel(team, CompononentType.PLAYER));
     	staffTable.setModel(new MyComponentModel(team, CompononentType.STAFF));
     	componentsTable.addMouseListener(new MouseAdapter(){
