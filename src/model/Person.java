@@ -27,4 +27,12 @@ public interface Person extends Serializable {
      * @return the cf
      */
     String getCF();
+    
+    void setName(String name);
+    
+    void setSurname(String surname);
+    
+    void setBirth(Date birth);
+    
+    void setCF(String cf);
 }

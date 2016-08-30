@@ -10,8 +10,8 @@ public class Player extends PersonImpl{
      * 
      */
     private static final long serialVersionUID = 8648663467990512362L;
-    private final PLAYEROLE role;
-    private final double height;
+    private PLAYEROLE role;
+    private double height;
     private List<Statistics> stat;
     
     
@@ -26,6 +26,9 @@ public class Player extends PersonImpl{
         return this.role;
     }
     
+    public void setRole(PLAYEROLE r){
+        this.role = r;
+    }
     public double getHeight(){
         return this.height;
     }
@@ -36,6 +39,10 @@ public class Player extends PersonImpl{
     
     public void addStat(Statistics s){
         this.stat.add(s);
+    }
+    
+    public void setHeight(double height){
+        this.height = height;
     }
     
     public static enum PLAYEROLE{
