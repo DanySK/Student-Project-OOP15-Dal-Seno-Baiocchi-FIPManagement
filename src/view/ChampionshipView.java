@@ -5,12 +5,19 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+
+
+
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import model.Championship;
 import model.ChampionshipImpl;
@@ -112,8 +119,12 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             c.setVisible(true);
         });
         deleteChamp.addActionListener(e->{
-            this.attachObserver(new ChampionshipController(model));
-            obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
+            
+            if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
+                    "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
+                    this.attachObserver(new ChampionshipController(model));
+                    obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
+            }
             champTable.repaint();
         });
         
