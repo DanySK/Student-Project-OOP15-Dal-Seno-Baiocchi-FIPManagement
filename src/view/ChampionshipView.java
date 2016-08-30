@@ -83,7 +83,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         contentPane.add(lblZone);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(6, 492, 117, 29);
+        btnBack.setBounds(549, 470, 117, 29);
         contentPane.add(btnBack);   
         
         JLabel lblChampionship_1 = new JLabel("CHAMPIONSHIP");
@@ -115,6 +115,10 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             this.attachObserver(new ChampionshipController(model));
             obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
             champTable.repaint();
+        });
+        
+        btnBack.addActionListener(e->{
+        	this.setVisible(false);
         });
     }
 

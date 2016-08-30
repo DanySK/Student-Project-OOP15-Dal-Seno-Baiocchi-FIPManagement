@@ -27,9 +27,9 @@ public class TeamController implements TeamObserver {
     }
 	
 	@Override
-	public void addTeam(String name, String homeColour, String transferColour) {
+	public void addTeam(String name, String homeColour, String transferColour, String company, String vat) {
 		try {
-			model.addTeam(champ, new TeamImpl(name, transferColour, homeColour));
+			model.addTeam(champ, new TeamImpl(name, transferColour, homeColour, company, vat));
 		} catch (TeamAlreadyInThisChampionshipException e) {
 			e.printStackTrace();
 		}

@@ -11,7 +11,7 @@ public class MyTeamModel extends MyTableModel {
 
 	public MyTeamModel(Model model, Championship champ) {
 		super(model);
-		setColumnNames(new String []{"Name","Home Jersey", "Transfer Jersey"});
+		setColumnNames(new String []{"Name","Home Jersey", "Transfer Jersey", "Company", "VAT"});
 		this.champ = champ;
 	}
 
@@ -30,6 +30,10 @@ public class MyTeamModel extends MyTableModel {
 			return team.getHomeJerseyColour();
 		case 2 : 
 			return team.getTransferJerseyColour();
+		case 3 : 
+			return team.getCompany();
+		case 4 : 
+			return team.getVatNumber();
 		}
 		return null;
 	}

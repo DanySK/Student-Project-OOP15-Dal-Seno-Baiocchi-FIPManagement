@@ -52,7 +52,6 @@ public class TeamView extends JFrame {
      */
     private TeamView() {
         this.setTitle("Team View");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,16 +71,28 @@ public class TeamView extends JFrame {
         contentPane.add(btnDeleteTeam);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(6, 492, 117, 29);
+        btnBack.setBounds(549, 470, 117, 29);
         contentPane.add(btnBack);
         
-        JLabel lblTeamName = new JLabel("TEAM NAME");
-        lblTeamName.setBounds(173, 103, 82, 16);
+        JLabel lblTeamName = new JLabel("Team name");
+        lblTeamName.setBounds(108, 104, 82, 16);
         contentPane.add(lblTeamName);
         
-        JLabel lblCompany = new JLabel("COMPANY");
-        lblCompany.setBounds(436, 103, 69, 16);
+        JLabel lblCompany = new JLabel("Company");
+        lblCompany.setBounds(406, 104, 69, 16);
         contentPane.add(lblCompany);
+        
+        JLabel lblHomeJersey = new JLabel("Home Jersey");
+        lblHomeJersey.setBounds(200, 104, 82, 16);
+        contentPane.add(lblHomeJersey);
+        
+        JLabel lblTransferJersey = new JLabel("Transfer Jersey");
+        lblTransferJersey.setBounds(304, 104, 82, 16);
+        contentPane.add(lblTransferJersey);
+        
+        JLabel lblVat = new JLabel("Vat");
+        lblVat.setBounds(502, 104, 82, 16);
+        contentPane.add(lblVat);
       
         JLabel lblTeams = new JLabel("TEAMS");
         lblTeams.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
@@ -117,6 +128,10 @@ public class TeamView extends JFrame {
         	Team remove = (Team) model.getTeam(ch).toArray()[i];
         	controller.removeTeam(remove);
         	teamTable.repaint();
+        });
+        
+        btnBack.addActionListener(e->{
+        	this.setVisible(false);
         });
     }
 }

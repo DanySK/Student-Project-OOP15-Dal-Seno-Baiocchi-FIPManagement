@@ -40,4 +40,29 @@ public class PersonImpl implements Person {
         return this.cf;
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cf == null) ? 0 : cf.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PersonImpl other = (PersonImpl) obj;
+		if (cf == null) {
+			if (other.cf != null)
+				return false;
+		} else if (!cf.equals(other.cf))
+			return false;
+		return true;
+	}
+
 }

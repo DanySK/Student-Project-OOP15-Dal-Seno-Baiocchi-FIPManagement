@@ -12,7 +12,7 @@ public class MyComponentModel extends MyTableModel{
 	public MyComponentModel(Team team) {
 		super(null);
 		this.team = team;
-		setColumnNames(new String[]{});
+		setColumnNames(new String[]{"Name","Surname","Birth","CF","Height","Role"});
 	}
 	
 	@Override
