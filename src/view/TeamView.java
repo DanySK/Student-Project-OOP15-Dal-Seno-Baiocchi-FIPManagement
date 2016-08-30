@@ -114,7 +114,7 @@ public class TeamView extends JFrame {
 					int index = teamTable.getSelectedRow();
 					if(index>=0){
 					Team team = model.getTeam(ch).get(index);
-					new TeamComponentView(team).setVisible(true);;
+					new TeamComponentView(model,team).setVisible(true);;
 					}
 				}
 			}

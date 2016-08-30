@@ -2,30 +2,32 @@ package view;
 
 import java.awt.EventQueue;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Championship;
 import model.IModel;
-import model.Model;
+import model.Team;
 import observer.MatchSelectorObserver;
 
 public class MatchSelector extends JFrame implements ObserverInterface<MatchSelectorObserver> {
 
 	private JPanel contentPane;
-	private JComboBox comboBoxHome;
-	private JComboBox comboBoxGuest;
+	private JComboBox<Team> comboBoxHome;
+	private JComboBox<Team> comboBoxGuest;
 	private JButton btnStartMatch;
 	private JButton btnBack;
 	private MatchSelectorObserver observer;
 	private Championship ch;
 	private JLabel lblSelectChampionship;
-	private JComboBox comboBoxChampionship;
-
+	private JComboBox<Championship> comboBoxChampionship;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -60,13 +62,13 @@ public class MatchSelector extends JFrame implements ObserverInterface<MatchSele
 		lblGuestTeam.setBounds(252, 77, 98, 30);
 		contentPane.add(lblGuestTeam);
 		
-		comboBoxHome = new JComboBox();
+		comboBoxHome = new JComboBox<>();
 		comboBoxHome.setBounds(34, 116, 134, 20);
-		contentPane.add(comboBoxHome);
+		contentPane.add(comboBoxHome).setEnabled(false);;
 		
-		comboBoxGuest = new JComboBox();
+		comboBoxGuest = new JComboBox<>();
 		comboBoxGuest.setBounds(252, 116, 134, 20);
-		contentPane.add(comboBoxGuest);
+		contentPane.add(comboBoxGuest).setEnabled(false);;
 		
 		btnStartMatch = new JButton("Start Match");
 		btnStartMatch.setBounds(34, 147, 134, 23);
@@ -80,18 +82,40 @@ public class MatchSelector extends JFrame implements ObserverInterface<MatchSele
 		lblSelectChampionship.setBounds(34, 11, 118, 20);
 		contentPane.add(lblSelectChampionship);
 		
-		comboBoxChampionship = new JComboBox();
+		comboBoxChampionship = new JComboBox<>();
 		comboBoxChampionship.setBounds(34, 46, 134, 20);
 		contentPane.add(comboBoxChampionship);
 	}
 	
 	public MatchSelector(final IModel model){
 		this();
+		Championship[] ch = new Championship[model.getChampionship().size()];
+		model.getChampionship().toArray(ch);
+		comboBoxChampionship.setModel(new DefaultComboBoxModel<>(ch));
+		
+		comboBoxChampionship.addActionListener(e->{
+			Championship champ = (Championship) (comboBoxChampionship.getSelectedItem());
+			Team[] teams = new Team[model.getTeam(champ).size()];
+			model.getTeam(champ).toArray(teams);
+			comboBoxHome.setEnabled(true);
+			comboBoxHome.setModel(new DefaultComboBoxModel<>(teams));
+			comboBoxGuest.setEnabled(true);
+			comboBoxGuest.setModel(new DefaultComboBoxModel<>(teams));
+		});
+		
+		comboBoxChampionship.getActionListeners()[0].actionPerformed(null);
 		
 		btnStartMatch.addActionListener(e->{
-			this.setVisible(false);
-			new MatchView(model).setVisible(true);
+			Team team1 = (Team) comboBoxHome.getSelectedItem();
+			Team team2 = (Team) comboBoxGuest.getSelectedItem();
+			if(team1.equals(team2)){
+				JOptionPane.showMessageDialog(this, "You have selected the same team");
+			}else{
+				new MatchView(model, team1, team2).setVisible(true);	
+				this.setVisible(false);
+			}
 		});
+		
 		
 		btnBack.addActionListener(e->{
 			this.setVisible(false);

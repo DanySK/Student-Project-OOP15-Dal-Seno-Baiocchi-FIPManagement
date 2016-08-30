@@ -33,7 +33,7 @@ public class Utils {
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			IModel model = (IModel) oi.readObject();
 			oi.close();
-			return model;
+			return model == null ? new Model() : model;
 		} catch (Exception e) {
 			return new Model();
 		}

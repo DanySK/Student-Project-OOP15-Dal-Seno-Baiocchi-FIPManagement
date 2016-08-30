@@ -94,4 +94,8 @@ public class TeamImpl implements Team {
     public List<Staff> getStaff() {
         return new ArrayList<Staff>(staff);
     }
+    
+    public String toString(){
+    	return this.name;
+    }
 }

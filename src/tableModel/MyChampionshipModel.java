@@ -2,7 +2,6 @@ package tableModel;
 
 import model.Championship;
 import model.IModel;
-import model.Model;
 import model.MyTableModel;
 
 public class MyChampionshipModel extends MyTableModel{
@@ -14,7 +13,6 @@ public class MyChampionshipModel extends MyTableModel{
 
 	@Override
 	public int getRowCount() {
-		
 		return model.getChampionship().size();
 	}
 

@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.IModel;
 import model.Model;
+import model.Team;
 import observer.MatchViewObserver;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
@@ -20,6 +21,9 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
      */
     private static final long serialVersionUID = -6679819020260822815L;
     private JPanel contentPane;
+	private Team guestTeam;
+	private Team homeTeam;
+	private IModel model;
 
 	/**
 	 * Launch the application.
@@ -120,11 +124,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.add(btnAddFaul);
 	}
 
-	public MatchView(final IModel model){
+	public MatchView(final IModel model, Team team1, Team team2){
 		this();
-		
-		
-		
+		this.model = model;
+		this.homeTeam = team1;
+		this.guestTeam = team2;		
 	}
 
 	@Override

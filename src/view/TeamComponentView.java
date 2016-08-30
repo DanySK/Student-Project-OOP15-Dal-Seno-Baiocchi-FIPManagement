@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import model.IModel;
 import model.Model;
 import model.Player;
 import model.Staff;
@@ -22,6 +23,7 @@ import sun.security.x509.DeltaCRLIndicatorExtension;
 import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
+import controller.Utils;
 
 public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
 
@@ -51,7 +53,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    TeamComponentView frame = new TeamComponentView(new TeamImpl("","","","",""));
+                    TeamComponentView frame = new TeamComponentView(Utils.loading(), new TeamImpl("","","","",""));
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -126,7 +128,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     
     
     
-    public TeamComponentView(final Team team){
+    public TeamComponentView(final IModel model, final Team team){
     	this();
     	lblRoster.setText(team.getName()+" ROSTER");
     	observer = new ComponentController(model, team);

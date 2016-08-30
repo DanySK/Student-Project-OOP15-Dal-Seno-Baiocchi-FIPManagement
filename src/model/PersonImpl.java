@@ -4,7 +4,12 @@ import java.util.Date;
 
 public class PersonImpl implements Person {
     
-    /**
+    @Override
+	public String toString() {
+		return "PersonImpl [name=" + name + ", surname=" + surname + "]";
+	}
+
+	/**
      * 
      */
     private static final long serialVersionUID = 3970309943492437923L;

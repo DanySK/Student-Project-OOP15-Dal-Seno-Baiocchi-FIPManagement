@@ -1,7 +1,11 @@
 package model;
 
 public class ChampionshipImpl implements Championship {
-    /**
+    @Override
+	public String toString() {
+		return division.toString() + " " + zone.toString();
+	}
+	/**
      * 
      */
     private static final long serialVersionUID = -2985081041574393034L;

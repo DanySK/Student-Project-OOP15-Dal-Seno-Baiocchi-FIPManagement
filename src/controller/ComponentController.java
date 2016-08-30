@@ -4,7 +4,6 @@ import java.util.Date;
 
 import exceptions.PersonAlreadyAddedException;
 import model.IModel;
-import model.Model;
 import model.Player;
 import model.Player.PLAYEROLE;
 import model.Staff;
@@ -17,7 +16,7 @@ public class ComponentController implements TeamComponentObserver {
 	private Team team;
 	private IModel model;
 
-	public ComponentController(Model model, Team team ) {
+	public ComponentController(IModel model, Team team ) {
 		this.team = team;
 		this.model = model;
 	}
