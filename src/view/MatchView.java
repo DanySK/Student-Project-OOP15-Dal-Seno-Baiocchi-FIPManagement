@@ -12,9 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.IModel;
-import model.Model;
 import model.Team;
 import observer.MatchViewObserver;
+import javax.swing.BoxLayout;
+import javax.swing.JTable;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
@@ -48,6 +49,8 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
     private JButton removeSteal;
     private JButton saveMatch;
     private JButton cancel;
+    private JTable homeTable;
+    private JTable guestTable;
 
 	/**
 	 * Launch the application.
@@ -69,30 +72,22 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 	 * Create the frame.
 	 */
 	private MatchView() {
-		setBounds(100, 100, 744, 563);
+		setBounds(100, 100, 1208, 563);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblHomeTeam = new JLabel("Home Team");
-		lblHomeTeam.setBounds(27, 11, 103, 38);
+		lblHomeTeam.setBounds(22, 11, 103, 38);
 		contentPane.add(lblHomeTeam);
 		
 		JLabel lblGuestTeam = new JLabel("Guest Team");
-		lblGuestTeam.setBounds(514, 11, 103, 38);
+		lblGuestTeam.setBounds(751, 11, 103, 38);
 		contentPane.add(lblGuestTeam);
 		
-		JList homeTeamList = new JList();
-		homeTeamList.setBounds(27, 48, 202, 400);
-		contentPane.add(homeTeamList);
-		
-		JList guestTeamList = new JList();
-		guestTeamList.setBounds(510, 48, 202, 400);
-		contentPane.add(guestTeamList);
-		
 		JPanel panel = new JPanel();
-		panel.setBounds(241, 30, 260, 476);
+		panel.setBounds(466, 37, 260, 476);
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		
@@ -160,12 +155,20 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		panel.add(removeSteal);
 		
 		saveMatch = new JButton("SaveMatch");
-		saveMatch.setBounds(514, 470, 86, 43);
+		saveMatch.setBounds(973, 470, 86, 43);
 		contentPane.add(saveMatch);
 		
 		cancel = new JButton("Cancel");
-		cancel.setBounds(626, 470, 86, 43);
+		cancel.setBounds(1085, 470, 86, 43);
 		contentPane.add(cancel);
+		
+		homeTable = new JTable();
+		homeTable.setBounds(22, 37, 434, 416);
+		contentPane.add(homeTable);
+		
+		guestTable = new JTable();
+		guestTable.setBounds(748, 37, 434, 416);
+		contentPane.add(guestTable);
 	}
 
 	public MatchView(final IModel model, Team team1, Team team2){
@@ -173,7 +176,13 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		this.model = model;
 		this.homeTeam = team1;
 		this.guestTeam = team2;		
+	
+		
+		
 	}
+	
+	
+	
 
 	@Override
 	public void attachObserver(MatchViewObserver observer) {
