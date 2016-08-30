@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import controller.ComponentController;
 import model.Player;
 import model.Staff;
 import model.Team;
@@ -43,6 +40,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JLabel lblCf;
     private JTable staffTable;
     private JButton removeStaff;
+    private JLabel lblRoster;
 
     /**
      * Launch the application.
@@ -110,9 +108,9 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         lblCf = new JLabel("CF");
         lblCf.setBounds(365, 103, 82, 16);
         contentPane.add(lblCf);
-        JLabel lblRoster = new JLabel("ROSTER");
+        lblRoster = new JLabel();
         lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-        lblRoster.setBounds(293, 23, 117, 53);
+        lblRoster.setBounds(216, 23, 282, 53);
         contentPane.add(lblRoster);
         
         staffTable = new JTable();
@@ -128,6 +126,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     
     public TeamComponentView(final Team team){
     	this();
+    	lblRoster.setText(team.getName()+" ROSTER");
     	observer = new ComponentController(team);
     	componentsTable.setModel(new MyComponentModel(team, CompononentType.PLAYER));
     	staffTable.setModel(new MyComponentModel(team, CompononentType.STAFF));
@@ -171,13 +170,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	});
     }
     
-
-	@Override
-	public void clearInterface() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void attachObserver(TeamComponentObserver observer) {
 		this.observer = observer;

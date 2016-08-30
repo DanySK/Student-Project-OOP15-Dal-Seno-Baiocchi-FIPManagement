@@ -96,14 +96,8 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
         }
     }
     
-    
     @Override
     public void attachObserver(ChampionshipObserver observer) {
         this.obs = observer;    
-    }
-    @Override
-    public void clearInterface() {
-        // TODO Auto-generated method stub
-        
     }
 }

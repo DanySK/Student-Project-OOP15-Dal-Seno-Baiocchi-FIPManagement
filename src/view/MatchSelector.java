@@ -102,10 +102,4 @@ public class MatchSelector extends JFrame implements ObserverInterface<MatchSele
 	public void attachObserver(MatchSelectorObserver observer) {
 		this.observer = observer;
 	}
-
-	@Override
-	public void clearInterface() {
-		// TODO Auto-generated method stub
-		
-	}
 }

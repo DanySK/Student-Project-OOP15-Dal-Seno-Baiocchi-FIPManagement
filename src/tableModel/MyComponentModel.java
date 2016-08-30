@@ -1,6 +1,7 @@
 package tableModel;
 
-import model.Model;
+import java.text.SimpleDateFormat;
+
 import model.MyTableModel;
 import model.Player;
 import model.Staff;
@@ -31,6 +32,7 @@ public class MyComponentModel extends MyTableModel{
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
+<<<<<<< local
 
 		if(type == CompononentType.PLAYER){		
 			Player player = team.getPlayers().get(rowIndex);
@@ -66,6 +68,26 @@ public class MyComponentModel extends MyTableModel{
 			default : 
 				return null;
 		}
+=======
+		Player player = team.getPlayers().get(rowIndex);
+		switch (columnIndex) {
+		case 0:
+			return	player.getName();
+		case 1 : 
+			return player.getSurname();
+		case 2 : 
+			return player.getHeight();
+		case 3 : 
+			return player.getCF();
+		case 4 : 
+			return player.getRole();
+		case 5 : 
+		        SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
+			return ft.format(player.getBirth());
+		default : 
+			return null;
+	
+>>>>>>> other
 		}
 	}
 

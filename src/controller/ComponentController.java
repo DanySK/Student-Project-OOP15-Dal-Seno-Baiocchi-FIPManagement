@@ -21,7 +21,6 @@ public class ComponentController implements TeamComponentObserver {
     @Override
     public void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth) {
 		try {
-			System.out.println("che palle");
 			team.addPlayer(new Player(name, surname, birth, cf, role, height));
 		} catch (PersonAlreadyAddedException e) {
 			e.printStackTrace();
@@ -41,15 +40,11 @@ public class ComponentController implements TeamComponentObserver {
 
     @Override
     public void removePlayer(Player p) {
-		team.removePlayer(p);
-        
+		team.removePlayer(p);   
     }
 
     @Override
     public void removeStaff(Staff s) {
-
     	team.removeStaff(s);
     }
-	
-
 }

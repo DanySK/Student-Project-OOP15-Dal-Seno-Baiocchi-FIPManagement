@@ -12,7 +12,6 @@ public class LoginController implements LoginObserver {
     private ObserverInterface<LoginObserver> view;
     private LoginType type;
 	private IModel model;
-    private static String ERROR_MESSAGE = "Errore login";
     
     public LoginController(LoginType type, IModel model) {
     	this.type = type;
@@ -35,7 +34,7 @@ public class LoginController implements LoginObserver {
 	        	return false;
 	        }
     	}else if(type == LoginType.user){
-    		if(user.equals("user") && pwd.equals("user")){
+    		if((user.equals("user") && pwd.equals("user")) || (user.equals("adm") && pwd.equals("adm"))){
     			new MatchSelector(model).setVisible(true);
 	            return true;
 	        } else {

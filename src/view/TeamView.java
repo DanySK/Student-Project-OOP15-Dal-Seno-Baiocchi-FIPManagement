@@ -83,11 +83,11 @@ public class TeamView extends JFrame {
         lblCompany.setBounds(406, 104, 69, 16);
         contentPane.add(lblCompany);
         
-        JLabel lblHomeJersey = new JLabel("Home Jersey");
+        JLabel lblHomeJersey = new JLabel("Home");
         lblHomeJersey.setBounds(200, 104, 82, 16);
         contentPane.add(lblHomeJersey);
         
-        JLabel lblTransferJersey = new JLabel("Transfer Jersey");
+        JLabel lblTransferJersey = new JLabel("Transfer");
         lblTransferJersey.setBounds(304, 104, 82, 16);
         contentPane.add(lblTransferJersey);
         

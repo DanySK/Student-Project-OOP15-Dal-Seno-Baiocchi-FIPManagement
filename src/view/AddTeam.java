@@ -3,14 +3,13 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import observer.TeamObserver;
 
@@ -105,11 +104,19 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
                 buttonPane.add(addButton);
                 addButton.addActionListener(e->{
 	            	try {
-						obs.addTeam(nameTextfield.getText(), homeColourTextfield.getText(), transferColourTextField.getText(), companyTextfield.getText(),vatTextfield.getText());
-						this.setVisible(false);
-					} catch (Exception e2) {
-	                    JOptionPane.showMessageDialog(this, "Team already exists", "Error",JOptionPane.ERROR_MESSAGE);                    
-					}
+	            	        if(checkField()){
+	            	            obs.addTeam(nameTextfield.getText(), homeColourTextfield.getText(), 
+	            	                    transferColourTextField.getText(), companyTextfield.getText(),
+	            	                    vatTextfield.getText());
+	            	            this.setVisible(false);
+	            	        } else {
+	            	            JOptionPane.showMessageDialog(this, "Some fields are missing",
+	            	                    "Error",JOptionPane.ERROR_MESSAGE);
+	            	        }
+	            	    } catch (Exception e2) {
+	            	        JOptionPane.showMessageDialog(this, "Team already exists", 
+	            	                "Error",JOptionPane.ERROR_MESSAGE);                    
+	            	    }
                 });
                 getRootPane().setDefaultButton(addButton);
             }
@@ -129,9 +136,9 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
         this.obs = observer;        
     }
 
-    @Override
-    public void clearInterface() {
-        // TODO Auto-generated method stub
-        
+    public boolean checkField(){
+        return !(nameTextfield.getText().isEmpty() || homeColourTextfield.getText().isEmpty() || 
+                transferColourTextField.getText().isEmpty() || companyTextfield.getText().isEmpty() ||
+                vatTextfield.getText().isEmpty());
     }
 }
