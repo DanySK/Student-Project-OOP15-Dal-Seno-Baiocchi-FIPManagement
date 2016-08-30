@@ -106,12 +106,6 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
     public void attachObserver(LoginObserver observer){
         this.obs = observer;
     }
-    @Override
-    public void clearInterface() {
-        // TODO Auto-generated method stub
-        
-    }
-
 }
 
 

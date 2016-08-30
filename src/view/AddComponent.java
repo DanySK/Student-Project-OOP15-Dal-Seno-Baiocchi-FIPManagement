@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -120,7 +121,7 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
         yyField.setColumns(10);
         
         JLabel lblDd = new JLabel("dd");
- lblDd.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+        lblDd.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
         lblDd.setBounds(97, 220, 12, 16);
         contentPanel.add(lblDd);
         
@@ -165,13 +166,25 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
                 buttonPane.add(addButton);
                 addButton.addActionListener(e->{
                     Calendar birth = Calendar.getInstance();
-                    birth.set(Integer.valueOf(yyField.getText()), Integer.valueOf(mmField.getText()), Integer.valueOf(ddField.getText()));
+                    birth.set(Integer.valueOf(yyField.getText()), Integer.valueOf(mmField.getText()), 
+                            Integer.valueOf(ddField.getText()));
                     if(typeBox.getSelectedItem().equals(type[0])){
-                        obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), Double.valueOf(heightField.getText()), cfField.getText(), birth.getTime());
+                        if(checkField()){
+                        obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), 
+                                Double.valueOf(heightField.getText()), cfField.getText(), birth.getTime());
+                        this.setVisible(false);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Some fields are missing","Error",JOptionPane.ERROR_MESSAGE);
+                        }
                     } else {
-                        obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), cfField.getText(),birth.getTime());
+                        if(checkField()){
+                        obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), 
+                                cfField.getText(),birth.getTime());
+                        this.setVisible(false);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Some fields are missing","Error",JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                    this.setVisible(false);
                 });
                 getRootPane().setDefaultButton(addButton);
             }
@@ -190,10 +203,14 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
     public void attachObserver(TeamComponentObserver observer) {
         this.obs = observer;        
     }
-
-    @Override
-    public void clearInterface() {
-        // TODO Auto-generated method stub
-        
+    
+    public boolean checkField(){
+        if(heightField.isEnabled()){
+            return !(nameField.getText().isEmpty() || surnameField.getText().isEmpty() || heightField.getText().isEmpty() || 
+                    cfField.getText().isEmpty() || ddField.getText().isEmpty() || mmField.getText().isEmpty() ||
+                    yyField.getText().isEmpty());
+        } else   return !(nameField.getText().isEmpty() || surnameField.getText().isEmpty()  || 
+                cfField.getText().isEmpty() || ddField.getText().isEmpty() || mmField.getText().isEmpty() ||
+                yyField.getText().isEmpty());
     }
 }

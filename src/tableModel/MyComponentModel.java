@@ -1,6 +1,7 @@
 package tableModel;
 
-import model.Model;
+import java.text.SimpleDateFormat;
+
 import model.MyTableModel;
 import model.Player;
 import model.Team;
@@ -35,7 +36,8 @@ public class MyComponentModel extends MyTableModel{
 		case 4 : 
 			return player.getRole();
 		case 5 : 
-			return player.getBirth();
+		        SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
+			return ft.format(player.getBirth());
 		default : 
 			return null;
 	

@@ -1,6 +1,5 @@
 package view;
 
-import controller.LoginController;
 
 public interface ObserverInterface<T>{
     /**
@@ -8,8 +7,4 @@ public interface ObserverInterface<T>{
      * @param loginController
      */
     void attachObserver(T observer);
-    /**
-     * Clear the view 
-     */
-    void clearInterface();
 }

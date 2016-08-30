@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import controller.ComponentController;
 import model.Player;
 import model.Team;
 import model.TeamImpl;
@@ -38,6 +35,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JLabel lblBirth;
     private JLabel lblHeight;
     private JLabel lblCf;
+    private JLabel lblRoster;
 
     /**
      * Launch the application.
@@ -91,6 +89,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         lblCompany.setBounds(547, 103, 69, 16);
         contentPane.add(lblCompany);
         
+        lblSurname = new JLabel("Surname");
         lblSurname.setBounds(203, 104, 82, 16);
         contentPane.add(lblSurname);
         
@@ -105,9 +104,9 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         lblCf = new JLabel("CF");
         lblCf.setBounds(365, 103, 82, 16);
         contentPane.add(lblCf);
-        JLabel lblRoster = new JLabel("ROSTER");
+        lblRoster = new JLabel();
         lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-        lblRoster.setBounds(293, 23, 117, 53);
+        lblRoster.setBounds(216, 23, 282, 53);
         contentPane.add(lblRoster);
     }
     
@@ -115,6 +114,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     
     public TeamComponentView(final Team team){
     	this();
+    	lblRoster.setText(team.getName()+" ROSTER");
     	observer = new ComponentController(team);
     	componentsTable.setModel(new MyComponentModel(team));
     	componentsTable.addMouseListener(new MouseAdapter(){
@@ -130,7 +130,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	addComponent.addActionListener(e->{
     		AddComponent ac = new AddComponent();
     		ac.attachObserver(observer);
-    		
     		ac.setVisible(true);
     	});
     	
@@ -143,13 +142,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	});
     }
     
-
-	@Override
-	public void clearInterface() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void attachObserver(TeamComponentObserver observer) {
 		this.observer = observer;

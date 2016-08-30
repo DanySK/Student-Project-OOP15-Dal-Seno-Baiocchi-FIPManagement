@@ -1,26 +1,17 @@
 package controller;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
-
 import model.Model;
 import observer.LoginObserver;
-import sun.security.util.Password;
 import view.ChampionshipView;
-import view.LoginDialog;
 import view.MainView.LoginType;
 import view.MatchSelector;
-import view.MatchView;
 import view.ObserverInterface;
 
 public class LoginController implements LoginObserver {
 
     private ObserverInterface<LoginObserver> view;
     private LoginType type;
-	private Model model;
-    private static String ERROR_MESSAGE = "Errore login";
+    private Model model;
     
     public LoginController(LoginType type, Model model) {
     	this.type = type;
@@ -43,7 +34,7 @@ public class LoginController implements LoginObserver {
 	        	return false;
 	        }
     	}else if(type == LoginType.user){
-    		if(user.equals("user") && pwd.equals("user")){
+    		if((user.equals("user") && pwd.equals("user")) || (user.equals("adm") && pwd.equals("adm"))){
     			new MatchSelector(model).setVisible(true);
 	            return true;
 	        } else {

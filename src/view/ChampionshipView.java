@@ -127,10 +127,4 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         this.obs = observer;
         
     }
-
-    @Override
-    public void clearInterface() {
-        // TODO Auto-generated method stub
-        
-    }
 }
