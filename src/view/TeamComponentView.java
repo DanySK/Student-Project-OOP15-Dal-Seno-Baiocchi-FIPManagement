@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -19,7 +20,6 @@ import model.Staff;
 import model.Team;
 import model.TeamImpl;
 import observer.TeamComponentObserver;
-import sun.security.x509.DeltaCRLIndicatorExtension;
 import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
@@ -152,19 +152,25 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	});
     	
     	deleteComponent.addActionListener(e->{
+    	  if((JOptionPane.showConfirmDialog(this, "You want to delete this Player?",
+                  "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
     		int index = componentsTable.getSelectedRow();
     		if(index>=0){
 				Player player = team.getPlayers().get(index);
 	    		observer.removePlayer(player);
     		}
+    	  }
     	});
     	
     	removeStaff.addActionListener(e->{
+    	  if((JOptionPane.showConfirmDialog(this, "You want to delete this Staff?",
+                  "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
     		int index = staffTable.getSelectedRow();
     		if(index>=0){
         		Staff staff = team.getStaff().get(index);
     			observer.removeStaff(staff);
     		}
+    	  }
     	});
     	  	
     	

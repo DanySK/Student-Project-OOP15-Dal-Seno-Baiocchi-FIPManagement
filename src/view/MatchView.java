@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +26,28 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 	private Team guestTeam;
 	private Team homeTeam;
 	private IModel model;
+    private JButton addOnePoint;
+    private JButton removeOnePoint;
+    private JButton addTwoPoints;
+    private JButton removeTwoPoints;
+    private JButton addThreePoints;
+    private JButton removeThreePoints;
+    private JButton addOffRebound;
+    private JButton removeOffRebound;
+    private JButton addDefRebound;
+    private JButton removeDefRebound;
+    private JButton addAssist;
+    private JButton removeAssist;
+    private JButton addBlock;
+    private JButton removeBlock;
+    private JButton addPersonalFoul;
+    private JButton removePersonaFoul;
+    private JButton addLoseBall;
+    private JButton removeLoseBall;
+    private JButton addSteal;
+    private JButton removeSteal;
+    private JButton saveMatch;
+    private JButton cancel;
 
 	/**
 	 * Launch the application.
@@ -56,7 +80,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.add(lblHomeTeam);
 		
 		JLabel lblGuestTeam = new JLabel("Guest Team");
-		lblGuestTeam.setBounds(500, 11, 103, 38);
+		lblGuestTeam.setBounds(514, 11, 103, 38);
 		contentPane.add(lblGuestTeam);
 		
 		JList homeTeamList = new JList();
@@ -64,64 +88,84 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.add(homeTeamList);
 		
 		JList guestTeamList = new JList();
-		guestTeamList.setBounds(500, 48, 202, 400);
+		guestTeamList.setBounds(510, 48, 202, 400);
 		contentPane.add(guestTeamList);
 		
-		JButton btnSaveMatch = new JButton("SaveMatch");
-		btnSaveMatch.setBounds(500, 471, 89, 38);
-		contentPane.add(btnSaveMatch);
+		JPanel panel = new JPanel();
+		panel.setBounds(241, 30, 260, 476);
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(613, 471, 89, 38);
-		contentPane.add(btnCancel);
+		addOnePoint = new JButton("Add 1 Point");
+		panel.add(addOnePoint);
 		
-		JButton btnAdd2Point = new JButton("Add 2 Points");
-		btnAdd2Point.setBounds(238, 116, 121, 57);
-		contentPane.add(btnAdd2Point);
+		removeOnePoint = new JButton("Remove 1 Point");
+		panel.add(removeOnePoint);
 		
-		JButton btnRemove2Point = new JButton("Remove 2 Points");
-		btnRemove2Point.setBounds(369, 116, 121, 57);
-		contentPane.add(btnRemove2Point);
+		addTwoPoints = new JButton("Add 2 Points");
+		panel.add(addTwoPoints);
 		
-		JButton btnAdd3Point = new JButton("Add 3 Points");
-		btnAdd3Point.setBounds(237, 184, 121, 57);
-		contentPane.add(btnAdd3Point);
+		removeTwoPoints = new JButton("Remove 2 Points");
+		panel.add(removeTwoPoints);
 		
-		JButton btnRemove3Point = new JButton("Remove 3 Points");
-		btnRemove3Point.setBounds(368, 184, 121, 57);
-		contentPane.add(btnRemove3Point);
+		addThreePoints = new JButton("Add 3 Points");
+		panel.add(addThreePoints);
 		
-		JButton addRimbalzo = new JButton("Add Rebound");
-		addRimbalzo.setBounds(238, 252, 121, 57);
-		contentPane.add(addRimbalzo);
+		removeThreePoints = new JButton("Remove 3 Points");
+		panel.add(removeThreePoints);
 		
-		JButton btnRemoveRimbalzo = new JButton("Remove Rebound");
-		btnRemoveRimbalzo.setBounds(369, 252, 121, 57);
-		contentPane.add(btnRemoveRimbalzo);
+		addOffRebound = new JButton("Add OFF Rebound");
+		panel.add(addOffRebound);
 		
-		JButton btnAddPoint = new JButton("Add 1 Point");
-		btnAddPoint.setBounds(238, 48, 121, 57);
-		contentPane.add(btnAddPoint);
+		removeOffRebound = new JButton("Remove OFF.Rebound");
+		removeOffRebound.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		panel.add(removeOffRebound);
 		
-		JButton btnRemovePoint = new JButton("Remove 1 Point");
-		btnRemovePoint.setBounds(369, 48, 121, 57);
-		contentPane.add(btnRemovePoint);
+		addDefRebound = new JButton("Add DEF Rebound");
+		panel.add(addDefRebound);
 		
-		JButton btnAddStop = new JButton("Add Block");
-		btnAddStop.setBounds(238, 320, 121, 57);
-		contentPane.add(btnAddStop);
+		removeDefRebound = new JButton("Remove DEF Rebound");
+		removeDefRebound.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		panel.add(removeDefRebound);
 		
-		JButton btnRemoveStop = new JButton("Remove Block");
-		btnRemoveStop.setBounds(369, 320, 121, 57);
-		contentPane.add(btnRemoveStop);
+		addAssist = new JButton("Add Assist");
+		panel.add(addAssist);
 		
-		JButton btnRemoveFaul = new JButton("Remove Foul");
-		btnRemoveFaul.setBounds(370, 388, 121, 57);
-		contentPane.add(btnRemoveFaul);
+		removeAssist = new JButton("Remove Assist");
+		panel.add(removeAssist);
 		
-		JButton btnAddFaul = new JButton("Add Foul");
-		btnAddFaul.setBounds(239, 388, 121, 57);
-		contentPane.add(btnAddFaul);
+		addBlock = new JButton("Add Block");
+		panel.add(addBlock);
+		
+		removeBlock = new JButton("Remove Block");
+		panel.add(removeBlock);
+		
+		addPersonalFoul = new JButton("Add  Personal Foul");
+		panel.add(addPersonalFoul);
+		
+		removePersonaFoul = new JButton("Remove Personal Foul");
+		removePersonaFoul.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		panel.add(removePersonaFoul);
+		
+		addLoseBall = new JButton("Add Lose Ball");
+		panel.add(addLoseBall);
+		
+		removeLoseBall = new JButton("Remove Lose Ball");
+		panel.add(removeLoseBall);
+		
+		addSteal = new JButton("Add Steal");
+		panel.add(addSteal);
+		
+		removeSteal = new JButton("Remove Steal");
+		panel.add(removeSteal);
+		
+		saveMatch = new JButton("SaveMatch");
+		saveMatch.setBounds(514, 470, 86, 43);
+		contentPane.add(saveMatch);
+		
+		cancel = new JButton("Cancel");
+		cancel.setBounds(626, 470, 86, 43);
+		contentPane.add(cancel);
 	}
 
 	public MatchView(final IModel model, Team team1, Team team2){
