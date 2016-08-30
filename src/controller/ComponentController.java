@@ -13,13 +13,13 @@ import observer.TeamComponentObserver;
 
 public class ComponentController implements TeamComponentObserver {
 
-	private Team team;
-	private IModel model;
+    private Team team;
+    private IModel model;
 
-	public ComponentController(IModel model, Team team ) {
-		this.team = team;
-		this.model = model;
-	}
+    public ComponentController(IModel model, Team team ) {
+	this.team = team;
+	this.model = model;
+    }
 
     @Override
     public void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth) {
@@ -29,7 +29,6 @@ public class ComponentController implements TeamComponentObserver {
 		} catch (PersonAlreadyAddedException e) {
 			e.printStackTrace();
 		}
-        
     }
 
     @Override
@@ -40,7 +39,6 @@ public class ComponentController implements TeamComponentObserver {
 		} catch (PersonAlreadyAddedException e) {
 			e.printStackTrace();
 		}
-                
     }
 
     @Override

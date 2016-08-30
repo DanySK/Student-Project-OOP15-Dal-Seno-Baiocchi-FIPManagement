@@ -1,6 +1,5 @@
 package controller;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,17 +13,14 @@ public class Utils {
 	public static final String FILENAME = "Salvataggio.txt"; 
 
 	public static void save(IModel model) {
-		
 		try {
 			FileOutputStream fo = new FileOutputStream(FILENAME);
 			ObjectOutputStream dos = new ObjectOutputStream(fo);
 			dos.writeObject(model);
 			dos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static IModel loading(){
@@ -36,8 +32,6 @@ public class Utils {
 			return model == null ? new Model() : model;
 		} catch (Exception e) {
 			return new Model();
-		}
-		
+		}		
 	}
-	
 }
