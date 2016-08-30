@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import model.IModel;
 import model.Model;
 import observer.LoginObserver;
 
@@ -44,7 +45,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
      * Create the dialog.
      * @param model 
      */
-    public LoginDialog(final Model model) {
+    public LoginDialog(final IModel model) {
         this.setTitle("Login");
         setBounds(100, 100, 401, 162);
         getContentPane().setLayout(new BorderLayout());

@@ -9,6 +9,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.IModel;
 import model.Model;
 import observer.MatchViewObserver;
 
@@ -119,7 +120,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.add(btnAddFaul);
 	}
 
-	public MatchView(final Model model){
+	public MatchView(final IModel model){
 		this();
 		
 		

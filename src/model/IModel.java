@@ -2,9 +2,11 @@ package model;
 
 import exceptions.ChampionshipAlreadyExistException;
 import exceptions.TeamAlreadyInThisChampionshipException;
+
+import java.io.Serializable;
 import java.util.List;
 
-public interface IModel {
+public interface IModel extends Serializable {
     
     /**
      * 

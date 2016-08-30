@@ -1,12 +1,13 @@
 package tableModel;
 
 import model.Championship;
+import model.IModel;
 import model.Model;
 import model.MyTableModel;
 
 public class MyChampionshipModel extends MyTableModel{
 
-	public MyChampionshipModel(Model model) {
+	public MyChampionshipModel(IModel model) {
 		super(model);
 		setColumnNames(new String []{"Championship", "Zone"});
 	}

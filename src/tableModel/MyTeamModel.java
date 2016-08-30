@@ -1,6 +1,7 @@
 package tableModel;
 
 import model.Championship;
+import model.IModel;
 import model.Model;
 import model.MyTableModel;
 import model.Team;
@@ -9,7 +10,7 @@ public class MyTeamModel extends MyTableModel {
 
 	private Championship champ;
 
-	public MyTeamModel(Model model, Championship champ) {
+	public MyTeamModel(IModel model, Championship champ) {
 		super(model);
 		setColumnNames(new String []{"Name","Home Jersey", "Transfer Jersey", "Company", "VAT"});
 		this.champ = champ;

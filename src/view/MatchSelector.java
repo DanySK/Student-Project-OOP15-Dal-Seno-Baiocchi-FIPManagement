@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Championship;
+import model.IModel;
 import model.Model;
 import observer.MatchSelectorObserver;
 
@@ -84,7 +85,7 @@ public class MatchSelector extends JFrame implements ObserverInterface<MatchSele
 		contentPane.add(comboBoxChampionship);
 	}
 	
-	public MatchSelector(final Model model){
+	public MatchSelector(final IModel model){
 		this();
 		
 		btnStartMatch.addActionListener(e->{

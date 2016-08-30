@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class Player extends PersonImpl {
+public class Player extends PersonImpl{
     
     /**
      * 

@@ -1,6 +1,7 @@
 package controller;
 
 import model.Championship;
+import model.IModel;
 import model.Model;
 import model.Team;
 import model.TeamImpl;
@@ -13,10 +14,10 @@ public class TeamController implements TeamObserver {
 	
 	
 	private ObserverInterface<TeamObserver> view;
-	private Model model;
+	private IModel model;
 	private Championship champ;
 
-	public TeamController(final Model model, Championship champ) {
+	public TeamController(final IModel model, Championship champ) {
 		this.model = model;
 		this.champ = champ;
 	}
@@ -30,6 +31,7 @@ public class TeamController implements TeamObserver {
 	public void addTeam(String name, String homeColour, String transferColour, String company, String vat) {
 		try {
 			model.addTeam(champ, new TeamImpl(name, transferColour, homeColour, company, vat));
+			Utils.save(model);
 		} catch (TeamAlreadyInThisChampionshipException e) {
 			e.printStackTrace();
 		}
@@ -38,6 +40,7 @@ public class TeamController implements TeamObserver {
 	@Override
 	public void removeTeam(Team team) {
 		model.removeTeam(champ, team);
+		Utils.save(model);
 	}
 
 }

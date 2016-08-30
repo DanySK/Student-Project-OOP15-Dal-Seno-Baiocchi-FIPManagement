@@ -6,11 +6,11 @@ import javax.swing.table.TableModel;
 public abstract class MyTableModel implements TableModel {
 	
 	
-	protected Model model;
+	protected IModel model;
 	private String[] columnNames;
 	public int parametro;
 	
-	public MyTableModel(Model model) {
+	public MyTableModel(IModel model) {
 	    this.model = model;
         }
 

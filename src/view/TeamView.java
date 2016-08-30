@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import model.Championship;
+import model.IModel;
 import model.Model;
 import model.Team;
 import tableModel.MyTeamModel;
@@ -100,7 +101,7 @@ public class TeamView extends JFrame {
         contentPane.add(lblTeams);
     }
     
-    public TeamView(final Model model, Championship ch){
+    public TeamView(final IModel model, Championship ch){
         this();
         this.controller = new TeamController(model, ch);
         teamTable.setModel(new MyTeamModel(model, ch));
@@ -111,8 +112,10 @@ public class TeamView extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount()==2){
 					int index = teamTable.getSelectedRow();
+					if(index>=0){
 					Team team = model.getTeam(ch).get(index);
 					new TeamComponentView(team).setVisible(true);;
+					}
 				}
 			}
 		});
@@ -125,9 +128,11 @@ public class TeamView extends JFrame {
         
         btnDeleteTeam.addActionListener(e->{
         	int i = teamTable.getSelectedRow();
-        	Team remove = (Team) model.getTeam(ch).toArray()[i];
-        	controller.removeTeam(remove);
-        	teamTable.repaint();
+        	if(i>=0){
+	        	Team remove = (Team) model.getTeam(ch).toArray()[i];
+	        	controller.removeTeam(remove);
+	        	teamTable.repaint();
+        	}
         });
         
         btnBack.addActionListener(e->{
