@@ -12,7 +12,11 @@ import javax.swing.border.EmptyBorder;
 import controller.LoginController;
 import controller.Utils;
 import model.IModel;
-
+/**
+ * The home View of the app
+ * @author lucadalseno
+ *
+ */
 public class MainView extends JFrame {
 
     /**

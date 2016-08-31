@@ -1,7 +1,11 @@
 package model;
 
 import java.io.Serializable;
-
+/**
+ * Define a championship
+ * @author lucadalseno
+ *
+ */
 public interface Championship extends Serializable {
     /**
      * 

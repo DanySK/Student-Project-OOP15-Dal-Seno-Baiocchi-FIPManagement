@@ -1,11 +1,11 @@
 package model;
-
+/**
+ * Model a championship
+ * @author lucadalseno
+ *
+ */
 public class ChampionshipImpl implements Championship {
-    @Override
-	public String toString() {
-		return division.toString() + " " + zone.toString();
-	}
-	/**
+    /**
      * 
      */
     private static final long serialVersionUID = -2985081041574393034L;
@@ -20,6 +20,11 @@ public class ChampionshipImpl implements Championship {
 		result = prime * result + ((zone == null) ? 0 : zone.hashCode());
 		return result;
 	}
+    /**
+     * redifine equals method
+     * a Championship is equals to another Championship 
+     * if both division & zone are equal
+     */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -39,6 +44,12 @@ public class ChampionshipImpl implements Championship {
         this.division = division;
         this.zone = zone;
     }
+
+    @Override
+    public String toString() {
+	return division.toString() + " " + zone.toString();
+    }
+	
     @Override
     public Division getDivision() {
         return this.division;

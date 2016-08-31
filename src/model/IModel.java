@@ -5,9 +5,12 @@ import exceptions.TeamAlreadyInThisChampionshipException;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * Define the model(following MVC pattern) of the FIP application
+ * @author lucadalseno
+ *
+ */
 public interface IModel extends Serializable {
-    
     /**
      * 
      * @param champ: the championship to add
@@ -43,5 +46,4 @@ public interface IModel extends Serializable {
      * @return a list of championship
      */
     List<Championship> getChampionship(); 
-    
 }

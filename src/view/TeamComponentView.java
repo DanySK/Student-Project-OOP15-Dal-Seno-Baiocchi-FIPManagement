@@ -23,7 +23,11 @@ import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
 import controller.Utils;
-
+/**
+ * The team component view of the app
+ * @author lucadalseno
+ *
+ */
 public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
 
     /**
@@ -72,7 +76,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.setLayout(null);
         
         componentsTable = new JTable();
-        componentsTable.setBounds(108, 131, 492, 160);
+        componentsTable.setBounds(108, 119, 492, 172);
         contentPane.add(componentsTable);
         
         addComponent = new JButton("Add Component");
@@ -84,31 +88,31 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(deleteComponent);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(549, 470, 117, 29);
+        btnBack.setBounds(18, 477, 117, 29);
         contentPane.add(btnBack);
         
         JLabel lblTeamName = new JLabel("Name");
-        lblTeamName.setBounds(108, 103, 82, 16);
+        lblTeamName.setBounds(108, 103, 50, 16);
         contentPane.add(lblTeamName);
         
         JLabel lblCompany = new JLabel("Role");
-        lblCompany.setBounds(547, 103, 69, 16);
+        lblCompany.setBounds(438, 103, 50, 16);
         contentPane.add(lblCompany);
         
         lblSurname = new JLabel("Surname");
-        lblSurname.setBounds(203, 104, 82, 16);
+        lblSurname.setBounds(188, 103, 62, 16);
         contentPane.add(lblSurname);
         
         lblBirth = new JLabel("Birth");
-        lblBirth.setBounds(295, 103, 82, 16);
+        lblBirth.setBounds(516, 103, 50, 16);
         contentPane.add(lblBirth);
         
         lblHeight = new JLabel("Height");
-        lblHeight.setBounds(449, 103, 82, 16);
+        lblHeight.setBounds(278, 103, 62, 16);
         contentPane.add(lblHeight);
         
         lblCf = new JLabel("CF");
-        lblCf.setBounds(365, 103, 82, 16);
+        lblCf.setBounds(365, 103, 31, 16);
         contentPane.add(lblCf);
         lblRoster = new JLabel();
         lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));

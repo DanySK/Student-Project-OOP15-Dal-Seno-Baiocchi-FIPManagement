@@ -18,7 +18,11 @@ import model.IModel;
 import model.Team;
 import tableModel.MyTeamModel;
 import controller.TeamController;
-
+/**
+ * The team view of the app
+ * @author lucadalseno
+ *
+ */
 public class TeamView extends JFrame {
 
     /**
@@ -72,7 +76,7 @@ public class TeamView extends JFrame {
         contentPane.add(btnDeleteTeam);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(549, 470, 117, 29);
+        btnBack.setBounds(18, 477, 117, 29);
         contentPane.add(btnBack);
         
         JLabel lblTeamName = new JLabel("Team name");
