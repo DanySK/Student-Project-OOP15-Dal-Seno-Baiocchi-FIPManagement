@@ -3,7 +3,6 @@ package controller;
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
-import model.Statistics;
 import observer.MatchViewObserver;
 
 public class MatchViewController implements MatchViewObserver {
@@ -34,86 +33,72 @@ public class MatchViewController implements MatchViewObserver {
 
 	@Override
 	public void increaseOffRebounds(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).increaseOffRebounds();
 	}
 
 	@Override
 	public void decreaseOffRebounds(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreaseOffRebounds();
 	}
 
 	@Override
 	public void increaseDefRebounds(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).increaseDefRebounds();
 	}
 
 	@Override
 	public void decreaseDefRebounds(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreaseDefRebounds();
 	}
 
 	@Override
 	public void increseAssists(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).increseAssists();
 	}
 
 	@Override
 	public void decreaseAssists(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreaseAssists();
 	}
 
 	@Override
 	public void increaseBlocks(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).increaseBlocks();
 	}
 
 	@Override
 	public void decreaseBlocks(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreaseBlocks();
 	}
 
 	@Override
 	public void incresePersonalFouls(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).incresePersonalFouls();
 	}
 
 	@Override
 	public void decreasePeronsalFouls(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreasePeronsalFouls();
 	}
 
 	@Override
 	public void increaseLoseBall(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).increaseLoseBall();
 	}
 
 	@Override
 	public void decreaseLoseBall(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreaseLoseBall();
 	}
 
 	@Override
 	public void increaseSteals(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).increaseSteals();
 	}
 
 	@Override
 	public void decreaseSteals(Player p) {
-		// TODO Auto-generated method stub
-		
+		stat.getStatistic(p).decreaseSteals();		
 	}
 
 }

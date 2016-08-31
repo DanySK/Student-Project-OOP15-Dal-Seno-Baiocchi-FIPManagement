@@ -18,6 +18,7 @@ import model.IModel;
 import model.Team;
 import tableModel.MyTeamModel;
 import controller.TeamController;
+import javax.swing.JScrollPane;
 
 public class TeamView extends JFrame {
 
@@ -60,8 +61,6 @@ public class TeamView extends JFrame {
         contentPane.setLayout(null);
         
         teamTable = new JTable();
-        teamTable.setBounds(108, 131, 492, 245);
-        contentPane.add(teamTable);
         
         btnAddTeam = new JButton("Add Team");
         btnAddTeam.setBounds(133, 415, 179, 29);
@@ -74,31 +73,15 @@ public class TeamView extends JFrame {
         btnBack = new JButton("Back");
         btnBack.setBounds(549, 470, 117, 29);
         contentPane.add(btnBack);
-        
-        JLabel lblTeamName = new JLabel("Team name");
-        lblTeamName.setBounds(108, 104, 82, 16);
-        contentPane.add(lblTeamName);
-        
-        JLabel lblCompany = new JLabel("Company");
-        lblCompany.setBounds(406, 104, 69, 16);
-        contentPane.add(lblCompany);
-        
-        JLabel lblHomeJersey = new JLabel("Home");
-        lblHomeJersey.setBounds(200, 104, 82, 16);
-        contentPane.add(lblHomeJersey);
-        
-        JLabel lblTransferJersey = new JLabel("Transfer");
-        lblTransferJersey.setBounds(304, 104, 82, 16);
-        contentPane.add(lblTransferJersey);
-        
-        JLabel lblVat = new JLabel("Vat");
-        lblVat.setBounds(502, 104, 82, 16);
-        contentPane.add(lblVat);
       
         JLabel lblTeams = new JLabel("TEAMS");
         lblTeams.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
         lblTeams.setBounds(293, 23, 91, 53);
         contentPane.add(lblTeams);
+        
+        JScrollPane teamScroll = new JScrollPane(teamTable);
+        teamScroll.setBounds(108, 131, 492, 245);
+        contentPane.add(teamScroll);
     }
     
     public TeamView(final IModel model, Championship ch){

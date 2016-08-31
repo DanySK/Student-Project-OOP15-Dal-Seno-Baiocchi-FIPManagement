@@ -9,8 +9,9 @@ import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import controller.MatchViewController;
@@ -22,10 +23,6 @@ import model.Statistics;
 import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
-
-import javax.swing.BoxLayout;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
@@ -233,10 +230,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			}
 		});
 		
+		
 		addOnePoint.addActionListener(e->{
+			
 			int homeindex = homeTable.getSelectedRow();
 			int guestindex = guestTable.getSelectedRow();
-
 			Player p ;
 			
 			if(homeindex>=0){
@@ -251,6 +249,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		});
 		
 		removeOnePoint.addActionListener(e->{
+
 			int homeindex = homeTable.getSelectedRow();
 			int guestindex = guestTable.getSelectedRow();
 
@@ -267,8 +266,331 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			}
 		});
 		
+		addTwoPoints.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increasePoints(p, 2);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increasePoints(p, 2);
+				guestTable.repaint();
+			}
+		});
+		
+		removeTwoPoints.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreasePoints(p, 2);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreasePoints(p, 2);
+				guestTable.repaint();
+			}
+		});
+		
+		addThreePoints.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increasePoints(p, 3);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increasePoints(p, 3);
+				guestTable.repaint();
+			}
+		});
+		
+		removeThreePoints.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreasePoints(p, 3);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreasePoints(p, 3);
+				guestTable.repaint();
+			}
+		});		
+		
+		addOffRebound.addActionListener(e->{
+			
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increaseOffRebounds(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increaseOffRebounds(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removeOffRebound.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreaseOffRebounds(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreaseOffRebounds(p);
+				guestTable.repaint();
+			}			
+		});
+
+		addDefRebound.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increaseDefRebounds(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increaseDefRebounds(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removeDefRebound.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreaseDefRebounds(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreaseDefRebounds(p);
+				guestTable.repaint();
+			}			
+		});
+
+		addAssist.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increseAssists(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increseAssists(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removeAssist.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreaseAssists(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreaseAssists(p);
+				guestTable.repaint();
+			}			
+		});
+
+		addBlock.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increaseBlocks(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increaseBlocks(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removeBlock.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreaseBlocks(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreaseBlocks(p);
+				guestTable.repaint();
+			}			
+		});
+
+		addPersonalFoul.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.incresePersonalFouls(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.incresePersonalFouls(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removePersonaFoul.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreasePeronsalFouls(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreasePeronsalFouls(p);
+				guestTable.repaint();
+			}			
+		});
+
+		addLoseBall.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increaseLoseBall(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increaseLoseBall(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removeLoseBall.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreaseLoseBall(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreaseLoseBall(p);
+				guestTable.repaint();
+			}			
+		});
+
+		addSteal.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.increaseSteals(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.increaseSteals(p);
+				guestTable.repaint();
+			}
+		});
+		
+		removeSteal.addActionListener(e->{
+
+			int homeindex = homeTable.getSelectedRow();
+			int guestindex = guestTable.getSelectedRow();
+			Player p ;
+			
+			if(homeindex>=0){
+				p = team1.getPlayers().get(homeindex);
+				controller.decreaseSteals(p);
+				homeTable.repaint();
+			}else if(guestindex>=0){
+				p = team2.getPlayers().get(guestindex);
+				controller.decreaseSteals(p);
+				guestTable.repaint();
+			}			
+		});
+
+		
 		saveMatch.addActionListener(e->{
 			
+		});
+		
+		cancel.addActionListener(e->{
+			this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		});
 	}
 	

@@ -23,6 +23,7 @@ import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
 import controller.Utils;
+import javax.swing.JScrollPane;
 
 public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
 
@@ -36,13 +37,11 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JButton addComponent;
     private JButton btnBack;
     private TeamComponentObserver observer;
-    private JLabel lblSurname;
-    private JLabel lblBirth;
-    private JLabel lblHeight;
-    private JLabel lblCf;
     private JTable staffTable;
     private JButton removeStaff;
     private JLabel lblRoster;
+    private JScrollPane playerScroll;
+    private JScrollPane staffScroll;
 
     /**
      * Launch the application.
@@ -72,8 +71,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.setLayout(null);
         
         componentsTable = new JTable();
-        componentsTable.setBounds(108, 131, 492, 160);
-        contentPane.add(componentsTable);
         
         addComponent = new JButton("Add Component");
         addComponent.setBounds(108, 415, 146, 29);
@@ -86,42 +83,24 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         btnBack = new JButton("Back");
         btnBack.setBounds(549, 470, 117, 29);
         contentPane.add(btnBack);
-        
-        JLabel lblTeamName = new JLabel("Name");
-        lblTeamName.setBounds(108, 103, 82, 16);
-        contentPane.add(lblTeamName);
-        
-        JLabel lblCompany = new JLabel("Role");
-        lblCompany.setBounds(547, 103, 69, 16);
-        contentPane.add(lblCompany);
-        
-        lblSurname = new JLabel("Surname");
-        lblSurname.setBounds(203, 104, 82, 16);
-        contentPane.add(lblSurname);
-        
-        lblBirth = new JLabel("Birth");
-        lblBirth.setBounds(295, 103, 82, 16);
-        contentPane.add(lblBirth);
-        
-        lblHeight = new JLabel("Height");
-        lblHeight.setBounds(449, 103, 82, 16);
-        contentPane.add(lblHeight);
-        
-        lblCf = new JLabel("CF");
-        lblCf.setBounds(365, 103, 82, 16);
-        contentPane.add(lblCf);
         lblRoster = new JLabel();
         lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
         lblRoster.setBounds(216, 23, 282, 53);
         contentPane.add(lblRoster);
         
         staffTable = new JTable();
-        staffTable.setBounds(108, 302, 492, 91);
-        contentPane.add(staffTable);
         
         removeStaff = new JButton("Remove Staff");
         removeStaff.setBounds(366, 415, 109, 29);
         contentPane.add(removeStaff);
+        
+        playerScroll = new JScrollPane(componentsTable);
+        playerScroll.setBounds(108, 131, 492, 160);
+        contentPane.add(playerScroll);
+        
+        staffScroll = new JScrollPane(staffTable);
+        staffScroll.setBounds(108, 302, 492, 91);
+        contentPane.add(staffScroll);
     }
     
     

@@ -20,6 +20,7 @@ import model.Model;
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
 import controller.ChampionshipController;
+import javax.swing.JScrollPane;
 
 
 public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>{
@@ -73,16 +74,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         contentPane.add(deleteChamp);
         
         champTable = new JTable();
-        champTable.setBounds(108, 131, 492, 245);
-        contentPane.add(champTable);
-        
-        JLabel lblChampionship = new JLabel("DIVISION");
-        lblChampionship.setBounds(173, 103, 82, 16);
-        contentPane.add(lblChampionship);
-        
-        JLabel lblZone = new JLabel("ZONE");
-        lblZone.setBounds(436, 103, 82, 16);
-        contentPane.add(lblZone);
         
         btnBack = new JButton("Back");
         btnBack.setBounds(549, 470, 117, 29);
@@ -92,6 +83,10 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         lblChampionship_1.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
         lblChampionship_1.setBounds(251, 23, 200, 53);
         contentPane.add(lblChampionship_1);
+        
+        JScrollPane champScroll = new JScrollPane(champTable);
+        champScroll.setBounds(108, 131, 492, 245);
+        contentPane.add(champScroll);
     }
     
     public ChampionshipView(final IModel model){
