@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import exceptions.PersonAlreadyAddedException;
-
+/**
+ * Model a team
+ * @author lucadalseno
+ *
+ */
 public class TeamImpl implements Team {
     /**
      * 
@@ -59,20 +63,18 @@ public class TeamImpl implements Team {
     public void addPlayer(Player p) throws PersonAlreadyAddedException {
     	if(!players.contains(p)){
     		players.add(p);
-    	}else{
+    	} else {
     		throw new PersonAlreadyAddedException();
     	}
-    	
     }
 
     @Override
     public void addStaff(Staff s) throws PersonAlreadyAddedException {
     	if(!staff.contains(s)){
     		staff.add(s);
-    	}else{
+    	} else {
     		throw new PersonAlreadyAddedException();
     	}
-   
     }
 
     @Override

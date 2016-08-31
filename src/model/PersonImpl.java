@@ -1,7 +1,11 @@
 package model;
 
 import java.util.Date;
-
+/**
+ * Model a person
+ * @author lucadalseno
+ *
+ */
 public class PersonImpl implements Person {
     
     @Override
@@ -9,7 +13,7 @@ public class PersonImpl implements Person {
 		return "PersonImpl [name=" + name + ", surname=" + surname + "]";
 	}
 
-	/**
+    /**
      * 
      */
     private static final long serialVersionUID = 3970309943492437923L;
@@ -46,13 +50,16 @@ public class PersonImpl implements Person {
     }
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cf == null) ? 0 : cf.hashCode());
-		return result;
-	}
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((cf == null) ? 0 : cf.hashCode());
+	return result;
+    }
 
+	/**
+	 * a person is equal to another one if their cf are equal
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

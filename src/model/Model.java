@@ -9,14 +9,15 @@ import java.util.Set;
 
 import exceptions.ChampionshipAlreadyExistException;
 import exceptions.TeamAlreadyInThisChampionshipException;
-
-
+/**
+ * Class that manage all the data of the FIP application
+ * @author lucadalseno
+ *
+ */
 public class Model implements IModel{
-    
-	
     /**
-	 * 
-	 */
+     * 
+     */
 	private static final long serialVersionUID = 1L;
 	private Map<Championship,Set<Team>> dataMap;
     

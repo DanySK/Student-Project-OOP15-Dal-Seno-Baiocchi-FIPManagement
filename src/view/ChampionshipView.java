@@ -23,8 +23,12 @@ import controller.ChampionshipController;
 import javax.swing.JScrollPane;
 
 
+/**
+ * The championship view of the app
+ * @author lucadalseno
+ *
+ */
 public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>{
-
     /**
      * 
      */
@@ -36,7 +40,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     private ChampionshipObserver obs;
     private JButton btnBack;
     
-
     /**
      * Launch the application.
      */
@@ -55,7 +58,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 
     /**
      * Create the frame.
-     * @param model 
+     * 
      */
     private ChampionshipView() {
         this.setTitle("Championship View");
@@ -76,7 +79,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         champTable = new JTable();
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(549, 470, 117, 29);
+        btnBack.setBounds(18, 477, 117, 29);
         contentPane.add(btnBack);   
         
         JLabel lblChampionship_1 = new JLabel("CHAMPIONSHIP");
@@ -109,11 +112,11 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             c.setVisible(true);
         });
         deleteChamp.addActionListener(e->{
-            
             if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
                     "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
                     this.attachObserver(new ChampionshipController(model));
-                    obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()[champTable.getSelectedRow()]);
+                    obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()
+                            [champTable.getSelectedRow()]);
             }
             champTable.repaint();
         });

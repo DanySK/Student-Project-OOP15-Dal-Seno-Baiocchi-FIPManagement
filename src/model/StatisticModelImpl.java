@@ -2,7 +2,11 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Model a StatisticModel
+ * @author lucadalseno
+ *
+ */
 public class StatisticModelImpl implements StatisticModel {
     
     Map<Player, Statistics> statMap;
@@ -20,5 +24,4 @@ public class StatisticModelImpl implements StatisticModel {
     public Statistics getStatistic(Player p) {
         return statMap.get(p);
     }
-
 }

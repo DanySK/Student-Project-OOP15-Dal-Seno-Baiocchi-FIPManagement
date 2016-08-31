@@ -15,7 +15,7 @@ public class MyMatchModel extends MyTableModel{
 		super(model);
 		this.team = team;
 		this.statmodel  = statmod;
-		setColumnNames(new String[]{"Player","P","OffR","DefR","Ass","Blo","Faul","BL","Ste"});
+		setColumnNames(new String[]{"Player","P","OffR","DefR","Ass","Blo","Foul","BL","Ste"});
 		
 	}
 
@@ -43,7 +43,7 @@ public class MyMatchModel extends MyTableModel{
 			case 6 : 
 				return statmodel.getStatistic(player).getPersonalFouls();
 			case 7 :
-				return statmodel.getStatistic(player).getLoseBalls();
+				return statmodel.getStatistic(player).getTurnovers();
 			case 8 :
 				return statmodel.getStatistic(player).getSteals();
 			default : 

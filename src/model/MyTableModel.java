@@ -14,23 +14,18 @@ public abstract class MyTableModel implements TableModel {
 	    this.model = model;
         }
 
-
-
     @Override
 	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		// TODO Auto-generated method stub
 		return String.class;
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return columnNames.length;
 	}
 
@@ -45,21 +40,16 @@ public abstract class MyTableModel implements TableModel {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
 		
 	}
-	
-
 }

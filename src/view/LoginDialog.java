@@ -15,7 +15,11 @@ import javax.swing.border.EmptyBorder;
 import model.IModel;
 import model.Model;
 import observer.LoginObserver;
-
+/**
+ * A Login Dialog to log into the application
+ * @author lucadalseno
+ *
+ */
 public class LoginDialog extends JDialog implements ObserverInterface<LoginObserver> {
 
     /**
@@ -39,7 +43,6 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
             e.printStackTrace();
         }
     }
-
 
     /**
      * Create the dialog.
@@ -86,9 +89,9 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                     if(obs.doLogin(userTextField.getText(),new String( pswTextfield.getPassword()))){
                 		this.setVisible(false);
                 	} else {
-                            JOptionPane.showMessageDialog(this, "Login Error", "Error",JOptionPane.ERROR_MESSAGE);                    
+                            JOptionPane.showMessageDialog(this, "Login Error", "Error",
+                                    JOptionPane.ERROR_MESSAGE);                    
                 	}
-                	    
                 });
             }
             {
@@ -101,13 +104,8 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
             }
         }
     }
-    
   
-    
     public void attachObserver(LoginObserver observer){
         this.obs = observer;
     }
 }
-
-
-

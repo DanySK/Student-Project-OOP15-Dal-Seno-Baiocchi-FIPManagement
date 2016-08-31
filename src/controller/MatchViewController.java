@@ -83,12 +83,12 @@ public class MatchViewController implements MatchViewObserver {
 
 	@Override
 	public void increaseLoseBall(Player p) {
-		stat.getStatistic(p).increaseLoseBall();
+		stat.getStatistic(p).increaseTurnovers();
 	}
 
 	@Override
 	public void decreaseLoseBall(Player p) {
-		stat.getStatistic(p).decreaseLoseBall();
+		stat.getStatistic(p).decreaseTurnovers();
 	}
 
 	@Override

@@ -15,18 +15,20 @@ import exceptions.ChampionshipAlreadyExistException;
 import observer.ChampionshipObserver;
 import model.Division;
 import model.Zone;
+/**
+ * Dialog that let you add a championship
+ * @author lucadalseno
+ *
+ */
 public class AddChamp extends JDialog implements ObserverInterface<ChampionshipObserver> {
-
     /**
      * 
      */
     private static final long serialVersionUID = 73893420932703563L;
     private final JPanel contentPanel = new JPanel();
     private ChampionshipObserver obs;
-    @SuppressWarnings("rawtypes")
-    private JComboBox zoneBox;
-    @SuppressWarnings("rawtypes")
-    private JComboBox divisionBox;
+    private JComboBox<Zone> zoneBox;
+    private JComboBox<Division> divisionBox;
 
     /**
      * Launch the application.
@@ -44,7 +46,6 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
     /**
      * Create the dialog.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     public AddChamp() {
         setBounds(100, 100, 410, 231);
         getContentPane().setLayout(new BorderLayout());
@@ -60,11 +61,11 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
         lblZone.setBounds(42, 106, 75, 16);
         contentPanel.add(lblZone);
         
-        divisionBox = new JComboBox(Division.values());
+        divisionBox = new JComboBox<>(Division.values());
         divisionBox.setBounds(188, 39, 145, 27);
         contentPanel.add(divisionBox);
         
-        zoneBox = new JComboBox(Zone.values());
+        zoneBox = new JComboBox<>(Zone.values());
         zoneBox.setBounds(188, 102, 145, 27);
         contentPanel.add(zoneBox);
         {

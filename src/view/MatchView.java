@@ -14,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import controller.MatchViewController;
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
@@ -23,6 +22,7 @@ import model.Statistics;
 import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
+import controller.MatchViewController;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
@@ -58,8 +58,10 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
     private JButton cancel;
     private JTable homeTable;
     private JTable guestTable;
-	private JScrollPane homeScrollPane;
-	private JScrollPane guestScrollPane;
+    private JScrollPane homeScrollPane;
+    private JScrollPane guestScrollPane;
+    private JLabel lblHomeTeam;
+    private JLabel lblGuestTeam;
 
 	/**
 	 * Launch the application.
@@ -87,11 +89,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblHomeTeam = new JLabel("Home Team");
+		lblHomeTeam = new JLabel("Home Team");
 		lblHomeTeam.setBounds(22, 11, 103, 38);
 		contentPane.add(lblHomeTeam);
 		
-		JLabel lblGuestTeam = new JLabel("Guest Team");
+		lblGuestTeam = new JLabel("Guest Team");
 		lblGuestTeam.setBounds(751, 11, 103, 38);
 		contentPane.add(lblGuestTeam);
 		
@@ -188,7 +190,9 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		this();
 		this.model = model;
 		this.homeTeam = team1;
-		this.guestTeam = team2;		
+		this.guestTeam = team2;	
+		lblHomeTeam.setText(team1.getName());
+		lblGuestTeam.setText(team2.getName());
 		
 		StatisticModel stmod = new StatisticModelImpl();
 		

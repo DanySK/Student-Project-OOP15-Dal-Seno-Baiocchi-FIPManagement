@@ -25,6 +25,11 @@ import controller.ComponentController;
 import controller.Utils;
 import javax.swing.JScrollPane;
 
+/**
+ * The team component view of the app
+ * @author lucadalseno
+ *
+ */
 public class TeamComponentView extends JFrame implements ObserverInterface<TeamComponentObserver>{
 
     /**
@@ -81,8 +86,17 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(deleteComponent);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(549, 470, 117, 29);
+        btnBack.setBounds(18, 477, 117, 29);
         contentPane.add(btnBack);
+        
+        JLabel lblTeamName = new JLabel("Name");
+        lblTeamName.setBounds(108, 103, 50, 16);
+        contentPane.add(lblTeamName);
+        
+        JLabel lblCompany = new JLabel("Role");
+        lblCompany.setBounds(438, 103, 50, 16);
+        contentPane.add(lblCompany);
+        
         lblRoster = new JLabel();
         lblRoster.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
         lblRoster.setBounds(216, 23, 282, 53);
