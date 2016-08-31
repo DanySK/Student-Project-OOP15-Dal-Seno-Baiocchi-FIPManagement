@@ -23,6 +23,8 @@ import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
 import controller.MatchViewController;
+import java.awt.Color;
+import javax.swing.ListSelectionModel;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
@@ -174,8 +176,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.add(cancel);
 		
 		homeTable = new JTable();
+		homeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		homeTable.setSelectionBackground(Color.GREEN);
 		
 		guestTable = new JTable();
+		guestTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		homeScrollPane = new JScrollPane(homeTable);
 		homeScrollPane.setBounds(10, 49, 434, 416);
@@ -594,7 +599,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		});
 		
 		cancel.addActionListener(e->{
-			this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		});
 	}
 	
