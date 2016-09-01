@@ -3,10 +3,11 @@ package controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import model.IModel;
@@ -23,11 +24,12 @@ public class MatchViewController implements MatchViewObserver {
 
 	private StatisticModel stat;
 	private IModel model;
+    private List<String> valueable;
+    private Set<String> id;
 
 	public MatchViewController(IModel model, StatisticModel stat) {
 		this.model = model;
 		this.stat = stat;
-		
 	}
 	
 	@Override
@@ -35,29 +37,29 @@ public class MatchViewController implements MatchViewObserver {
 	    XSSFWorkbook workbook = new XSSFWorkbook();
 	    XSSFSheet sheet = workbook.createSheet();
 	    
-	    TreeMap<String, Object[]> data = new TreeMap<>();
-	    data.put("0", new String[]{ homeTable.getColumnName(0), homeTable.getColumnName(1),homeTable.getColumnName(2),
-	            homeTable.getColumnName(3),homeTable.getColumnName(4),homeTable.getColumnName(5),
-	            homeTable.getColumnName(6),homeTable.getColumnName(7),homeTable.getColumnName(8)});
+	    TreeMap<String, List<String>> data = new TreeMap<>();
+	    ArrayList<String> header = new ArrayList<>();
+	    for(int k = 0; k <= (homeTable.getColumnCount()-1);k++){
+	        header.add(homeTable.getColumnName(k));
+	    }
+	    data.put("0",header );
+
+            ArrayList<String> values = new ArrayList<>();
 	    for(int i= 0; i <= (homeTable.getRowCount()-1); i++){
 	        for(int j = 0; j <= (homeTable.getColumnCount()-1); j++){
-	            int row = homeTable.getRowCount();
-	            String name = homeTable.getValueAt(i, j).toString();
-	            data.put(""+i, new String[]{homeTable.getValueAt(i, j).toString()});
+	            values.add(homeTable.getValueAt(i, j).toString());
+	            data.put(""+(i+1),values);
 	        }
 	    }
-	    /* Lui mi cicla le celle al contrario però vede solo le ultime due
-	     * La parte sopra dovrebbe andare tutta bene, è qui che sbagliamo qualcosa
-	     */
-	    Set<String> id = data.keySet();
+	  
+	    id = data.keySet();
 	    XSSFRow row;
 	    int rowID = 0;
 	    for(String key: id){
 	        row = sheet.createRow(rowID++);
-	        
 	        int cellID = 0;
-	        Object[] values = data.get(key);
-	        for(Object o: values){
+	        valueable = data.get(key);
+	        for(String o: valueable){
 	            XSSFCell cell = row.createCell(cellID++);
 	            cell.setCellValue(o.toString());
 	        }

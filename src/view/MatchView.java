@@ -698,6 +698,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
                 if((JOptionPane.showConfirmDialog(this, "Are you sure you want to export this match?", 
                         "Alert",JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
                     this.obs.saveMatch(homeTable,guestTable,lblHomeTeam.getText(),lblGuestTeam.getText());
+                    JOptionPane.showMessageDialog(this, "File created successfully","Done!",JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (IOException e1) {
                 JOptionPane.showMessageDialog(this, ""+e1.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
