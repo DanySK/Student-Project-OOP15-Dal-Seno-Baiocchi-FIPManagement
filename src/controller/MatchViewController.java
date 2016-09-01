@@ -1,17 +1,10 @@
 package controller;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.swing.JTable;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import model.IModel;
 import model.Player;
@@ -35,7 +28,6 @@ public class MatchViewController implements MatchViewObserver {
 	@Override
 	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) {
 
-		Utils.save(model);
 	}
 
 	@Override
