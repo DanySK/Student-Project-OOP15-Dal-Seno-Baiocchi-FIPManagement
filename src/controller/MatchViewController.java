@@ -26,6 +26,7 @@ public class MatchViewController implements MatchViewObserver {
 	private IModel model;
     private List<String> valueable;
     private Set<String> id;
+    private XSSFCell cell;
 
 	public MatchViewController(IModel model, StatisticModel stat) {
 		this.model = model;
@@ -48,10 +49,10 @@ public class MatchViewController implements MatchViewObserver {
 	    for(int i= 0; i <= (homeTable.getRowCount()-1); i++){
 	        for(int j = 0; j <= (homeTable.getColumnCount()-1); j++){
 	            values.add(homeTable.getValueAt(i, j).toString());
-	            data.put(""+(i+1),values);
+	            
 	        }
+	        data.put(""+(i+1),values);
 	    }
-	  
 	    id = data.keySet();
 	    XSSFRow row;
 	    int rowID = 0;
@@ -60,7 +61,7 @@ public class MatchViewController implements MatchViewObserver {
 	        int cellID = 0;
 	        valueable = data.get(key);
 	        for(String o: valueable){
-	            XSSFCell cell = row.createCell(cellID++);
+	            cell = row.createCell(cellID++);
 	            cell.setCellValue(o.toString());
 	        }
 	    }
