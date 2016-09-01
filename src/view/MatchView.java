@@ -208,7 +208,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		
 		StatisticModel stmod = new StatisticModelImpl();
 
-                this.attachObserver(new MatchViewController(model, stmod));
+        this.attachObserver(new MatchViewController(model, stmod));
 		for(Player p : team1.getPlayers()){
 			stmod.addStatistic(p, new Statistics());
 		}
@@ -271,7 +271,6 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-                                this.attachObserver(new MatchViewController(model, stmod));
 				this.obs.increasePoints(p, 1);
 				guestTable.repaint();
 			}
