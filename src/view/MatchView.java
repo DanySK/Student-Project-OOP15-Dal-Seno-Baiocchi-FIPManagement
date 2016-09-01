@@ -1,17 +1,21 @@
 package view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import model.IModel;
@@ -23,19 +27,18 @@ import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
 import controller.MatchViewController;
-import java.awt.Color;
-import javax.swing.ListSelectionModel;
+import exceptions.InvalidStatisticException;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
-	/**
+    /**
      * 
      */
     private static final long serialVersionUID = -6679819020260822815L;
     private JPanel contentPane;
-	private Team guestTeam;
-	private Team homeTeam;
-	private IModel model;
+    private Team guestTeam;
+    private Team homeTeam;
+    private IModel model;
     private JButton addOnePoint;
     private JButton removeOnePoint;
     private JButton addTwoPoints;
@@ -52,8 +55,8 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
     private JButton removeBlock;
     private JButton addPersonalFoul;
     private JButton removePersonaFoul;
-    private JButton addLoseBall;
-    private JButton removeLoseBall;
+    private JButton addTurnover;
+    private JButton removeTurnover;
     private JButton addSteal;
     private JButton removeSteal;
     private JButton saveMatch;
@@ -64,6 +67,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
     private JScrollPane guestScrollPane;
     private JLabel lblHomeTeam;
     private JLabel lblGuestTeam;
+    private MatchViewObserver obs;
 
 	/**
 	 * Launch the application.
@@ -92,11 +96,13 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		contentPane.setLayout(null);
 		
 		lblHomeTeam = new JLabel("Home Team");
-		lblHomeTeam.setBounds(22, 11, 103, 38);
+		lblHomeTeam.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblHomeTeam.setBounds(22, 11, 133, 38);
 		contentPane.add(lblHomeTeam);
 		
 		lblGuestTeam = new JLabel("Guest Team");
-		lblGuestTeam.setBounds(751, 11, 103, 38);
+		lblGuestTeam.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblGuestTeam.setBounds(751, 11, 133, 38);
 		contentPane.add(lblGuestTeam);
 		
 		JPanel panel = new JPanel();
@@ -155,11 +161,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		removePersonaFoul.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		panel.add(removePersonaFoul);
 		
-		addLoseBall = new JButton("Add Lose Ball");
-		panel.add(addLoseBall);
+		addTurnover = new JButton("Add Turnover");
+		panel.add(addTurnover);
 		
-		removeLoseBall = new JButton("Remove Lose Ball");
-		panel.add(removeLoseBall);
+		removeTurnover = new JButton("Remove Turnover");
+		panel.add(removeTurnover);
 		
 		addSteal = new JButton("Add Steal");
 		panel.add(addSteal);
@@ -177,7 +183,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		
 		homeTable = new JTable();
 		homeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		homeTable.setSelectionBackground(Color.GREEN);
+		homeTable.setSelectionBackground(Color.RED);
 		
 		guestTable = new JTable();
 		guestTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -196,11 +202,13 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		this.model = model;
 		this.homeTeam = team1;
 		this.guestTeam = team2;	
+		
 		lblHomeTeam.setText(team1.getName());
 		lblGuestTeam.setText(team2.getName());
 		
 		StatisticModel stmod = new StatisticModelImpl();
-		
+
+                this.attachObserver(new MatchViewController(model, stmod));
 		for(Player p : team1.getPlayers()){
 			stmod.addStatistic(p, new Statistics());
 		}
@@ -211,7 +219,18 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		
 		homeTable.setModel(new MyMatchModel(model, team1, stmod));
 		guestTable.setModel(new MyMatchModel(model, team2, stmod));
-		final MatchViewController controller = new MatchViewController(model, stmod);
+		
+		homeTable.getColumnModel().getColumn(0).setMinWidth(180);
+                homeTable.getTableHeader().setReorderingAllowed(false);
+		for(int i = 0; i < homeTable.getColumnCount(); i++){
+		    homeTable.getColumnModel().getColumn(i).setResizable(false);
+		}
+		
+		guestTable.getColumnModel().getColumn(0).setMinWidth(180);
+		guestTable.getTableHeader().setReorderingAllowed(false);
+		for(int i = 0; i < guestTable.getColumnCount(); i++){
+		    guestTable.getColumnModel().getColumn(i).setResizable(false);
+                }
 		
 		homeTable.addFocusListener(new FocusListener() {
 			
@@ -248,11 +267,12 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increasePoints(p, 1);
+				this.obs.increasePoints(p, 1);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increasePoints(p, 1);
+                                this.attachObserver(new MatchViewController(model, stmod));
+				this.obs.increasePoints(p, 1);
 				guestTable.repaint();
 			}
 		});
@@ -266,11 +286,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreasePoints(p, 1);
+				try{
+	                                this.obs.decreasePoints(p, 1);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreasePoints(p, 1);
+				try{
+                                    this.obs.decreasePoints(p, 1);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				guestTable.repaint();
 			}
 		});
@@ -284,11 +312,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increasePoints(p, 2);
+				this.obs.increasePoints(p, 2);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increasePoints(p, 2);
+				this.obs.increasePoints(p, 2);
 				guestTable.repaint();
 			}
 		});
@@ -302,11 +330,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreasePoints(p, 2);
+				try{
+                                    this.obs.decreasePoints(p, 2);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreasePoints(p, 2);
+				try{
+                                    this.obs.decreasePoints(p, 2);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				guestTable.repaint();
 			}
 		});
@@ -320,11 +356,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increasePoints(p, 3);
+				this.obs.increasePoints(p, 3);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increasePoints(p, 3);
+				this.obs.increasePoints(p, 3);
 				guestTable.repaint();
 			}
 		});
@@ -338,11 +374,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreasePoints(p, 3);
+				try{
+                                    this.obs.decreasePoints(p, 3);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreasePoints(p, 3);
+				try{
+                                    this.obs.decreasePoints(p, 3);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				guestTable.repaint();
 			}
 		});		
@@ -356,11 +400,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increaseOffRebounds(p);
+				this.obs.increaseOffRebounds(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increaseOffRebounds(p);
+				this.obs.increaseOffRebounds(p);
 				guestTable.repaint();
 			}
 		});
@@ -374,11 +418,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreaseOffRebounds(p);
+				try{
+	                             this.obs.decreaseOffRebounds(p);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreaseOffRebounds(p);
+				try{
+                                    this.obs.decreaseOffRebounds(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				guestTable.repaint();
 			}			
 		});
@@ -392,11 +444,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increaseDefRebounds(p);
+				this.obs.increaseDefRebounds(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increaseDefRebounds(p);
+				this.obs.increaseDefRebounds(p);
 				guestTable.repaint();
 			}
 		});
@@ -409,11 +461,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreaseDefRebounds(p);
+				try{
+                                    this.obs.decreaseDefRebounds(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreaseDefRebounds(p);
+				try{
+                                    this.obs.decreaseDefRebounds(p);
+                                } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                                }
 				guestTable.repaint();
 			}			
 		});
@@ -427,11 +487,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increseAssists(p);
+				this.obs.increseAssists(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increseAssists(p);
+				this.obs.increseAssists(p);
 				guestTable.repaint();
 			}
 		});
@@ -444,11 +504,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreaseAssists(p);
+				try{
+                                    this.obs.decreaseAssists(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreaseAssists(p);
+				try{
+                                    this.obs.decreaseAssists(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				guestTable.repaint();
 			}			
 		});
@@ -462,11 +530,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increaseBlocks(p);
+				this.obs.increaseBlocks(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increaseBlocks(p);
+				this.obs.increaseBlocks(p);
 				guestTable.repaint();
 			}
 		});
@@ -479,11 +547,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreaseBlocks(p);
+				try{
+                                    this.obs.decreaseBlocks(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreaseBlocks(p);
+				try{
+                                    this.obs.decreaseBlocks(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				guestTable.repaint();
 			}			
 		});
@@ -497,11 +573,11 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.incresePersonalFouls(p);
+				this.obs.incresePersonalFouls(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.incresePersonalFouls(p);
+				this.obs.incresePersonalFouls(p);
 				guestTable.repaint();
 			}
 		});
@@ -514,16 +590,24 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreasePeronsalFouls(p);
+				try{
+				    this.obs.decreasePeronsalFouls(p);
+				} catch (InvalidStatisticException ex){
+				    errorDialog();
+				}
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreasePeronsalFouls(p);
+				try{
+                                    this.obs.decreasePeronsalFouls(p);
+                                } catch (InvalidStatisticException ex){
+                                    errorDialog();
+                                }
 				guestTable.repaint();
 			}			
 		});
 
-		addLoseBall.addActionListener(e->{
+		addTurnover.addActionListener(e->{
 
 			int homeindex = homeTable.getSelectedRow();
 			int guestindex = guestTable.getSelectedRow();
@@ -532,16 +616,16 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increaseLoseBall(p);
+				this.obs.increaseTurnovers(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increaseLoseBall(p);
+				this.obs.increaseTurnovers(p);
 				guestTable.repaint();
 			}
 		});
 		
-		removeLoseBall.addActionListener(e->{
+		removeTurnover.addActionListener(e->{
 
 			int homeindex = homeTable.getSelectedRow();
 			int guestindex = guestTable.getSelectedRow();
@@ -549,11 +633,19 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreaseLoseBall(p);
+				try{
+                                    this.obs.decreaseTurnovers(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreaseLoseBall(p);
+				try{
+                                    this.obs.decreaseTurnovers(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				guestTable.repaint();
 			}			
 		});
@@ -567,48 +659,63 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.increaseSteals(p);
+				this.obs.increaseSteals(p);
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.increaseSteals(p);
+				this.obs.increaseSteals(p);
 				guestTable.repaint();
 			}
 		});
 		
 		removeSteal.addActionListener(e->{
-
 			int homeindex = homeTable.getSelectedRow();
 			int guestindex = guestTable.getSelectedRow();
 			Player p ;
 			
 			if(homeindex>=0){
 				p = team1.getPlayers().get(homeindex);
-				controller.decreaseSteals(p);
+				try{
+                                    this.obs.decreaseSteals(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				homeTable.repaint();
 			}else if(guestindex>=0){
 				p = team2.getPlayers().get(guestindex);
-				controller.decreaseSteals(p);
+				try{
+                                    this.obs.decreaseSteals(p);
+                               } catch (InvalidStatisticException ex){
+                                   errorDialog();
+                               }
 				guestTable.repaint();
 			}			
 		});
 
 		
 		saveMatch.addActionListener(e->{
-			
+			try {
+                if((JOptionPane.showConfirmDialog(this, "Are you sure you want to export this match?", 
+                        "Alert",JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
+                    this.obs.saveMatch(homeTable,guestTable,lblHomeTeam.getText(),lblGuestTeam.getText());
+                }
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(this, ""+e1.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            }
 		});
 		
 		cancel.addActionListener(e->{
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			this.setVisible(false);
 		});
 	}
-	
-	
-	
-
 	@Override
 	public void attachObserver(MatchViewObserver observer) {
-		// TODO Auto-generated method stub
-		
+		this.obs = observer;	
+	}
+	
+	public void errorDialog(){
+	    JOptionPane.showMessageDialog(this, "Statistics cannot be negative", 
+                    "Statistic Error", JOptionPane.ERROR_MESSAGE);
 	}
 }

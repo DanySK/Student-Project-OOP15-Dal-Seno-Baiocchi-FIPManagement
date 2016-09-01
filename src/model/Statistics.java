@@ -2,7 +2,7 @@ package model;
 
 import java.security.InvalidParameterException;
 
-import exceptions.InvalidStatistic;
+import exceptions.InvalidStatisticException;
 /**
  * Contains all the type of statistics
  * @author lucadalseno
@@ -124,7 +124,7 @@ public class Statistics {
      */
     public void decreaseOffRebounds(){
         if(this.offRebounds == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.offRebounds--;
     }
@@ -141,7 +141,7 @@ public class Statistics {
      */
     public void decreaseDefRebounds(){
         if(this.defRebounds == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.defRebounds--;
     }
@@ -158,7 +158,7 @@ public class Statistics {
      */
     public void decreaseAssists(){
         if(this.assists == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.assists--;
     }
@@ -175,7 +175,7 @@ public class Statistics {
      */
     public void decreaseBlocks(){
         if(this.blocks == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.blocks--;
     }
@@ -192,7 +192,7 @@ public class Statistics {
      */
     public void decreasePeronsalFouls(){
         if(this.personalFouls == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.personalFouls--;
     }
@@ -209,7 +209,7 @@ public class Statistics {
      */
     public void decreaseTurnovers(){
         if(this.turnovers == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.turnovers--;
     }
@@ -226,7 +226,7 @@ public class Statistics {
      */
     public void decreaseSteals(){
         if(this.steals == 0){
-            throw new InvalidStatistic();
+            throw new InvalidStatisticException();
         }
         this.steals--;
     }

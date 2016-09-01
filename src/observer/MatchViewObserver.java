@@ -1,10 +1,14 @@
 package observer;
 
+import java.io.IOException;
+
+import javax.swing.JTable;
+
 import model.Player;
 
 public interface MatchViewObserver {
 
-	public void saveMatch();
+    public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) throws IOException;
 
     public void increasePoints(Player p, int value);
     
@@ -30,9 +34,9 @@ public interface MatchViewObserver {
     
     public void decreasePeronsalFouls(Player p);
     
-    public void increaseLoseBall(Player p);
+    public void increaseTurnovers(Player p);
     
-    public void decreaseLoseBall(Player p);
+    public void decreaseTurnovers(Player p);
     
     public void increaseSteals(Player p);
     

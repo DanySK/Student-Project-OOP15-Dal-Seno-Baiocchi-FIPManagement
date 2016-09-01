@@ -1,9 +1,23 @@
 package controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
 import observer.MatchViewObserver;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class MatchViewController implements MatchViewObserver {
 
@@ -17,7 +31,44 @@ public class MatchViewController implements MatchViewObserver {
 	}
 	
 	@Override
-	public void saveMatch() {
+	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) {
+	    XSSFWorkbook workbook = new XSSFWorkbook();
+	    XSSFSheet sheet = workbook.createSheet();
+	    
+	    TreeMap<String, Object[]> data = new TreeMap<>();
+	    data.put("0", new String[]{ homeTable.getColumnName(0), homeTable.getColumnName(1),homeTable.getColumnName(2),
+	            homeTable.getColumnName(3),homeTable.getColumnName(4),homeTable.getColumnName(5),
+	            homeTable.getColumnName(6),homeTable.getColumnName(7),homeTable.getColumnName(8)});
+	    for(int i= 0; i <= (homeTable.getRowCount()-1); i++){
+	        for(int j = 0; j <= (homeTable.getColumnCount()-1); j++){
+	            int row = homeTable.getRowCount();
+	            String name = homeTable.getValueAt(i, j).toString();
+	            data.put(""+i, new String[]{homeTable.getValueAt(i, j).toString()});
+	        }
+	    }
+	    /* Lui mi cicla le celle al contrario però vede solo le ultime due
+	     * La parte sopra dovrebbe andare tutta bene, è qui che sbagliamo qualcosa
+	     */
+	    Set<String> id = data.keySet();
+	    XSSFRow row;
+	    int rowID = 0;
+	    for(String key: id){
+	        row = sheet.createRow(rowID++);
+	        
+	        int cellID = 0;
+	        Object[] values = data.get(key);
+	        for(Object o: values){
+	            XSSFCell cell = row.createCell(cellID++);
+	            cell.setCellValue(o.toString());
+	        }
+	    }
+	    try{
+	        FileOutputStream fs = new FileOutputStream(new File(System.getProperty("user.home")+System.getProperty("file.separator")+"view"+homeName+guestName+".xlsx"));
+	        workbook.write(fs);
+	        fs.close();
+	    } catch (IOException ex){
+	        
+	    }
 		Utils.save(model);
 	}
 
@@ -82,12 +133,12 @@ public class MatchViewController implements MatchViewObserver {
 	}
 
 	@Override
-	public void increaseLoseBall(Player p) {
+	public void increaseTurnovers(Player p) {
 		stat.getStatistic(p).increaseTurnovers();
 	}
 
 	@Override
-	public void decreaseLoseBall(Player p) {
+	public void decreaseTurnovers(Player p) {
 		stat.getStatistic(p).decreaseTurnovers();
 	}
 

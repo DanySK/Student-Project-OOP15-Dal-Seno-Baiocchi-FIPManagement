@@ -1,10 +1,9 @@
 package observer;
 
-import exceptions.ChampionshipAlreadyExistException;
 import model.Championship;
-import model.ChampionshipImpl;
 import model.Division;
 import model.Zone;
+import exceptions.ChampionshipAlreadyExistException;
 
 public interface ChampionshipObserver {
 

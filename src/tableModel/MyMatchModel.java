@@ -15,7 +15,7 @@ public class MyMatchModel extends MyTableModel{
 		super(model);
 		this.team = team;
 		this.statmodel  = statmod;
-		setColumnNames(new String[]{"Player","P","OffR","DefR","Ass","Blo","Foul","BL","Ste"});
+		setColumnNames(new String[]{"Player","P","OffR","DefR","Ass","Blo","Foul","To","Ste"});
 		
 	}
 
@@ -48,7 +48,6 @@ public class MyMatchModel extends MyTableModel{
 				return statmodel.getStatistic(player).getSteals();
 			default : 
 				return null;
-
 		}
 	}
 }
