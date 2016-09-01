@@ -22,11 +22,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class MatchViewController implements MatchViewObserver {
 
-	private StatisticModel stat;
-	private IModel model;
+    private StatisticModel stat;
+    private IModel model;
     private List<String> valueable;
     private Set<String> id;
     private XSSFCell cell;
+    private XSSFWorkbook workbook;
 
 	public MatchViewController(IModel model, StatisticModel stat) {
 		this.model = model;
@@ -35,7 +36,7 @@ public class MatchViewController implements MatchViewObserver {
 	
 	@Override
 	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) {
-	    XSSFWorkbook workbook = new XSSFWorkbook();
+	    workbook = new XSSFWorkbook();
 	    XSSFSheet sheet = workbook.createSheet();
 	    
 	    TreeMap<String, List<String>> data = new TreeMap<>();
@@ -47,11 +48,12 @@ public class MatchViewController implements MatchViewObserver {
 
             ArrayList<String> values = new ArrayList<>();
 	    for(int i= 0; i <= (homeTable.getRowCount()-1); i++){
+	        int conta = 1;
 	        for(int j = 0; j <= (homeTable.getColumnCount()-1); j++){
 	            values.add(homeTable.getValueAt(i, j).toString());
-	            
+	                data.put(""+conta,values);
 	        }
-	        data.put(""+(i+1),values);
+	        conta++;
 	    }
 	    id = data.keySet();
 	    XSSFRow row;
