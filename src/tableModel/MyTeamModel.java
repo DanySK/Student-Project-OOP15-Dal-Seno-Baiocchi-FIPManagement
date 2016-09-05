@@ -2,7 +2,6 @@ package tableModel;
 
 import model.Championship;
 import model.IModel;
-import model.Model;
 import model.MyTableModel;
 import model.Team;
 

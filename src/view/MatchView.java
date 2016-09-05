@@ -27,6 +27,7 @@ import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
 import controller.MatchViewController;
+import controller.Utils;
 import exceptions.InvalidStatisticException;
 
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
@@ -36,9 +37,6 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
      */
     private static final long serialVersionUID = -6679819020260822815L;
     private JPanel contentPane;
-    private Team guestTeam;
-    private Team homeTeam;
-    private IModel model;
     private JButton addOnePoint;
     private JButton removeOnePoint;
     private JButton addTwoPoints;
@@ -195,13 +193,12 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		guestScrollPane = new JScrollPane(guestTable);
 		guestScrollPane.setBounds(751, 49, 434, 416);
 		contentPane.add(guestScrollPane);
+		
+		
 	}
 
 	public MatchView(final IModel model, Team team1, Team team2){
 		this();
-		this.model = model;
-		this.homeTeam = team1;
-		this.guestTeam = team2;	
 		
 		lblHomeTeam.setText(team1.getName());
 		lblGuestTeam.setText(team2.getName());
@@ -695,20 +692,24 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		
 		saveMatch.addActionListener(e->{
 			try {
-                if((JOptionPane.showConfirmDialog(this, "Are you sure you want to export this match?", 
-                        "Alert",JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
-                    this.obs.saveMatch(homeTable,guestTable,lblHomeTeam.getText(),lblGuestTeam.getText());
-                    JOptionPane.showMessageDialog(this, "File created successfully","Done!",JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (IOException e1) {
-                JOptionPane.showMessageDialog(this, ""+e1.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-            }
+                            if((JOptionPane.showConfirmDialog(this, "Are you sure you want to export this match?", 
+                                    "Alert",JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
+                                this.obs.saveMatch(homeTable,guestTable,lblHomeTeam.getText(),lblGuestTeam.getText());
+                                JOptionPane.showMessageDialog(this, "File created successfully",
+                                        "Done!",JOptionPane.INFORMATION_MESSAGE);
+                                    stmod.applyStatistic();
+                                    Utils.save(model);
+                                }
+                            } catch (IOException e1) {
+                                JOptionPane.showMessageDialog(this, ""+e1.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                            }
 		});
 		
 		cancel.addActionListener(e->{
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			this.setVisible(false);
 		});
+		
 	}
 	@Override
 	public void attachObserver(MatchViewObserver observer) {

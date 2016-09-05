@@ -17,6 +17,7 @@ import model.Player;
 import model.Player.PLAYEROLE;
 import model.Staff;
 import model.Staff.ROLE;
+import model.Statistics;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -37,6 +38,14 @@ public class StatisticView extends JFrame {
     private JComboBox<Object> roleBox;
     private JButton btnCancel;
     private JButton btnApplyChanges;
+    private JLabel setPoints;
+    private JLabel setOffRebounds;
+    private JLabel setDefRebounds;
+    private JLabel setAssists;
+    private JLabel setBlocks;
+    private JLabel setPersonalFouls;
+    private JLabel setTurnovers;
+    private JLabel setSteals;
 
     /**
      * Launch the application.
@@ -124,49 +133,49 @@ public class StatisticView extends JFrame {
         JLabel lblPoints = new JLabel("Points:");
         panel.add(lblPoints);
         
-        JLabel setPoints = new JLabel("");
+        setPoints = new JLabel("");
         panel.add(setPoints);
         
         JLabel lblOffRebounds = new JLabel("Off Rebounds:");
         panel.add(lblOffRebounds);
         
-        JLabel setOffRebounds = new JLabel("");
+        setOffRebounds = new JLabel("");
         panel.add(setOffRebounds);
         
         JLabel lblDefRebounds = new JLabel("Def Rebounds:");
         panel.add(lblDefRebounds);
         
-        JLabel setDefRebounds = new JLabel("");
+        setDefRebounds = new JLabel("");
         panel.add(setDefRebounds);
         
         JLabel lblAssist = new JLabel("Assists:");
         panel.add(lblAssist);
         
-        JLabel setAssists = new JLabel("");
+        setAssists = new JLabel("");
         panel.add(setAssists);
         
         JLabel lblBlocks = new JLabel("Blocks:");
         panel.add(lblBlocks);
         
-        JLabel setBlocks = new JLabel("");
+        setBlocks = new JLabel("");
         panel.add(setBlocks);
         
         JLabel lblPersonalFouls = new JLabel("Personal Fouls:");
         panel.add(lblPersonalFouls);
         
-        JLabel setPersonalFouls = new JLabel("");
+        setPersonalFouls = new JLabel("");
         panel.add(setPersonalFouls);
         
         JLabel lblLoseBalls = new JLabel("Lose Balls:");
         panel.add(lblLoseBalls);
         
-        JLabel setLoseBalls = new JLabel("");
-        panel.add(setLoseBalls);
+        setTurnovers = new JLabel("");
+        panel.add(setTurnovers);
         
         JLabel lblSteals = new JLabel("Steals:");
         panel.add(lblSteals);
         
-        JLabel setSteals = new JLabel("");
+        setSteals = new JLabel("");
         panel.add(setSteals);
         
         btnApplyChanges = new JButton("Apply Changes");
@@ -183,6 +192,7 @@ public class StatisticView extends JFrame {
     
     public StatisticView(Player p,final IModel model){
         this();
+        calculateStatistic(p);
         this.roleBox.setModel(new DefaultComboBoxModel<>(PLAYEROLE.values()));
         this.roleBox.setSelectedItem(p.getRole());
         this.nameTextField.setText(p.getName());
@@ -202,6 +212,35 @@ public class StatisticView extends JFrame {
         });
     }
     
+    private void calculateStatistic(Player p) {
+        int points = 0;
+        int offReb = 0;
+        int defReb = 0;
+        int assists = 0;
+        int turnOver = 0;
+        int steals = 0;
+        int blocks = 0;
+        int personFouls = 0;
+        for(Statistics s: p.getStatistics()){
+            points += s.getPoints();
+            offReb += s.getOffRebounds();
+            defReb += s.getDefRebounds();
+            assists += s.getAssists();
+            turnOver += s.getTurnovers();
+            steals += s.getSteals();
+            blocks += s.getBlocks();
+            personFouls += s.getPersonalFouls();
+        }
+        setPoints.setText(""+points);
+        setOffRebounds.setText(""+offReb);
+        setDefRebounds.setText(""+defReb);
+        setAssists.setText(""+assists);
+        setTurnovers.setText(""+turnOver);
+        setSteals.setText(""+steals);
+        setBlocks.setText(""+blocks);
+        setPersonalFouls.setText(""+personFouls);
+    }
+
     public StatisticView(Staff s,final IModel model){
         this();
         this.roleBox.setModel(new DefaultComboBoxModel<>(ROLE.values()));

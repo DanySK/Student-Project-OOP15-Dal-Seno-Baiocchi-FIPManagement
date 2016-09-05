@@ -19,4 +19,9 @@ public interface StatisticModel {
      * the statistics
      */
     Statistics getStatistic(Player p);
+    
+    /**
+     * Apply the statistics to the model
+     */
+    void applyStatistic();
 }

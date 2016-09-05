@@ -4,17 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 
-import exceptions.ChampionshipAlreadyExistException;
-import observer.ChampionshipObserver;
 import model.Division;
 import model.Zone;
+import observer.ChampionshipObserver;
+import exceptions.ChampionshipAlreadyExistException;
 /**
  * Dialog that let you add a championship
  * @author lucadalseno

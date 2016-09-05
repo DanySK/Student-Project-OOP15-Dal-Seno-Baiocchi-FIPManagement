@@ -2,7 +2,6 @@ package controller;
 
 import java.util.Date;
 
-import exceptions.PersonAlreadyAddedException;
 import model.IModel;
 import model.Player;
 import model.Player.PLAYEROLE;
@@ -10,6 +9,7 @@ import model.Staff;
 import model.Staff.ROLE;
 import model.Team;
 import observer.TeamComponentObserver;
+import exceptions.PersonAlreadyAddedException;
 
 public class ComponentController implements TeamComponentObserver {
 

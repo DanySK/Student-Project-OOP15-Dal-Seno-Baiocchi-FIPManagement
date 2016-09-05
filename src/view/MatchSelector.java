@@ -14,17 +14,18 @@ import javax.swing.border.EmptyBorder;
 import model.Championship;
 import model.IModel;
 import model.Team;
-import observer.MatchSelectorObserver;
 
-public class MatchSelector extends JFrame implements ObserverInterface<MatchSelectorObserver> {
+public class MatchSelector extends JFrame  {
 
-	private JPanel contentPane;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = -7149268289002655560L;
+    private JPanel contentPane;
 	private JComboBox<Team> comboBoxHome;
 	private JComboBox<Team> comboBoxGuest;
 	private JButton btnStartMatch;
 	private JButton btnBack;
-	private MatchSelectorObserver observer;
-	private Championship ch;
 	private JLabel lblSelectChampionship;
 	private JComboBox<Championship> comboBoxChampionship;
 	
@@ -120,10 +121,5 @@ public class MatchSelector extends JFrame implements ObserverInterface<MatchSele
 		btnBack.addActionListener(e->{
 			this.setVisible(false);
 		});
-	}
-	
-	@Override
-	public void attachObserver(MatchSelectorObserver observer) {
-		this.observer = observer;
 	}
 }

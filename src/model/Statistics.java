@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 
 import exceptions.InvalidStatisticException;
@@ -8,7 +9,11 @@ import exceptions.InvalidStatisticException;
  * @author lucadalseno
  *
  */
-public class Statistics { 
+public class Statistics implements Serializable{ 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7872501312758066108L;
     public int points;
     public int offRebounds;
     public int defRebounds;

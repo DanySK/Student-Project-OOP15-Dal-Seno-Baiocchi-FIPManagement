@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
@@ -18,7 +19,6 @@ import model.IModel;
 import model.Team;
 import tableModel.MyTeamModel;
 import controller.TeamController;
-import javax.swing.JScrollPane;
 
 /**
  * The team view of the app

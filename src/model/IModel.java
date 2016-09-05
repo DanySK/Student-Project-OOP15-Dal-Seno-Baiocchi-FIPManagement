@@ -1,10 +1,10 @@
 package model;
 
-import exceptions.ChampionshipAlreadyExistException;
-import exceptions.TeamAlreadyInThisChampionshipException;
-
 import java.io.Serializable;
 import java.util.List;
+
+import exceptions.ChampionshipAlreadyExistException;
+import exceptions.TeamAlreadyInThisChampionshipException;
 /**
  * Define the model(following MVC pattern) of the FIP application
  * @author lucadalseno

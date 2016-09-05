@@ -9,9 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.IModel;
 import controller.LoginController;
 import controller.Utils;
-import model.IModel;
 /**
  * The home View of the app
  * @author lucadalseno

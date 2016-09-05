@@ -2,7 +2,6 @@ package controller;
 
 import model.Championship;
 import model.IModel;
-import model.Model;
 import model.Team;
 import model.TeamImpl;
 import observer.TeamObserver;
