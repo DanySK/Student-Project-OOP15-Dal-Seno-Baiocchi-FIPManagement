@@ -10,6 +10,11 @@ import java.util.TreeMap;
 
 import javax.swing.JTable;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
@@ -21,6 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 public class MatchViewController implements MatchViewObserver {
 
@@ -41,6 +47,7 @@ public class MatchViewController implements MatchViewObserver {
 	public MatchViewController(IModel model, StatisticModel stat) {
 		this.model = model;
 		this.stat = stat;
+		
 	}
 	
 	@Override
