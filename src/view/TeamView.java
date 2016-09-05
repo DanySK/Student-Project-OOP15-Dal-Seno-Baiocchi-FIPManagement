@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,8 +24,7 @@ import controller.TeamController;
  * @author lucadalseno
  *
  */
-public class TeamView extends JFrame {
-
+public class TeamView extends JFrame implements CallBackInterface {
     /**
      * 
      */
@@ -37,23 +35,8 @@ public class TeamView extends JFrame {
     private JButton btnDeleteTeam;
     private JButton btnBack;
     private TeamController controller;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    TeamView frame = new TeamView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
+    private JLabel lblTeams;
+    private JScrollPane teamScroll;
     /**
      * Create the frame.
      */
@@ -79,21 +62,20 @@ public class TeamView extends JFrame {
         btnBack.setBounds(18, 477, 117, 29);
         contentPane.add(btnBack);
       
-        JLabel lblTeams = new JLabel("TEAMS");
+        lblTeams = new JLabel("TEAMS");
         lblTeams.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
         lblTeams.setBounds(293, 23, 91, 53);
         contentPane.add(lblTeams);
         
-        JScrollPane teamScroll = new JScrollPane(teamTable);
+        teamScroll = new JScrollPane(teamTable);
         teamScroll.setBounds(108, 131, 492, 245);
         contentPane.add(teamScroll);
     }
     
-    public TeamView(final IModel model, Championship ch){
+    public TeamView(final IModel model, Championship ch,CallBackInterface callback){
         this();
         this.controller = new TeamController(model, ch);
         teamTable.setModel(new MyTeamModel(model, ch));
-        
         teamTable.addMouseListener(new MouseAdapter() {
 		
 			@Override
@@ -102,7 +84,8 @@ public class TeamView extends JFrame {
 					int index = teamTable.getSelectedRow();
 					if(index>=0){
 					Team team = model.getTeam(ch).get(index);
-					new TeamComponentView(model,team).setVisible(true);;
+					new TeamComponentView(model,team,TeamView.this).setVisible(true);
+					TeamView.this.setVisibility(false);
 					}
 				}
 			}
@@ -127,7 +110,18 @@ public class TeamView extends JFrame {
         });
         
         btnBack.addActionListener(e->{
+                callback.onClose();
         	this.setVisible(false);
         });
+    }
+
+    @Override
+    public void onClose() {
+        this.setVisible(true);
+    }
+
+    @Override
+    public void setVisibility(boolean b) {
+        this.setVisible(b);
     }
 }

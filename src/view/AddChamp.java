@@ -29,20 +29,11 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
     private ChampionshipObserver obs;
     private JComboBox<Zone> zoneBox;
     private JComboBox<Division> divisionBox;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            AddChamp dialog = new AddChamp();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    private JLabel lblNewLabel;
+    private JLabel lblZone;
+    private JPanel buttonPane;
+    private JButton okButton;
+    private JButton cancelButton;
     /**
      * Create the dialog.
      */
@@ -53,11 +44,11 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
-        JLabel lblNewLabel = new JLabel("Division:");
+        lblNewLabel = new JLabel("Division:");
         lblNewLabel.setBounds(42, 43, 75, 16);
         contentPanel.add(lblNewLabel);
         
-        JLabel lblZone = new JLabel("Zone:");
+        lblZone = new JLabel("Zone:");
         lblZone.setBounds(42, 106, 75, 16);
         contentPanel.add(lblZone);
         
@@ -69,11 +60,11 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
         zoneBox.setBounds(188, 102, 145, 27);
         contentPanel.add(zoneBox);
         {
-            JPanel buttonPane = new JPanel();
+            buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
-                JButton okButton = new JButton("OK");
+                okButton = new JButton("OK");
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
@@ -87,7 +78,7 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
                 });
             }
             {
-                JButton cancelButton = new JButton("Cancel");
+                cancelButton = new JButton("Cancel");
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
                 cancelButton.addActionListener(e->{

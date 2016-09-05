@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import model.IModel;
-import model.Model;
 import observer.LoginObserver;
 /**
  * A Login Dialog to log into the application
@@ -21,7 +20,6 @@ import observer.LoginObserver;
  *
  */
 public class LoginDialog extends JDialog implements ObserverInterface<LoginObserver> {
-
     /**
      * 
      */
@@ -30,19 +28,11 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
     public JTextField userTextField;
     public JPasswordField pswTextfield;
     private LoginObserver obs;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            LoginDialog dialog = new LoginDialog(new Model());
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private JLabel userLbl;
+    private JLabel passLbl;
+    private JPanel buttonPane;
+    private JButton okButton;
+    private JButton cancelButton;
 
     /**
      * Create the dialog.
@@ -62,12 +52,12 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
             userTextField.setColumns(10);
         }
         {
-            JLabel userLbl = new JLabel("Username");
+            userLbl = new JLabel("Username");
             userLbl.setBounds(23, 12, 84, 16);
             contentPanel.add(userLbl);
         }
         {
-            JLabel passLbl = new JLabel("Password");
+            passLbl = new JLabel("Password");
             passLbl.setBounds(23, 56, 68, 16);
             contentPanel.add(passLbl);
         }
@@ -77,11 +67,11 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
         contentPanel.add(pswTextfield);
         pswTextfield.setColumns(10);
         {
-            JPanel buttonPane = new JPanel();
+            buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
-                JButton okButton = new JButton("OK");
+                okButton = new JButton("OK");
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
@@ -95,7 +85,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
                 });
             }
             {
-                JButton cancelButton = new JButton("Cancel");
+                cancelButton = new JButton("Cancel");
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
                 cancelButton.addActionListener(e->{

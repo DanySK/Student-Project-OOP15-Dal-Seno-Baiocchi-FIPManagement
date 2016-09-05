@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,9 +14,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import model.Championship;
-import model.ChampionshipImpl;
 import model.IModel;
-import model.Model;
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
 import controller.ChampionshipController;
@@ -28,7 +25,7 @@ import controller.ChampionshipController;
  * @author lucadalseno
  *
  */
-public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>{
+public class ChampionshipView extends JFrame  implements ObserverInterface<ChampionshipObserver>,CallBackInterface{
     /**
      * 
      */
@@ -39,23 +36,8 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     private JButton deleteChamp;
     private ChampionshipObserver obs;
     private JButton btnBack;
-    
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ChampionshipView frame = new ChampionshipView(new Model());
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
+    private JLabel lblChampionship;
+    private JScrollPane champScroll;
     /**
      * Create the frame.
      * 
@@ -82,17 +64,17 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         btnBack.setBounds(18, 477, 117, 29);
         contentPane.add(btnBack);   
         
-        JLabel lblChampionship_1 = new JLabel("CHAMPIONSHIP");
-        lblChampionship_1.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-        lblChampionship_1.setBounds(251, 23, 200, 53);
-        contentPane.add(lblChampionship_1);
+        lblChampionship = new JLabel("CHAMPIONSHIP");
+        lblChampionship.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+        lblChampionship.setBounds(251, 23, 200, 53);
+        contentPane.add(lblChampionship);
         
-        JScrollPane champScroll = new JScrollPane(champTable);
+        champScroll = new JScrollPane(champTable);
         champScroll.setBounds(108, 131, 492, 245);
         contentPane.add(champScroll);
     }
     
-    public ChampionshipView(final IModel model){
+    public ChampionshipView(final IModel model,final CallBackInterface callback){
     	this();
     	champTable.setModel(new MyChampionshipModel(model));
     	champTable.addMouseListener(new MouseAdapter() {
@@ -100,28 +82,30 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2){
 					int index = ((JTable)e.getSource()).getSelectedRow();
-					Championship ch = (Championship) model.getChampionship().toArray()[index];
-					new TeamView(model, ch).setVisible(true);
+					Championship ch = model.getChampionship().get(index);
+					new TeamView(model, ch,ChampionshipView.this).setVisible(true);
+					ChampionshipView.this.setVisibility(false);
 				}
 			}
 		});
         addChampBtn.addActionListener(e->{
             AddChamp c = new AddChamp();
             c.attachObserver(new ChampionshipController(model));
-            c.repaint();
             c.setVisible(true);
+            champTable.repaint();
         });
         deleteChamp.addActionListener(e->{
             if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
                     "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
                     this.attachObserver(new ChampionshipController(model));
-                    obs.deleteChampionship((ChampionshipImpl) model.getChampionship().toArray()
-                            [champTable.getSelectedRow()]);
+                    obs.deleteChampionship(model.getChampionship().get(champTable.getSelectedRow()));
+                            
             }
             champTable.repaint();
         });
         
         btnBack.addActionListener(e->{
+                callback.onClose();
         	this.setVisible(false);
         });
     }
@@ -129,5 +113,15 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     @Override
     public void attachObserver(ChampionshipObserver observer) {
         this.obs = observer;  
+    }
+
+    @Override
+    public void onClose() {
+      this.setVisible(true);
+    }
+
+    @Override
+    public void setVisibility(boolean b) {
+        this.setVisible(b);        
     }
 }

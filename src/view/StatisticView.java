@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -46,6 +47,14 @@ public class StatisticView extends JFrame {
     private JLabel setPersonalFouls;
     private JLabel setTurnovers;
     private JLabel setSteals;
+    private JLabel lblSteals;
+    private JLabel lblLoseBalls;
+    private JLabel lblPersonalFouls;
+    private JLabel lblBlocks;
+    private JLabel lblAssist;
+    private JLabel lblDefRebounds;
+    private JLabel lblOffRebounds;
+    private JLabel lblPoints;
 
     /**
      * Launch the application.
@@ -130,49 +139,49 @@ public class StatisticView extends JFrame {
         contentPane.add(panel);
         panel.setLayout(new GridLayout(0, 2, 0, 0));
         
-        JLabel lblPoints = new JLabel("Points:");
+        lblPoints = new JLabel("Points:");
         panel.add(lblPoints);
         
         setPoints = new JLabel("");
         panel.add(setPoints);
         
-        JLabel lblOffRebounds = new JLabel("Off Rebounds:");
+        lblOffRebounds = new JLabel("Off Rebounds:");
         panel.add(lblOffRebounds);
         
         setOffRebounds = new JLabel("");
         panel.add(setOffRebounds);
         
-        JLabel lblDefRebounds = new JLabel("Def Rebounds:");
+        lblDefRebounds = new JLabel("Def Rebounds:");
         panel.add(lblDefRebounds);
         
         setDefRebounds = new JLabel("");
         panel.add(setDefRebounds);
         
-        JLabel lblAssist = new JLabel("Assists:");
+        lblAssist = new JLabel("Assists:");
         panel.add(lblAssist);
         
         setAssists = new JLabel("");
         panel.add(setAssists);
         
-        JLabel lblBlocks = new JLabel("Blocks:");
+        lblBlocks = new JLabel("Blocks:");
         panel.add(lblBlocks);
         
         setBlocks = new JLabel("");
         panel.add(setBlocks);
         
-        JLabel lblPersonalFouls = new JLabel("Personal Fouls:");
+        lblPersonalFouls = new JLabel("Personal Fouls:");
         panel.add(lblPersonalFouls);
         
         setPersonalFouls = new JLabel("");
         panel.add(setPersonalFouls);
         
-        JLabel lblLoseBalls = new JLabel("Lose Balls:");
+        lblLoseBalls = new JLabel("Lose Balls:");
         panel.add(lblLoseBalls);
         
         setTurnovers = new JLabel("");
         panel.add(setTurnovers);
         
-        JLabel lblSteals = new JLabel("Steals:");
+        lblSteals = new JLabel("Steals:");
         panel.add(lblSteals);
         
         setSteals = new JLabel("");
@@ -208,6 +217,8 @@ public class StatisticView extends JFrame {
             p.setCF(cfField.getText());
             p.setHeight(Double.valueOf(heightField.getText()));
             Utils.save(model);
+            JOptionPane.showMessageDialog(this, "Changes Applied", "Info",
+                    JOptionPane.INFORMATION_MESSAGE); 
             this.setVisible(false);
         });
     }
@@ -243,6 +254,14 @@ public class StatisticView extends JFrame {
 
     public StatisticView(Staff s,final IModel model){
         this();
+        lblSteals.setVisible(false);
+        lblLoseBalls.setVisible(false);
+        lblPersonalFouls.setVisible(false);
+        lblBlocks.setVisible(false);
+        lblAssist.setVisible(false);
+        lblDefRebounds.setVisible(false);
+        lblOffRebounds.setVisible(false);
+        lblPoints.setVisible(false);
         this.roleBox.setModel(new DefaultComboBoxModel<>(ROLE.values()));
         this.roleBox.setSelectedItem(s.getRole());
         this.nameTextField.setText(s.getName());
@@ -257,6 +276,8 @@ public class StatisticView extends JFrame {
             s.setRole((ROLE)roleBox.getSelectedItem());
             s.setCF(cfField.getText());
             Utils.save(model);
+            JOptionPane.showMessageDialog(this, "Changes Applied", "Info",
+                    JOptionPane.INFORMATION_MESSAGE); 
             this.setVisible(false);
         });
     }

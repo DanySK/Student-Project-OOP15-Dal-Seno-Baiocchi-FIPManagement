@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,12 +17,10 @@ import model.IModel;
 import model.Player;
 import model.Staff;
 import model.Team;
-import model.TeamImpl;
 import observer.TeamComponentObserver;
 import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
-import controller.Utils;
 
 /**
  * The team component view of the app
@@ -47,23 +44,6 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private JLabel lblRoster;
     private JScrollPane playerScroll;
     private JScrollPane staffScroll;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    TeamComponentView frame = new TeamComponentView(Utils.loading(), new TeamImpl("","","","",""));
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     /**
      * Create the frame.
      */
@@ -117,9 +97,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(staffScroll);
     }
     
-    
-    
-    public TeamComponentView(final IModel model, final Team team){
+    public TeamComponentView(final IModel model, final Team team,final CallBackInterface callback){
     	this();
     	lblRoster.setText(team.getName()+" ROSTER");
     	observer = new ComponentController(model, team);
@@ -175,6 +153,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	});
     	  	   	
     	btnBack.addActionListener(e->{
+    	        callback.onClose();
     		this.setVisible(false);
     	});
     }

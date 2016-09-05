@@ -17,16 +17,16 @@ import controller.Utils;
  * @author lucadalseno
  *
  */
-public class MainView extends JFrame {
-
+public class MainView extends JFrame implements CallBackInterface {
     /**
      * 
      */
     private static final long serialVersionUID = 9199009276340778940L;
     private JPanel contentPane;
     public static enum LoginType{adm,user};
-    IModel model;
-    
+    private IModel model;
+    private JButton championshipBtn;
+    private JButton matchBtn;
     /**
      * Launch the application.
      */
@@ -54,23 +54,23 @@ public class MainView extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JButton championshipBtn = new JButton("Championship");
+        championshipBtn = new JButton("Championship");
         championshipBtn.setBounds(101, 439, 172, 29);
         contentPane.add(championshipBtn);
         championshipBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog(model);
-            LoginController contr = new LoginController(LoginType.adm, model);
+            LoginController contr = new LoginController(LoginType.adm, model,this);
             contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 
         });
         
-        JButton matchBtn = new JButton("Match");
+        matchBtn = new JButton("Match");
         matchBtn.setBounds(424, 439, 172, 29);
         contentPane.add(matchBtn);
         matchBtn.addActionListener(e->{
             LoginDialog lD = new LoginDialog(model);
-            LoginController contr = new LoginController(LoginType.user,model);
+            LoginController contr = new LoginController(LoginType.user,model,this);
             contr.setView(lD);
             lD.setLocation(250, 250);
             lD.setVisible(true); 
@@ -81,5 +81,15 @@ public class MainView extends JFrame {
         JLabel logoLbl = new JLabel(image);
         logoLbl.setBounds(86, 51, 522, 334);
         contentPane.add(logoLbl);
+    }
+
+    @Override
+    public void onClose() {
+        this.setVisible(true);
+    }
+
+    @Override
+    public void setVisibility(boolean b) {
+       this.setVisible(b);
     }
 }

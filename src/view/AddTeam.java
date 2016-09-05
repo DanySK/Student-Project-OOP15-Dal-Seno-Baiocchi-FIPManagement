@@ -14,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 import observer.TeamObserver;
 
 public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> {
-
     /**
      * 
      */
@@ -26,20 +25,14 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
     private JTextField companyTextfield;
     private TeamObserver obs;
     private JTextField vatTextfield;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            AddTeam dialog = new AddTeam();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    private JLabel lblName;
+    private JLabel lblHomeColour;
+    private JLabel lblTransferColour;
+    private JLabel lblCompanyName;
+    private JLabel lblCompanyVat;
+    private JPanel buttonPane;
+    private JButton addButton;
+    private JButton cancelButton;
     /**
      * Create the dialog.
      */
@@ -65,19 +58,19 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
         contentPanel.add(transferColourTextField);
         transferColourTextField.setColumns(10);
         
-        JLabel lblNewLabel = new JLabel("Name:");
-        lblNewLabel.setBounds(6, 29, 61, 16);
-        contentPanel.add(lblNewLabel);
+        lblName = new JLabel("Name:");
+        lblName.setBounds(6, 29, 61, 16);
+        contentPanel.add(lblName);
         
-        JLabel lblNewLabel_1 = new JLabel("Home Colour:");
-        lblNewLabel_1.setBounds(6, 84, 98, 16);
-        contentPanel.add(lblNewLabel_1);
+        lblHomeColour = new JLabel("Home Colour:");
+        lblHomeColour.setBounds(6, 84, 98, 16);
+        contentPanel.add(lblHomeColour);
         
-        JLabel lblNewLabel_2 = new JLabel("Transfer Colour:");
-        lblNewLabel_2.setBounds(6, 138, 113, 16);
-        contentPanel.add(lblNewLabel_2);
+        lblTransferColour = new JLabel("Transfer Colour:");
+        lblTransferColour.setBounds(6, 138, 113, 16);
+        contentPanel.add(lblTransferColour);
         
-        JLabel lblCompanyName = new JLabel("Company Name:");
+        lblCompanyName = new JLabel("Company Name:");
         lblCompanyName.setBounds(6, 196, 113, 16);
         contentPanel.add(lblCompanyName);
         
@@ -86,7 +79,7 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
         contentPanel.add(companyTextfield);
         companyTextfield.setColumns(10);
         
-        JLabel lblCompanyVat = new JLabel("Company VAT:");
+        lblCompanyVat = new JLabel("Company VAT:");
         lblCompanyVat.setBounds(6, 247, 98, 16);
         contentPanel.add(lblCompanyVat);
         
@@ -95,11 +88,11 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
         contentPanel.add(vatTextfield);
         vatTextfield.setColumns(10);
         {
-            JPanel buttonPane = new JPanel();
+            buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
-                JButton addButton = new JButton("Add");
+                addButton = new JButton("Add");
                 addButton.setActionCommand("Add");
                 buttonPane.add(addButton);
                 addButton.addActionListener(e->{
@@ -121,7 +114,7 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
                 getRootPane().setDefaultButton(addButton);
             }
             {
-                JButton cancelButton = new JButton("Cancel");
+                cancelButton = new JButton("Cancel");
                 cancelButton.setActionCommand("Cancel");
                 cancelButton.addActionListener(e->{
                     this.setVisible(false);
