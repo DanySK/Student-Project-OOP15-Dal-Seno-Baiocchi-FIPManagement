@@ -136,7 +136,9 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	});
     	
     	deleteComponent.addActionListener(e->{
-    	  if((JOptionPane.showConfirmDialog(this, "You want to delete this Player?",
+    	 if(componentsTable.getSelectedRow() == -1){
+             JOptionPane.showMessageDialog(this, "No Player is selected","Error",JOptionPane.ERROR_MESSAGE);
+    	 } else if((JOptionPane.showConfirmDialog(this, "You want to delete this Player?",
                   "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
     		int index = componentsTable.getSelectedRow();
     		if(index>=0){
@@ -149,7 +151,9 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	});
     	
     	removeStaff.addActionListener(e->{
-    	  if((JOptionPane.showConfirmDialog(this, "You want to delete this Staff?",
+    	 if(staffTable.getSelectedRow() == -1){
+             JOptionPane.showMessageDialog(this, "No Staff is selected","Error",JOptionPane.ERROR_MESSAGE);
+    	 }else if((JOptionPane.showConfirmDialog(this, "You want to delete this Staff?",
                   "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
     		int index = staffTable.getSelectedRow();
     		if(index>=0){

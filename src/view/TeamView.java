@@ -101,7 +101,9 @@ public class TeamView extends JFrame implements CallBackInterface {
         });
         
         btnDeleteTeam.addActionListener(e->{
-            if((JOptionPane.showConfirmDialog(this, "You want to delete this team and roster with it?",
+            if(teamTable.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(this, "No team is selected","Error",JOptionPane.ERROR_MESSAGE);
+            } else if((JOptionPane.showConfirmDialog(this, "You want to delete this team and roster with it?",
                     "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
         	int i = teamTable.getSelectedRow();
         	if(i>=0){
