@@ -704,7 +704,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 	            	fileChooser.setSelectedFile(new File("" + lblHomeTeam.getText() + lblGuestTeam.getText() + "view"));
 	            	fileChooser.setFileFilter(new FileNameExtensionFilter("Excel File","xlsx"));
 	            	int userSelection = fileChooser.showSaveDialog(parentFrame);
-	            	 
+	            	
 	            	if (userSelection == JFileChooser.APPROVE_OPTION) {
 	            	    File fileToSave = fileChooser.getSelectedFile();
 	            	    
