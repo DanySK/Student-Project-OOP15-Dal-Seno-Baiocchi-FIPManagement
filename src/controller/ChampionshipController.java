@@ -27,4 +27,5 @@ public class ChampionshipController implements ChampionshipObserver {
 		model.deletChampionship(champ);
 		Utils.save(model);
 	}
+	
 }

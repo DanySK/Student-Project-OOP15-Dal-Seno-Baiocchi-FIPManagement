@@ -10,6 +10,11 @@ import java.util.TreeMap;
 
 import javax.swing.JTable;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
@@ -21,6 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 public class MatchViewController implements MatchViewObserver {
 
@@ -41,10 +47,11 @@ public class MatchViewController implements MatchViewObserver {
 	public MatchViewController(IModel model, StatisticModel stat) {
 		this.model = model;
 		this.stat = stat;
+		
 	}
 	
 	@Override
-	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) {
+	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName, String path) {
 	    
 	    fileWorkbook = new XSSFWorkbook();
 	    fileSheet = fileWorkbook.createSheet();
@@ -126,7 +133,7 @@ public class MatchViewController implements MatchViewObserver {
 	        }  
 	    }
 	    try{
-	        FileOutputStream fs = new FileOutputStream(new File(System.getProperty("user.home")+System.getProperty("file.separator")+"view"+homeName+guestName+".xlsx"));
+	        FileOutputStream fs = new FileOutputStream(path+".xslx");
 	        fileWorkbook.write(fs);
 	        fs.close();
 	    } catch (IOException ex){
