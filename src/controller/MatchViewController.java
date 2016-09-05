@@ -51,7 +51,7 @@ public class MatchViewController implements MatchViewObserver {
 	    for(int i= 0; i <= (homeTable.getRowCount()-1); i++){
 	        int conta = 1;
 	        for(int j = 0; j <= (homeTable.getColumnCount()-1); j++){
-	            values.add(homeTable.getValueAt(i, j).toString());
+	            values.add(homeTable.getValueAt(i,j).toString());
 	                data.put(""+conta,values);
 	        }
 	        conta++;
