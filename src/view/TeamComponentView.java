@@ -21,6 +21,7 @@ import observer.TeamComponentObserver;
 import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
 import controller.ComponentController;
+import controller.TableSorter;
 
 /**
  * The team component view of the app
@@ -151,6 +152,9 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     		}
     	  }
     	});
+    	
+    	TableSorter.setSorter(componentsTable);
+    	TableSorter.setSorter(staffTable);
     	  	   	
     	btnBack.addActionListener(e->{
     	        callback.onClose();

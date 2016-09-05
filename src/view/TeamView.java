@@ -17,6 +17,7 @@ import model.Championship;
 import model.IModel;
 import model.Team;
 import tableModel.MyTeamModel;
+import controller.TableSorter;
 import controller.TeamController;
 
 /**
@@ -108,6 +109,8 @@ public class TeamView extends JFrame implements CallBackInterface {
         	}
             }
         });
+        
+        TableSorter.setSorter(teamTable);
         
         btnBack.addActionListener(e->{
                 callback.onClose();

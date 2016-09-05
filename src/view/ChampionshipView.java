@@ -1,8 +1,11 @@
 package view;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,13 +14,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import model.Championship;
 import model.IModel;
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
 import controller.ChampionshipController;
+import controller.TableSorter;
 
 
 /**
@@ -88,6 +97,9 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 				}
 			}
 		});
+    	
+    	
+    	
         addChampBtn.addActionListener(e->{
             AddChamp c = new AddChamp();
             c.attachObserver(new ChampionshipController(model));
@@ -103,6 +115,8 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             }
             champTable.repaint();
         });
+        
+        TableSorter.setSorter(champTable);
         
         btnBack.addActionListener(e->{
                 callback.onClose();
