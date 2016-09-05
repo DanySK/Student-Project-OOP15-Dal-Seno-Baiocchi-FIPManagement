@@ -3,6 +3,8 @@ package view;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -105,7 +107,9 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             //champTable.repaint();
         });
         deleteChamp.addActionListener(e->{
-            if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
+            if(champTable.getSelectedRow() == -1){
+             JOptionPane.showMessageDialog(this, "No championship is selected","Error",JOptionPane.ERROR_MESSAGE);
+            } else if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
                     "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
                     this.attachObserver(new ChampionshipController(model));
                     obs.deleteChampionship(model.getChampionship().get(champTable.getSelectedRow()));
