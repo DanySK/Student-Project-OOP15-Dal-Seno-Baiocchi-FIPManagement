@@ -52,4 +52,6 @@ public abstract class MyTableModel implements TableModel {
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		
 	}
+	
+	
 }

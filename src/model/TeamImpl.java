@@ -89,7 +89,11 @@ public class TeamImpl implements Team {
 
     @Override
     public List<Player> getPlayers() {
-        return new ArrayList<Player>(players);
+    	List<Player> order = new ArrayList<Player>(players);
+    	order.sort((a,b)->{
+    		return  a.toString().compareTo(b.toString());   
+    	});
+        return order;
     }
 
     @Override

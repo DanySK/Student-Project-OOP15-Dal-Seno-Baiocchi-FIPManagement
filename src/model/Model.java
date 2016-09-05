@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -41,7 +42,11 @@ public class Model implements IModel{
     
     @Override
     public List<Championship> getChampionship(){
-    	return new ArrayList<Championship>(dataMap.keySet());
+    	List<Championship> order = new ArrayList<Championship>(dataMap.keySet());
+    	order.sort((a,b)->{
+    		return  a.toString().compareTo(b.toString());   
+    	});
+    	return order;
     }
 
     @Override
@@ -55,7 +60,11 @@ public class Model implements IModel{
     
     @Override
     public List<Team> getTeam(Championship champ){
-    	return  new ArrayList<Team>(dataMap.get(champ)); 
+    	List<Team> order = (new ArrayList<Team>(dataMap.get(champ)));
+    	order.sort((a,b)->{
+			return a.toString().compareTo(b.toString());    		
+    	});
+    	return order; 
     }
 
     @Override
