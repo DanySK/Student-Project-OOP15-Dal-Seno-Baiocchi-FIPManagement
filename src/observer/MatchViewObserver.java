@@ -8,7 +8,6 @@ import model.Player;
 
 public interface MatchViewObserver {
 
-    public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) throws IOException;
 
     public void increasePoints(Player p, int value);
     
@@ -40,5 +39,7 @@ public interface MatchViewObserver {
     
     public void increaseSteals(Player p);
     
-    public void decreaseSteals(Player p);	
+    public void decreaseSteals(Player p);
+
+	void saveMatch(JTable homeTable, JTable guestTable, String homeName, String guestName, String path) throws IOException;	
 }

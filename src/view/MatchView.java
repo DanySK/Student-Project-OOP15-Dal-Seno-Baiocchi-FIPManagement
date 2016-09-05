@@ -6,9 +6,11 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.IModel;
 import model.Player;
@@ -691,17 +695,34 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 		
 		saveMatch.addActionListener(e->{
 			try {
-                            if((JOptionPane.showConfirmDialog(this, "Are you sure you want to export this match?", 
-                                    "Alert",JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
-                                this.obs.saveMatch(homeTable,guestTable,lblHomeTeam.getText(),lblGuestTeam.getText());
-                                JOptionPane.showMessageDialog(this, "File created successfully",
-                                        "Done!",JOptionPane.INFORMATION_MESSAGE);
-                                    stmod.applyStatistic();
-                                    Utils.save(model);
-                                }
-                            } catch (IOException e1) {
-                                JOptionPane.showMessageDialog(this, ""+e1.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-                            }
+				if((JOptionPane.showConfirmDialog(this, "Are you sure you want to export this match?", 
+                    "Alert",JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
+					JFrame parentFrame = new JFrame();
+            	 
+	            	JFileChooser fileChooser = new JFileChooser();
+	            	fileChooser.setDialogTitle("Saving Match");   
+	            	fileChooser.setSelectedFile(new File("" + lblHomeTeam.getText() + lblGuestTeam.getText() + "view"));
+	            	fileChooser.setFileFilter(new FileNameExtensionFilter("Excel File","xlsx"));
+	            	int userSelection = fileChooser.showSaveDialog(parentFrame);
+	            	 
+	            	if (userSelection == JFileChooser.APPROVE_OPTION) {
+	            	    File fileToSave = fileChooser.getSelectedFile();
+	            	    
+	            	    this.obs.saveMatch(homeTable,guestTable,lblHomeTeam.getText(),lblGuestTeam.getText(), fileToSave.getAbsolutePath());
+	            	    JOptionPane.showMessageDialog(this, "File created successfully",
+	                            "Done!",JOptionPane.INFORMATION_MESSAGE);
+	                        stmod.applyStatistic();
+	                        Utils.save(model);
+	            			this.setVisible(false);
+	                }else{
+	                    	    JOptionPane.showMessageDialog(this, "File not created",
+	                                    "Nothing happened",JOptionPane.INFORMATION_MESSAGE);                                        	
+	                        }
+	                }
+	            	
+	            } catch (IOException e1) {
+	                JOptionPane.showMessageDialog(this, ""+e1.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                }
 		});
 		
 		cancel.addActionListener(e->{

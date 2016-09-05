@@ -51,7 +51,7 @@ public class MatchViewController implements MatchViewObserver {
 	}
 	
 	@Override
-	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName) {
+	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName, String path) {
 	    
 	    fileWorkbook = new XSSFWorkbook();
 	    fileSheet = fileWorkbook.createSheet();
@@ -133,7 +133,7 @@ public class MatchViewController implements MatchViewObserver {
 	        }  
 	    }
 	    try{
-	        FileOutputStream fs = new FileOutputStream(new File(System.getProperty("user.home")+System.getProperty("file.separator")+"view"+homeName+guestName+".xlsx"));
+	        FileOutputStream fs = new FileOutputStream(path+".xslx");
 	        fileWorkbook.write(fs);
 	        fs.close();
 	    } catch (IOException ex){
