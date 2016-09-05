@@ -49,6 +49,7 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
      */
     public AddComponent() {
         setBounds(100, 100, 451, 411);
+        this.setResizable(false);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);

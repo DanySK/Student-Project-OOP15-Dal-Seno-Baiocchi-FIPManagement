@@ -50,6 +50,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     private TeamComponentView() {
         this.setTitle("Team Component View");
     	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	this.setResizable(false);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

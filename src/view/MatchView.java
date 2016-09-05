@@ -92,6 +92,7 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
 	 */
 	private MatchView() {
 		setBounds(100, 100, 1208, 563);
+		this.setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

@@ -39,6 +39,7 @@ public class AddChamp extends JDialog implements ObserverInterface<ChampionshipO
      */
     public AddChamp() {
         setBounds(100, 100, 410, 231);
+        this.setResizable(false);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);

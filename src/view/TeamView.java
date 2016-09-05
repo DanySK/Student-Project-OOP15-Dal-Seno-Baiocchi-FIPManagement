@@ -46,7 +46,7 @@ public class TeamView extends JFrame implements CallBackInterface {
      */
     private TeamView() {
         this.setTitle("Team View");
-
+        this.setResizable(false);
     	setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

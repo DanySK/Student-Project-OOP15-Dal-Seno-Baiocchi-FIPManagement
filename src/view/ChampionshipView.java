@@ -77,6 +77,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     public ChampionshipView(final IModel model,final CallBackInterface callback){
     	this();
     	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	this.setResizable(false);
     	champTable.setModel(new MyChampionshipModel(model));
     	champTable.addMouseListener(new MouseAdapter() {
 			@Override

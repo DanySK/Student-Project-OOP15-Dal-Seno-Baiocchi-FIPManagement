@@ -31,6 +31,7 @@ public class MatchSelector extends JFrame  {
 	 */
 	private MatchSelector() {
 		setBounds(100, 100, 450, 235);
+		this.setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
