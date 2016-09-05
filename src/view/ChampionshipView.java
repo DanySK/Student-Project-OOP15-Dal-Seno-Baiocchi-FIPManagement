@@ -76,6 +76,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     
     public ChampionshipView(final IModel model,final CallBackInterface callback){
     	this();
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     	champTable.setModel(new MyChampionshipModel(model));
     	champTable.addMouseListener(new MouseAdapter() {
 			@Override
@@ -91,8 +92,13 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         addChampBtn.addActionListener(e->{
             AddChamp c = new AddChamp();
             c.attachObserver(new ChampionshipController(model));
+            c.setModal(true);
             c.setVisible(true);
-            champTable.repaint();
+            //System.out.println("SONO QUI");
+            //((AbstractTableModel) champTable.getModel()).fireTableDataChanged();
+            champTable.setVisible(false);
+            champTable.setVisible(true);
+            //champTable.repaint();
         });
         deleteChamp.addActionListener(e->{
             if((JOptionPane.showConfirmDialog(this, "You want to delete this championship and all the teams with it?",
@@ -101,7 +107,10 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
                     obs.deleteChampionship(model.getChampionship().get(champTable.getSelectedRow()));
                             
             }
-            champTable.repaint();
+            /*((AbstractTableModel) champTable.getModel()).fireTableDataChanged();
+            champTable.repaint();*/
+            champTable.setVisible(false);
+            champTable.setVisible(true);
         });
         
         btnBack.addActionListener(e->{
@@ -123,5 +132,5 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     @Override
     public void setVisibility(boolean b) {
         this.setVisible(b);        
-    }
+    } 
 }

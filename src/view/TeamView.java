@@ -94,7 +94,10 @@ public class TeamView extends JFrame implements CallBackInterface {
         btnAddTeam.addActionListener(e->{
            AddTeam t = new AddTeam();
            t.attachObserver(new TeamController(model,ch));
+           t.setModal(true);
            t.setVisible(true);
+           teamTable.setVisible(false);
+           teamTable.setVisible(true);
         });
         
         btnDeleteTeam.addActionListener(e->{
@@ -107,6 +110,8 @@ public class TeamView extends JFrame implements CallBackInterface {
 	        	teamTable.repaint();
         	}
             }
+            teamTable.setVisible(false);
+            teamTable.setVisible(true);
         });
         
         btnBack.addActionListener(e->{

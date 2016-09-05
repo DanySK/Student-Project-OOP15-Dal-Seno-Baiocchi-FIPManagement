@@ -127,7 +127,12 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	addComponent.addActionListener(e->{
     		AddComponent ac = new AddComponent();
     		ac.attachObserver(observer);
+    		ac.setModal(true);
     		ac.setVisible(true);
+                staffTable.setVisible(false);
+                componentsTable.setVisible(false);
+    		staffTable.setVisible(true);
+    		componentsTable.setVisible(true);
     	});
     	
     	deleteComponent.addActionListener(e->{
@@ -139,6 +144,8 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
 	    		observer.removePlayer(player);
     		}
     	  }
+    	  componentsTable.setVisible(false);
+    	  componentsTable.setVisible(true);
     	});
     	
     	removeStaff.addActionListener(e->{
@@ -150,6 +157,8 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     			observer.removeStaff(staff);
     		}
     	  }
+    	  staffTable.setVisible(false);
+    	  staffTable.setVisible(true);
     	});
     	  	   	
     	btnBack.addActionListener(e->{
