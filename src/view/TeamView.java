@@ -3,8 +3,6 @@ package view;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,20 +13,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-
-import controller.TeamController;
 import model.Championship;
 import model.IModel;
 import model.Team;
+import observer.TeamObserver;
 import tableModel.MyTeamModel;
+import controller.TeamController;
 
 /**
  * The team view of the app
  * @author lucadalseno
  *
  */
-public class TeamView extends JFrame implements CallBackInterface {
+public class TeamView extends JFrame implements CallBackInterface,ObserverInterface<TeamObserver> {
     /**
      * 
      */
@@ -38,9 +35,10 @@ public class TeamView extends JFrame implements CallBackInterface {
     private JButton btnAddTeam;
     private JButton btnDeleteTeam;
     private JButton btnBack;
-    private TeamController controller;
+   // private TeamController controller;
     private JLabel lblTeams;
     private JScrollPane teamScroll;
+    private TeamObserver obs;
     /**
      * Create the frame.
      */
@@ -79,7 +77,7 @@ public class TeamView extends JFrame implements CallBackInterface {
     
     public TeamView(final IModel model, Championship ch,CallBackInterface callback){
         this();
-        this.controller = new TeamController(model, ch);
+        //this.controller = new TeamController(model, ch);
         teamTable.setModel(new MyTeamModel(model, ch));
         teamTable.addMouseListener(new MouseAdapter() {
 		
@@ -112,8 +110,8 @@ public class TeamView extends JFrame implements CallBackInterface {
                     "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
         	int i = teamTable.getSelectedRow();
         	if(i>=0){
-	        	Team remove = (Team) model.getTeam(ch).toArray()[i];
-	        	controller.removeTeam(remove);
+        	        this.attachObserver(new TeamController(model, ch));
+	                    obs.removeTeam(model.getTeam(ch).get(i));
 	        	teamTable.repaint();
         	}
             }
@@ -136,5 +134,10 @@ public class TeamView extends JFrame implements CallBackInterface {
     @Override
     public void setVisibility(boolean b) {
         this.setVisible(b);
+    }
+
+    @Override
+    public void attachObserver(TeamObserver observer) {
+        this.obs = observer;        
     }
 }
