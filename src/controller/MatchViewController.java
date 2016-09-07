@@ -139,7 +139,7 @@ public class MatchViewController implements MatchViewObserver {
 	        }  
 	    }
 	    try{
-	        FileOutputStream fs = new FileOutputStream(path+".xslx");
+	        FileOutputStream fs = new FileOutputStream(path+".xlsx");
 	        fileWorkbook.write(fs);
 	        fs.close();
 	    } catch (IOException ex){
