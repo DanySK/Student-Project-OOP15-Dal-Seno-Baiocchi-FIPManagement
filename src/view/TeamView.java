@@ -35,7 +35,6 @@ public class TeamView extends JFrame implements CallBackInterface,ObserverInterf
     private JButton btnAddTeam;
     private JButton btnDeleteTeam;
     private JButton btnBack;
-   // private TeamController controller;
     private JLabel lblTeams;
     private JScrollPane teamScroll;
     private TeamObserver obs;
@@ -77,7 +76,6 @@ public class TeamView extends JFrame implements CallBackInterface,ObserverInterf
     
     public TeamView(final IModel model, Championship ch,CallBackInterface callback){
         this();
-        //this.controller = new TeamController(model, ch);
         teamTable.setModel(new MyTeamModel(model, ch));
         teamTable.addMouseListener(new MouseAdapter() {
 		
@@ -111,7 +109,7 @@ public class TeamView extends JFrame implements CallBackInterface,ObserverInterf
         	int i = teamTable.getSelectedRow();
         	if(i>=0){
         	        this.attachObserver(new TeamController(model, ch));
-	                    obs.removeTeam(model.getTeam(ch).get(i));
+	                obs.removeTeam(model.getTeam(ch).get(i));
 	        	teamTable.repaint();
         	}
             }

@@ -144,7 +144,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
                   "WARNING", JOptionPane.YES_NO_CANCEL_OPTION)) == JOptionPane.YES_OPTION){
     		int index = componentsTable.getSelectedRow();
     		if(index>=0){
-				Player player = team.getPlayers().get(index);
+			Player player = team.getPlayers().get(index);
 	    		observer.removePlayer(player);
     		}
     	  }

@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
@@ -21,9 +20,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import controller.MatchViewController;
-import controller.Utils;
-import exceptions.InvalidStatisticException;
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
@@ -32,6 +28,9 @@ import model.Statistics;
 import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
+import controller.MatchViewController;
+import controller.Utils;
+import exceptions.InvalidStatisticException;
 /**
  * View to manage and save a match between 2 teams 
  * @author francesco

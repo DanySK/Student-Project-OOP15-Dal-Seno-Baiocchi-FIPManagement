@@ -1,5 +1,10 @@
 package view;
-
+/**
+ * Define the Observer
+ * @author lucadalseno
+ *
+ * @param <T> type of the Observer
+ */
 
 public interface ObserverInterface<T>{
     /**

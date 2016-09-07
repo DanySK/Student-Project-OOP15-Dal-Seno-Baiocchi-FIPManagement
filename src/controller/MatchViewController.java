@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,11 +8,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import javax.swing.JTable;
-
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import model.IModel;
 import model.Player;
