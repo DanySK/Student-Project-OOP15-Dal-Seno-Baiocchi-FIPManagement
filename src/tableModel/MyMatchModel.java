@@ -5,7 +5,11 @@ import model.MyTableModel;
 import model.Player;
 import model.StatisticModel;
 import model.Team;
-
+/**
+ * Specific class that extends the tables for the match view
+ * @author francesco
+ *
+ */
 public class MyMatchModel extends MyTableModel{
 
 	private Team team;

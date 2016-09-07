@@ -1,5 +1,8 @@
 package controller;
-
+/**
+ * Adding or removing a component of the team
+ * @author francesco
+ */
 import java.util.Date;
 
 import model.IModel;

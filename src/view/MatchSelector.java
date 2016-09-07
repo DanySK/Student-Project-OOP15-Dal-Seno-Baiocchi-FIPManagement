@@ -12,7 +12,11 @@ import javax.swing.border.EmptyBorder;
 import model.Championship;
 import model.IModel;
 import model.Team;
-
+/**
+ * View to begin a new match between 2 teams of the same championship
+ * @author francesco
+ *
+ */
 public class MatchSelector extends JFrame  {
 
 	/**
@@ -31,6 +35,7 @@ public class MatchSelector extends JFrame  {
 	 */
 	private MatchSelector() {
 		setBounds(100, 100, 450, 235);
+		this.setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

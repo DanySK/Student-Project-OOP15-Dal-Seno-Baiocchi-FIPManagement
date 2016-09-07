@@ -40,6 +40,7 @@ public class LoginDialog extends JDialog implements ObserverInterface<LoginObser
      */
     public LoginDialog(final IModel model) {
         this.setTitle("Login");
+        this.setResizable(false);
         setBounds(100, 100, 401, 162);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

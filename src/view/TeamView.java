@@ -3,6 +3,8 @@ package view;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,11 +15,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
+
+import controller.TeamController;
 import model.Championship;
 import model.IModel;
 import model.Team;
 import tableModel.MyTeamModel;
-import controller.TeamController;
 
 /**
  * The team view of the app
@@ -42,7 +46,8 @@ public class TeamView extends JFrame implements CallBackInterface {
      */
     private TeamView() {
         this.setTitle("Team View");
-        setBounds(100, 100, 692, 549);
+        this.setResizable(false);
+    	setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -115,6 +120,7 @@ public class TeamView extends JFrame implements CallBackInterface {
             teamTable.setVisible(false);
             teamTable.setVisible(true);
         });
+        
         
         btnBack.addActionListener(e->{
                 callback.onClose();

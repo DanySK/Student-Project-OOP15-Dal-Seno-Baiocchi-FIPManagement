@@ -64,6 +64,7 @@ public class StatisticView extends JFrame {
      */
     private StatisticView() {
         setBounds(100, 100, 587, 408);
+        this.setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);

@@ -12,7 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import observer.TeamObserver;
-
+/**
+ * View to add a team to a championship
+ * @author francesco
+ *
+ */
 public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> {
     /**
      * 
@@ -38,6 +42,7 @@ public class AddTeam extends JDialog implements ObserverInterface<TeamObserver> 
      */
     public AddTeam() {
         setBounds(100, 100, 474, 365);
+        this.setResizable(false);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);

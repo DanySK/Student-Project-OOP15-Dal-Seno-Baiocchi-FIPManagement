@@ -46,7 +46,7 @@ public class MainView extends JFrame implements CallBackInterface {
     public MainView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 692, 549);
-        
+        this.setResizable(false);
         model = Utils.loading();
         
         contentPane = new JPanel();

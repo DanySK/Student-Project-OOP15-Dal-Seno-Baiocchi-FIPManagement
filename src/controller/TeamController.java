@@ -8,6 +8,12 @@ import observer.TeamObserver;
 import view.ObserverInterface;
 import exceptions.TeamAlreadyInThisChampionshipException;
 
+/**
+ * Class which controls the way to add or remove a team
+ * @author francesco
+ *
+ */
+
 public class TeamController implements TeamObserver {
 
 	

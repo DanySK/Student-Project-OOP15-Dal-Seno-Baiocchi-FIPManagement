@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import controller.ComponentController;
 import model.IModel;
 import model.Player;
 import model.Staff;
@@ -20,7 +21,6 @@ import model.Team;
 import observer.TeamComponentObserver;
 import tableModel.MyComponentModel;
 import tableModel.MyComponentModel.CompononentType;
-import controller.ComponentController;
 
 /**
  * The team component view of the app
@@ -49,6 +49,8 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
      */
     private TeamComponentView() {
         this.setTitle("Team Component View");
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	this.setResizable(false);
         setBounds(100, 100, 692, 549);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -164,7 +166,8 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
     	  staffTable.setVisible(false);
     	  staffTable.setVisible(true);
     	});
-    	  	   	
+    	
+
     	btnBack.addActionListener(e->{
     	        callback.onClose();
     		this.setVisible(false);

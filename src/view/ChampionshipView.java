@@ -13,11 +13,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import controller.ChampionshipController;
 import model.Championship;
 import model.IModel;
 import observer.ChampionshipObserver;
 import tableModel.MyChampionshipModel;
-import controller.ChampionshipController;
 
 
 /**
@@ -77,6 +77,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
     public ChampionshipView(final IModel model,final CallBackInterface callback){
     	this();
     	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	this.setResizable(false);
     	champTable.setModel(new MyChampionshipModel(model));
     	champTable.addMouseListener(new MouseAdapter() {
 			@Override
@@ -89,6 +90,9 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
 				}
 			}
 		});
+    	
+    	
+    	
         addChampBtn.addActionListener(e->{
             AddChamp c = new AddChamp();
             c.attachObserver(new ChampionshipController(model));
@@ -113,6 +117,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             champTable.setVisible(false);
             champTable.setVisible(true);
         });
+        
         
         btnBack.addActionListener(e->{
                 callback.onClose();

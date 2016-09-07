@@ -3,7 +3,11 @@ package tableModel;
 import model.Championship;
 import model.IModel;
 import model.MyTableModel;
-
+/**
+ * Specific class that extends the table for the championship
+ * @author francesco
+ *
+ */
 public class MyChampionshipModel extends MyTableModel{
 
 	public MyChampionshipModel(IModel model) {

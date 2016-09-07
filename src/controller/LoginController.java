@@ -8,6 +8,12 @@ import view.CallBackInterface;
 import view.MatchSelector;
 import view.ObserverInterface;
 
+/**
+ * Login implementation
+ * @author francesco
+ *
+ */
+
 public class LoginController implements LoginObserver {
 
     private ObserverInterface<LoginObserver> view;

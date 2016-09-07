@@ -4,7 +4,11 @@ import model.Championship;
 import model.IModel;
 import model.MyTableModel;
 import model.Team;
-
+/**
+ * Specific class that extends the table of the teams into a championship
+ * @author francesco
+ *
+ */
 public class MyTeamModel extends MyTableModel {
 
 	private Championship champ;
