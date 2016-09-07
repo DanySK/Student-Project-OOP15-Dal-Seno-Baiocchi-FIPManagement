@@ -3,8 +3,6 @@ package view;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -96,7 +94,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             c.attachObserver(new ChampionshipController(model));
             c.setModal(true);
             c.setVisible(true);
-            //System.out.println("SONO QUI");
             //((AbstractTableModel) champTable.getModel()).fireTableDataChanged();
             champTable.setVisible(false);
             champTable.setVisible(true);

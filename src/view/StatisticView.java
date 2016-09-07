@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 
 import javax.swing.DefaultComboBoxModel;
@@ -23,9 +22,14 @@ import model.Statistics;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Utils;
-
+/**
+ * A view that shows all the statistic of a certain player
+ * and gives also the possibility to change informations of
+ * both players or staff members
+ * @author lucadalseno
+ *
+ */
 public class StatisticView extends JFrame {
-
     /**
      * 
      */
@@ -55,23 +59,6 @@ public class StatisticView extends JFrame {
     private JLabel lblDefRebounds;
     private JLabel lblOffRebounds;
     private JLabel lblPoints;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    StatisticView frame = new StatisticView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     /**
      * Create the frame.
      */
