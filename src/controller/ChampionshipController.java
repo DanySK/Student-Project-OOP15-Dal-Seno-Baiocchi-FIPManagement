@@ -1,5 +1,8 @@
 package controller;
-
+/**
+ * adding or removing a championship
+ * @author francesco
+ */
 import model.Championship;
 import model.ChampionshipImpl;
 import model.Division;

@@ -6,7 +6,11 @@ import model.MyTableModel;
 import model.Player;
 import model.Staff;
 import model.Team;
-
+/**
+ * Specific class that extends the table of the components of a team
+ * @author francesco
+ *
+ */
 public class MyComponentModel extends MyTableModel{
 
 	private Team team;

@@ -8,6 +8,12 @@ import java.io.ObjectOutputStream;
 import model.IModel;
 import model.Model;
 
+/**
+ * class used to save and load the data model into a file "Salvataggio.txt"
+ * @author francesco
+ *
+ */
+
 public class Utils {
 	
 	public static final String FILENAME = "Salvataggio.txt"; 

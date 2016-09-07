@@ -18,11 +18,12 @@ import model.Staff.ROLE;
 import observer.TeamComponentObserver;
 
 import com.toedter.calendar.JDateChooser;
-
+/**
+ * View to add a component of a specific team
+ * @author francesco
+ *
+ */
 public class AddComponent extends JDialog implements ObserverInterface<TeamComponentObserver> {
-    /**
-     * 
-     */
     private static final long serialVersionUID = -1833110520800729619L;
     private final JPanel contentPanel = new JPanel();
     private JTextField nameField;

@@ -27,7 +27,13 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
+/**
+ * Class which controls the MatchView and allows to save file into
+ * an external excel file and adding or 
+ * removing statistics
+ * @author francesco
+ *
+ */
 public class MatchViewController implements MatchViewObserver {
 
     private StatisticModel stat;

@@ -2,7 +2,10 @@ package model;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-
+/**
+ *The model for all the table of the project
+ *@author francesco 
+ **/
 public abstract class MyTableModel implements TableModel {
 	
 	

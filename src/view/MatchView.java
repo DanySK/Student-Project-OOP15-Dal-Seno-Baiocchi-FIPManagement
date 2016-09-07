@@ -19,9 +19,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import controller.MatchViewController;
+import controller.Utils;
+import exceptions.InvalidStatisticException;
 import model.IModel;
 import model.Player;
 import model.StatisticModel;
@@ -30,10 +32,11 @@ import model.Statistics;
 import model.Team;
 import observer.MatchViewObserver;
 import tableModel.MyMatchModel;
-import controller.MatchViewController;
-import controller.Utils;
-import exceptions.InvalidStatisticException;
-
+/**
+ * View to manage and save a match between 2 teams 
+ * @author francesco
+ *
+ */
 public class MatchView extends JFrame implements ObserverInterface<MatchViewObserver>{
 
     /**
