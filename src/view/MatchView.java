@@ -74,21 +74,6 @@ public class MatchView extends JFrame implements ObserverInterface<MatchViewObse
     private JLabel lblGuestTeam;
     private MatchViewObserver obs;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MatchView frame = new MatchView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

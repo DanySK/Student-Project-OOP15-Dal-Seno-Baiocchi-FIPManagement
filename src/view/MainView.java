@@ -27,21 +27,6 @@ public class MainView extends JFrame implements CallBackInterface {
     private IModel model;
     private JButton championshipBtn;
     private JButton matchBtn;
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MainView frame = new MainView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     public MainView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
