@@ -1,5 +1,7 @@
 package view;
 
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -58,8 +60,11 @@ public class MainView extends JFrame implements CallBackInterface {
             lD.setLocation(250, 250);
             lD.setVisible(true); 
         });
-        
+        /* Così worka*/
         String path = "image/logone.png";
+        /* Questo no*/
+        URL url = MainView.class.getResource(path);
+        
         ImageIcon image = new ImageIcon(path);
         JLabel logoLbl = new JLabel(image);
         logoLbl.setBounds(86, 51, 522, 334);
