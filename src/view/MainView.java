@@ -60,13 +60,12 @@ public class MainView extends JFrame implements CallBackInterface {
             lD.setLocation(250, 250);
             lD.setVisible(true); 
         });
-        /* Così worka*/
-        String path = "image/logone.png";
-        /* Questo no*/
-        URL url = MainView.class.getResource(path);
-        
-        ImageIcon image = new ImageIcon(path);
-        JLabel logoLbl = new JLabel(image);
+
+        ClassLoader cl = getClass().getClassLoader();
+        URL url = cl.getResource("logone.png");
+        ImageIcon image = new ImageIcon(url);
+        JLabel logoLbl = new JLabel();
+        logoLbl.setIcon(image);
         logoLbl.setBounds(86, 51, 522, 334);
         contentPane.add(logoLbl);
     }
