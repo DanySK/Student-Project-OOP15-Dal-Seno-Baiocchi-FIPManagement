@@ -58,6 +58,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.setLayout(null);
         
         componentsTable = new JTable();
+        componentsTable.setSelectionMode(0);
         
         addComponent = new JButton("Add Component");
         addComponent.setBounds(108, 415, 146, 29);
@@ -85,6 +86,7 @@ public class TeamComponentView extends JFrame implements ObserverInterface<TeamC
         contentPane.add(lblRoster);
         
         staffTable = new JTable();
+        staffTable.setSelectionMode(0);
         
         removeStaff = new JButton("Remove Staff");
         removeStaff.setBounds(366, 415, 109, 29);

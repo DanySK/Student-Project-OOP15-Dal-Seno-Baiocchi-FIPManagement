@@ -16,8 +16,6 @@ import exceptions.TeamAlreadyInThisChampionshipException;
 
 public class TeamController implements TeamObserver {
 
-	
-	
 	private ObserverInterface<TeamObserver> view;
 	private IModel model;
 	private Championship champ;
@@ -27,19 +25,16 @@ public class TeamController implements TeamObserver {
 		this.champ = champ;
 	}
 	
-    public void setView(ObserverInterface<TeamObserver> lD){
-        this.view = lD;
-        this.view.attachObserver(this);
-    }
+	public void setView(ObserverInterface<TeamObserver> lD){
+            this.view = lD;
+            this.view.attachObserver(this);
+	}
 	
 	@Override
-	public void addTeam(String name, String homeColour, String transferColour, String company, String vat) {
-		try {
+	public void addTeam(String name, String homeColour, String transferColour, String company, String vat) throws TeamAlreadyInThisChampionshipException {
 			model.addTeam(champ, new TeamImpl(name, transferColour, homeColour, company, vat));
 			Utils.save(model);
-		} catch (TeamAlreadyInThisChampionshipException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Override

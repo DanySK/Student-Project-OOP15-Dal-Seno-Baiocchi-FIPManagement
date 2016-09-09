@@ -18,6 +18,8 @@ import model.Staff.ROLE;
 import observer.TeamComponentObserver;
 
 import com.toedter.calendar.JDateChooser;
+
+import exceptions.PersonAlreadyAddedException;
 /**
  * View to add a component of a specific team
  * @author francesco
@@ -137,14 +139,18 @@ public class AddComponent extends JDialog implements ObserverInterface<TeamCompo
                 addButton.addActionListener(e->{
                     if(checkField()){
                         if(checkIntField()){
+                            try{
                         if(typeBox.getSelectedItem().equals(type[0])){
-                            obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), 
-                                Double.valueOf(heightField.getText()), cfField.getText(), calendar.getDate());
+                                obs.addPlayer(nameField.getText(), surnameField.getText(), (PLAYEROLE)roleBox.getSelectedItem(), 
+                                    Double.valueOf(heightField.getText()), cfField.getText(), calendar.getDate());
                         } else {
                             obs.addStaff(nameField.getText(), surnameField.getText(), (ROLE)roleBox.getSelectedItem(), 
                                 cfField.getText(),calendar.getDate());
                         } 
                         this.setVisible(false);
+                            } catch (PersonAlreadyAddedException ex){
+                                JOptionPane.showMessageDialog(this, "Person with that CF already exists","Error",JOptionPane.ERROR_MESSAGE);
+                            }
                         } else {
                             JOptionPane.showMessageDialog(this, "Height must be an Int","Error",JOptionPane.ERROR_MESSAGE);
                         }

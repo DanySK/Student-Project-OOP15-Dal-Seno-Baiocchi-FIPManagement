@@ -51,6 +51,7 @@ public class TeamView extends JFrame implements CallBackInterface,ObserverInterf
         contentPane.setLayout(null);
         
         teamTable = new JTable();
+        teamTable.setSelectionMode(0);
         
         btnAddTeam = new JButton("Add Team");
         btnAddTeam.setBounds(133, 415, 179, 29);

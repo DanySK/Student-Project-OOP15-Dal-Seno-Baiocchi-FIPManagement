@@ -1,4 +1,5 @@
 package observer;
+import exceptions.TeamAlreadyInThisChampionshipException;
 import model.Team;
 
 /**
@@ -15,8 +16,9 @@ public interface TeamObserver {
 	 * @param transferColour
 	 * @param company
 	 * @param vat
+	 * @throws TeamAlreadyInThisChampionshipException 
 	 */
-    void addTeam(String name,String homeColour,String transferColour, String company, String vat);
+    void addTeam(String name,String homeColour,String transferColour, String company, String vat) throws TeamAlreadyInThisChampionshipException;
     /**
      * removing a team from a championship
      * @param team

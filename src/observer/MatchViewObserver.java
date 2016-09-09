@@ -12,11 +12,11 @@ import model.Player;
  */
 public interface MatchViewObserver {
 
-	/**
-	 * Method that increase the points scored by a player
-	 * @param p
-	 * @param value
-	 */
+    /**
+    * Method that increase the points scored by a player
+    * @param p
+    * @param value
+    */
     public void increasePoints(Player p, int value);
     /**
      * Method that decrease points scored by a player
@@ -84,7 +84,6 @@ public interface MatchViewObserver {
      * @param p
      */
     public void decreaseTurnovers(Player p);
-    
    /**
     * Method that increase the steal of the ball by a player
     * @param p
@@ -95,7 +94,6 @@ public interface MatchViewObserver {
      * @param p
      */
     public void decreaseSteals(Player p);
-
     /**
      * Method used to save the final result of a match into the model and into a excel file
      * @param homeTable
@@ -105,6 +103,5 @@ public interface MatchViewObserver {
      * @param path
      * @throws IOException
      */
-    
 	void saveMatch(JTable homeTable, JTable guestTable, String homeName, String guestName, String path) throws IOException;	
 }

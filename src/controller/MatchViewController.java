@@ -53,6 +53,7 @@ public class MatchViewController implements MatchViewObserver {
 	@Override
 	public void saveMatch(JTable homeTable, JTable guestTable,String homeName,String guestName, String path) {
 	    
+	    //Object necessary for the excel file creation 
 	    fileWorkbook = new XSSFWorkbook();
 	    fileSheet = fileWorkbook.createSheet();
 	   
@@ -60,9 +61,9 @@ public class MatchViewController implements MatchViewObserver {
 
 	    TreeMap<String, List<String>> homeTeamData = new TreeMap<>();
 	    TreeMap<String, List<String>> guestTeamData = new TreeMap<>();
-	    
 	    ArrayList<String> header = new ArrayList<>();
 	    
+	    //Creating the style for the table
             CellStyle homeStyle = fileWorkbook.createCellStyle();
             homeStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
             homeStyle.setFillPattern(CellStyle.ALIGN_FILL);
@@ -71,12 +72,13 @@ public class MatchViewController implements MatchViewObserver {
             guestStyle.setFillForegroundColor(IndexedColors.BLUE.getIndex());
             guestStyle.setFillPattern(CellStyle.ALIGN_FILL);
             
+            //Setting the first row with headers
 	    for(int k = 0; k <= (homeTable.getColumnCount()-1);k++){
 	        header.add(homeTable.getColumnName(k));
 	    }
 	    homeTeamData.put("0",header);
 
-            /* Gettin the home team data */
+            //Gettin the home team data 
 	    for(int i= 0; i <= (homeTable.getRowCount()-1); i++){
 	        homeValues = new ArrayList<>();
 	        for(int j = 0; j <= (homeTable.getColumnCount()-1); j++){
@@ -87,8 +89,9 @@ public class MatchViewController implements MatchViewObserver {
 	    }
 	    
 	    countRow = 1;
+	    //Setting again the header 
             guestTeamData.put("0", header);
-	    /* Getting the guest team data */
+	    // Getting the guest team data 
 	    for(int i = 0; i <= (guestTable.getRowCount()-1); i++){
 	        guestValues = new ArrayList<>();
 	        for(int j = 0; j <= (guestTable.getColumnCount()-1); j++){
@@ -100,12 +103,14 @@ public class MatchViewController implements MatchViewObserver {
 	   
 	    
 	    homeId = homeTeamData.keySet();
+	    // Creating row
 	    XSSFRow row;
 	    int rowID = 0;
 	    for(String key: homeId){
 	        row = fileSheet.createRow(rowID++);
 	        int cellID = 0;
 	        homeValueable = homeTeamData.get(key);
+	        // Populating cells
 	        for(String o: homeValueable){
 	            cell = row.createCell(cellID++);
 	            if(rowID == 1){
@@ -118,12 +123,14 @@ public class MatchViewController implements MatchViewObserver {
 	    rowID++;
 	    
 	    guestHeaderRowIndex = rowID;
+	    // Creting row
             guestId = guestTeamData.keySet();
             XSSFRow guestRow;
 	    for(String guestKey: guestId){
 	        guestRow = fileSheet.createRow(rowID++);
 	        int cellID = 0;
 	        guestValueable = guestTeamData.get(guestKey);
+	        // Populating cells
 	        for(String s: guestValueable){
 	            guestCell = guestRow.createCell(cellID++);
 	            if(rowID == guestHeaderRowIndex+1){
@@ -133,6 +140,7 @@ public class MatchViewController implements MatchViewObserver {
 	        }  
 	    }
 	    try{
+	        //Saving into a file
 	        FileOutputStream fs = new FileOutputStream(path+".xlsx");
 	        fileWorkbook.write(fs);
 	        fs.close();

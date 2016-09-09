@@ -3,6 +3,7 @@ package observer;
 
 import java.util.Date;
 
+import exceptions.PersonAlreadyAddedException;
 import model.Player;
 import model.Player.PLAYEROLE;
 import model.Staff;
@@ -23,8 +24,9 @@ public interface TeamComponentObserver {
 	 * @param height
 	 * @param cf
 	 * @param birth
+	 * @throws PersonAlreadyAddedException 
 	 */
-	void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth);
+	void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth) throws PersonAlreadyAddedException;
 	
 	/**
 	 * adding a member of the staff to the team
@@ -33,8 +35,9 @@ public interface TeamComponentObserver {
 	 * @param role
 	 * @param cf
 	 * @param birth
+	 * @throws PersonAlreadyAddedException 
 	 */
-	void addStaff(String name, String surname, ROLE role, String cf, Date birth);
+	void addStaff(String name, String surname, ROLE role, String cf, Date birth) throws PersonAlreadyAddedException;
 
 	/**
 	 * Removing a player from the team

@@ -59,6 +59,7 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
         contentPane.add(deleteChamp);
         
         champTable = new JTable();
+        champTable.setSelectionMode(0);
         
         btnBack = new JButton("Back");
         btnBack.setBounds(18, 477, 117, 29);

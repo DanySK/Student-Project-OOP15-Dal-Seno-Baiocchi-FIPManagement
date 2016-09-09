@@ -25,23 +25,16 @@ public class ComponentController implements TeamComponentObserver {
     }
 
     @Override
-    public void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth) {
-		try {
+    public void addPlayer(String name, String surname, PLAYEROLE role, double height, String cf, Date birth) throws PersonAlreadyAddedException {
 			team.addPlayer(new Player(name, surname, birth, cf, role, height));
 			Utils.save(model);
-		} catch (PersonAlreadyAddedException e) {
-			e.printStackTrace();
-		}
+		
     }
 
     @Override
-    public void addStaff(String name, String surname, ROLE role, String cf, Date birth) {
-    	try {
+    public void addStaff(String name, String surname, ROLE role, String cf, Date birth) throws PersonAlreadyAddedException {
 			team.addStaff(new Staff(name, surname, birth, cf, role));
-			Utils.save(model);
-		} catch (PersonAlreadyAddedException e) {
-			e.printStackTrace();
-		}
+			Utils.save(model);	
     }
 
     @Override
