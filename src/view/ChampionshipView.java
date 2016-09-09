@@ -98,10 +98,8 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
             c.attachObserver(new ChampionshipController(model));
             c.setModal(true);
             c.setVisible(true);
-            //((AbstractTableModel) champTable.getModel()).fireTableDataChanged();
             champTable.setVisible(false);
             champTable.setVisible(true);
-            //champTable.repaint();
         });
         deleteChamp.addActionListener(e->{
             if(champTable.getSelectedRow() == -1){
@@ -112,8 +110,6 @@ public class ChampionshipView extends JFrame  implements ObserverInterface<Champ
                     obs.deleteChampionship(model.getChampionship().get(champTable.getSelectedRow()));
                             
             }
-            /*((AbstractTableModel) champTable.getModel()).fireTableDataChanged();
-            champTable.repaint();*/
             champTable.setVisible(false);
             champTable.setVisible(true);
         });
