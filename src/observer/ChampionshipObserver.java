@@ -20,7 +20,7 @@ public interface ChampionshipObserver {
     void addChampionship(Division d, Zone zone) throws ChampionshipAlreadyExistException;
     /**
      * Method that is used to delete an existing championship
-     * @param championship
+     * @param championship 
      */
     void deleteChampionship(Championship championship);
 }

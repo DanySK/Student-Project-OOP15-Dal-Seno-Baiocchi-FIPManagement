@@ -67,7 +67,7 @@ public class MyComponentModel extends MyTableModel{
 			case 3 : 
 				return staff.getRole();
 			case 4 : 
-			return ft.format(staff.getBirth());
+				return ft.format(staff.getBirth());
 			default : 
 				return null;
 			}
